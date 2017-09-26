@@ -10,39 +10,73 @@ let extractSass = new ExtractTextPlugin({
 });
 
 webpackConfig = {
+    devtool: 'inline-source-map',
     entry: {
-        entry: './src/index.js'
+        app: [
+            'webpack-dev-server/client?http://localhost:8080',
+            'webpack/hot/only-dev-server',
+            './src/index.js',
+        ],
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'
     },
+    resolve: {
+        modules: ['node_modules', 'src'],
+        extensions: ['.js', 'jsx']
+    },
     module: {
         loaders: [
             {
-                test: /\.jsx?$/,
-                exclude: [/node_modules/],
-                loader: "babel-loader",
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
                 query: {
                     presets: ['es2015', 'react', 'stage-0', 'stage-1']
                 }
             },
             {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                loader: 'eslint-loader',
+                options: {
+                    emitWarning: true,
+                    configFile: path.join(__dirname, '.eslintrc.js'),
+                },
+            },
+            {
+                test: /\.(jpg|png|woff|woff2|eot|ttf|svg)$/,
+                exclude: /node_modules/,
+                use: [{
+                    loader: 'url-loader',
+                }],
+            }, {
+                test: /\.ico$/,
+                exclude: /node_modules/,
+                use: [{
+                    loader: 'file-loader?name=[name].[ext]',
+                }],
+            },
+            {
                 test: /\.scss$/,
+                exclude: /node_modules/,
                 use: extractSass.extract({
                     use: [{
-                        loader: "css-loader"
+                        loader: 'css-loader'
                     }, {
-                        loader: "sass-loader"
+                        loader: 'sass-loader'
                     }],
-                    // use style-loader in development
-                    fallback: "style-loader"
+                    fallback: 'style-loader'
                 })
             }
         ]
     },
     plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
         extractSass
     ]
 };
+
 module.exports = webpackConfig;
