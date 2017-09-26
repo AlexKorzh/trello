@@ -1,4 +1,4 @@
-# trello
+# Trello Clone
 Test task specification: 
 To show your current skills in web development, you will have to use: 
 On front-end: 
