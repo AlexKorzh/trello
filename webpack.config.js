@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 const extractSass = new ExtractTextPlugin({
-    filename: 'bundle.css',
+    filename: "bundle.css",
     allChunks: true,
     disable: process.env.NODE_ENV === "development"
 });
@@ -61,21 +61,15 @@ const webpackConfig = {
             {
                 test: /\.scss$/,
                 exclude: /node_modules/,
-                use: extractSass.extract({
+                loader: extractSass.extract({
                     use: [{
                         loader: 'css-loader'
                     }, {
                         loader: 'sass-loader'
                     }],
+                    // use style-loader in development
                     fallback: 'style-loader'
-                }),
-                use: [{
-                    loader: "style-loader"
-                }, {
-                    loader: "css-loader"
-                }, {
-                    loader: "sass-loader"
-                }]
+                })
             }
         ]
     },
