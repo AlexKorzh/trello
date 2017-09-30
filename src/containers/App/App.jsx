@@ -1,6 +1,7 @@
 import React from 'react';
-// import './app.scss';
+import './app.scss';
 import Header from '../../components/Header';
+import RegisterForm from '../../components/RegisterForm';
 
 export default class App extends React.Component {
 
@@ -9,6 +10,11 @@ export default class App extends React.Component {
     }
 
     render () {
-        return <Header />;
+        return (
+            <div className = "app-wrap">
+                <Header />
+                <RegisterForm /> 
+            </div>
+        );
     }
 }
