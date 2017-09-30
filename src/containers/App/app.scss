@@ -1,5 +1,25 @@
 @import '../../components/Header/header.scss';
+@import '../../assets/styles/variables.scss';
+
+html, body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
 
 body {
-    background-color: #D62F2F;
+    background-color: $bg-color;
+}
+
+p {
+    margin: 0;
+}
+
+body {
+    &.auth-page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
