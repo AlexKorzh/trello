@@ -13,11 +13,17 @@ export default class App extends React.Component {
 
     render () {
         return(
-            <div className = "app-wrap">
-                <Header />
-                <Auth />
-                <RegisterForm /> 
-            </div>
+            
+            <Auth />
+            
         );
+
+        // return(
+        //     <div className = "app-wrap">
+        //         <Header />
+        //         <Auth />
+        //         <RegisterForm /> 
+        //     </div>
+        // );
     }
 }

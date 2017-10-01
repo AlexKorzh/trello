@@ -2,6 +2,11 @@
 @import '../../components/Header/header.scss';
 @import '../../assets/styles/variables.scss';
 
+/* Font Awesome */
+
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome";
+
 * {
     margin: 0px;
     padding: 0px;
@@ -12,14 +17,27 @@ html, body {
     height: 100%;
 }
 
-body {
-    background-color: $bg-color;
-}
+// body {
+//     // background-color: $bg-color;
+// }
 
 body {
     &.auth-page {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        #app {
+            height: inherit;
+            background: url('../../assets/images/pexels-photo-373599.jpg');
+            background-size: cover;
+            background-position: top center;
+            .auth-container-overlay {
+                height: inherit;
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background: rgba(0, 0, 0, 0.4);
+                color: #fff;
+            }
+        }
     }
 }
