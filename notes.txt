@@ -2,6 +2,8 @@ deprecated babel@6.23.0
 webpack /node_modules/ not excluded in file-loader
 favicon
 devtools
+max-len
+sign-in form design
 
 https://auth0.com/blog/reactjs-authentication-tutorial/
 https://vladimirponomarev.com/blog/authentication-in-react-apps-creating-components
