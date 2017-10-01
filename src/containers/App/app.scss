@@ -1,6 +1,7 @@
 @import "~bootstrap/scss/bootstrap.scss";
 @import '../../components/Header/header.scss';
 @import '../../assets/styles/variables.scss';
+@import '../../assets/styles/mixins.scss';
 
 /* Font Awesome */
 
@@ -39,5 +40,44 @@ body {
                 color: #fff;
             }
         }
+    }
+}
+.btn {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.btn-google-plus {
+    background: $google-plus;
+    &:hover {
+        background: darken($google-plus, 10%);
+    }
+}
+.btn-facebook {
+    background: $facebook;
+    &:hover {
+        background: darken($facebook, 10%);
+    }
+}
+.btn-twitter {
+    background: $twitter;
+    &:hover {
+        background: darken($twitter, 10%);
+    }
+}
+.btn-linkedin {
+    background: $linkedin;
+    &:hover {
+        background: darken($linkedin, 10%);
+    }
+}
+.btn-google-plus,
+.btn-facebook,
+.btn-twitter,
+.btn-linkedin {
+    color: $color-light;
+    .fa {
+        margin-right: 15px;
     }
 }
