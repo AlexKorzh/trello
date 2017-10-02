@@ -18,7 +18,7 @@ export default class Auth extends Component {
                 <div className="container h-100">
                     <div className="row h-100 justify-content-center align-items-center">
                         <div className="col-12 col-md-8 col-lg-4 mx-sm-auto mx-md-auto">
-                            <SignIn />
+                            {/* <SignIn /> */}
                         </div>
                     </div>
                 </div>
