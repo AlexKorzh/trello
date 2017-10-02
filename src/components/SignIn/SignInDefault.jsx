@@ -5,7 +5,7 @@ const SignInDefault = ({ changeLoginType }) => {
     return(
         <fieldset className="form-group auth-form-fieldset">
             <button 
-                className="btn btn-lg btn-block btn-social-login"
+                className="btn btn-lg btn-block btn-outline-primary btn-social-login"
                 onClick={changeLoginType}
             >
                 <i
@@ -15,7 +15,7 @@ const SignInDefault = ({ changeLoginType }) => {
                 Log in with social media
             </button>
             <hr className="colorgraph" />
-            <div className="form-group">
+            <div className="form-group form-group-custom">
                 <input
                     type="email"
                     name="email"
@@ -23,7 +23,7 @@ const SignInDefault = ({ changeLoginType }) => {
                     placeholder="Email Address" 
                 />
             </div>
-            <div className="form-group">
+            <div className="form-group form-group-custom">
                 <input 
                     type="password" 
                     name="password"
@@ -31,11 +31,11 @@ const SignInDefault = ({ changeLoginType }) => {
                     placeholder="Password" 
                 />
             </div>
-            <button className="btn btn-lg btn-success btn-block">
+            <button className="btn btn-lg btn-enter btn-block">
                 Enter
             </button>
             <hr className="colorgraph" />
-            <ul className="nav nav-pills nav-justified">
+            <ul className="nav nav-pills nav-pills-custom nav-justified">
                 <li className="nav-item">
                     <a className="nav-link active" href="#">
                         Sign in
