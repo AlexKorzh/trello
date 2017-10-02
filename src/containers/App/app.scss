@@ -42,12 +42,25 @@ body {
         }
     }
 }
+
+// .btn-circle {
+//     display: flex;
+//     text-align: center;
+//     justify-content: center;
+//     align-items: center;
+//     height: 50px;
+//     width: 50px;
+//     font-size: 21px;
+//     border-radius: 50%;
+// }
+
 .btn {
     &:hover {
         cursor: pointer;
     }
 }
 
+.btn-social-login,
 .btn-google-plus {
     background: $google-plus;
     &:hover {
@@ -72,12 +85,22 @@ body {
         background: darken($linkedin, 10%);
     }
 }
+.btn-social-login,
 .btn-google-plus,
 .btn-facebook,
 .btn-twitter,
 .btn-linkedin {
     color: $color-light;
+}
+.btn-back,
+.btn-social-login {
     .fa {
-        margin-right: 15px;
+        margin-right: 10px;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .btn-social-login {
+        font-size: 18px;
     }
 }
