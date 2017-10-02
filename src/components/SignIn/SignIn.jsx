@@ -35,10 +35,10 @@ export default class SignIn extends Component {
                 <h2>Sign In</h2>
                 <form className="auth-form">
                     {socialMediaLogin ?
-                        <SignInDefault 
+                        <SignInSocial 
                             changeLoginType={this.changeLoginType} 
                         /> :
-                        <SignInSocial 
+                        <SignInDefault 
                             changeLoginType={this.changeLoginType} 
                         />
                     }
