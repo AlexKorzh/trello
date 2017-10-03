@@ -2,8 +2,8 @@ import React from 'react';
 import './boardForm.scss';
 
 class BoardForm extends React.Component {
-    constructor (props) {
-        super(props);
+    constructor () {
+        super();
         this.openStatus = '';
     }
     

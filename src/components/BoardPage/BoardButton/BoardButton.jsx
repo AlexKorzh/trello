@@ -3,8 +3,8 @@ import './boardButton.scss';
 import BoardForm from './BoardForm/BoardForm.jsx';
 
 class BoardButton extends React.Component {
-    constructor (props) {
-        super(props);
+    constructor () {
+        super();
         this.state = {isModalOpen: false};
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
