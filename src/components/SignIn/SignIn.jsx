@@ -39,7 +39,8 @@ export default class SignIn extends Component {
                             changeLoginType={this.changeLoginType} 
                         /> :
                         <SignInDefault 
-                            changeLoginType={this.changeLoginType} 
+                            changeLoginType={this.changeLoginType}
+                            register = {this.props.register} 
                         />
                     }
                 </form>

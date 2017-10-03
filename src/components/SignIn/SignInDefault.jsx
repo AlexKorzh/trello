@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-const SignInDefault = ({ changeLoginType }) => {
+const SignInDefault = ({ changeLoginType, register}) => {
     return(
         <fieldset className="form-group auth-form-fieldset">
             <button 
@@ -42,7 +42,9 @@ const SignInDefault = ({ changeLoginType }) => {
                     </a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Register</a>
+                    <a className="nav-link"
+                        onClick = {register} 
+                        href="#">Register</a>
                 </li>
             </ul>
         </fieldset>
