@@ -7,21 +7,29 @@ class BoardButton extends React.Component {
         super(props);
         this.state = {isModalOpen: false};
         this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
     openModal () {
         this.setState({isModalOpen: true});      
     }
 
+    closeModal () {
+        this.setState({isModalOpen: false});
+    }
+
     render () {
         return (
-            <button 
-                onClick = {this.openModal} 
-                className = "btn add-board-btn btn-secondary">
-                Создать новую доску…
-                <BoardForm open = {this.state} />
-            </button>
-            
+            <div className = "button-wrap">
+                <button 
+                    className = "btn add-board-btn btn-secondary" 
+                    onClick = {this.openModal}>
+                    Создать новую доску…
+                </button>
+                <BoardForm 
+                    close = {this.closeModal} 
+                    show = {this.state.isModalOpen} />
+            </div>                
         );
     }
 };

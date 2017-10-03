@@ -7,9 +7,9 @@
     background-color: #fff;
     box-sizing: border-box;
     padding: 10px;
-    opacity: 0;
+    display: none;
     &.open {
-        opacity: 1;
+        display: block;
     }
     .title {
         padding: 10px;
