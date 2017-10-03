@@ -140,6 +140,7 @@ body {
         .form-control {
             background: $form-group-bg;
             border: 1px solid $nav-link-active-shadow;
+            transition: all 0.3s ease;
             &:focus {
                 border: 1px solid $nav-link-active-shadow;
                 background: $color-light;
