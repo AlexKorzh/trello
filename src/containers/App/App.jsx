@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 
 import RegisterForm from '../../components/RegisterForm';
 import Auth from '../../components/Auth';
+import BoardPage from '../../components/BoardPage';
 
 export default class App extends React.Component {
 
@@ -13,9 +14,11 @@ export default class App extends React.Component {
 
     render () {
         return(
-            
-            <Auth />
-            
+            <div>
+                {/* <Header /> */}
+                <Auth />
+                {/* <BoardPage /> */}
+            </div>
         );
 
         // return(
