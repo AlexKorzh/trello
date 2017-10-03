@@ -36,66 +36,127 @@ body {
                 right: 0;
                 bottom: 0;
                 left: 0;
-                background: rgba(0, 0, 0, 0.4);
+                background: rgba(0, 0, 0, 0.8);
                 color: #fff;
             }
         }
     }
 }
 
-// .btn-circle {
-//     display: flex;
-//     text-align: center;
-//     justify-content: center;
-//     align-items: center;
-//     height: 50px;
-//     width: 50px;
-//     font-size: 21px;
-//     border-radius: 50%;
-// }
-
 .btn {
     &:hover {
         cursor: pointer;
     }
 }
-
-.btn-social-login,
+.btn-enter {
+    background: linear-gradient(to bottom,
+        $btn-enter-from 0, 
+        $btn-enter-to 100%);
+    color: $color-light;
+    border: none;
+    box-shadow: 0 2px 0 $btn-enter-shadow;
+    &:hover {
+        background: linear-gradient(to bottom, 
+            darken($btn-enter-from, 5%) 0, 
+            darken($btn-enter-to, 5%) 100%);
+        box-shadow: 0 2px 0 darken($btn-enter-shadow, 5%);
+    }
+    &:focus {
+        box-shadow: 0 2px 0 $btn-enter-shadow;
+    }
+    &:active {
+        background: linear-gradient(to bottom,
+            $btn-enter-from 0, 
+            $btn-enter-to 100%);
+    }
+}
 .btn-google-plus {
     background: $google-plus;
+    box-shadow: 0 2px 0 darken($google-plus, 15%);
     &:hover {
         background: darken($google-plus, 10%);
+        box-shadow: 0 2px 0 darken($google-plus, 25%);
+    }
+    &:focus {
+        box-shadow: 0 2px 0 darken($google-plus, 25%);
     }
 }
 .btn-facebook {
     background: $facebook;
+    box-shadow: 0 2px 0 darken($facebook, 15%);
     &:hover {
         background: darken($facebook, 10%);
+        box-shadow: 0 2px 0 darken($facebook, 25%);
+    }
+    &:focus {
+        box-shadow: 0 2px 0 darken($facebook, 25%);
     }
 }
 .btn-twitter {
     background: $twitter;
+    box-shadow: 0 2px 0 darken($twitter, 15%);
     &:hover {
         background: darken($twitter, 10%);
+        box-shadow: 0 2px 0 darken($twitter, 25%);
+    }
+    &:focus {
+        box-shadow: 0 2px 0 darken($twitter, 25%);
     }
 }
 .btn-linkedin {
     background: $linkedin;
+    box-shadow: 0 2px 0 darken($linkedin, 15%);
     &:hover {
         background: darken($linkedin, 10%);
+        box-shadow: 0 2px 0 darken($linkedin, 25%);
+    }
+    &:focus {
+        box-shadow: 0 2px 0 darken($linkedin, 25%);
     }
 }
-.btn-social-login,
 .btn-google-plus,
 .btn-facebook,
 .btn-twitter,
 .btn-linkedin {
     color: $color-light;
 }
-.btn-back,
-.btn-social-login {
+.btn-social-login,
+.btn-google-plus,
+.btn-facebook,
+.btn-twitter,
+.btn-linkedin {
     .fa {
         margin-right: 10px;
+    }
+}
+.btn-social-login,
+.btn-go-back {
+    &:focus {
+        box-shadow: none;
+    }
+}
+.form-group {
+    &.form-group-custom {
+        .form-control {
+            background: $form-group-bg;
+            border: 1px solid $nav-link-active-shadow;
+            &:focus {
+                border: 1px solid $nav-link-active-shadow;
+                background: $color-light;
+            }  
+        }
+    }
+}
+
+.nav-pills-custom {
+    .nav-item {
+        .nav-link {
+            color: $nav-links-color;
+            &.active {
+                background: $nav-link-active-bg;
+                box-shadow: 0 2px 0 $nav-link-active-shadow;
+            }
+        }
     }
 }
 
