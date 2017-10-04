@@ -6,6 +6,8 @@ devtools
 max-len
 sign-in form design
 buttons mixins!!
+webpack split dev/prod
+login/register form screen size check layout
 
 exclude: /node_modules\/(?!(font-awesome)\/).*/,
 
