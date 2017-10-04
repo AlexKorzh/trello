@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 const SignInDefault = ({ changeLoginType }) => {
-    console.log(props);
     return(
         <fieldset className="form-group auth-form-fieldset">
             <button 
