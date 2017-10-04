@@ -7,5 +7,7 @@ max-len
 sign-in form design
 buttons mixins!!
 
+exclude: /node_modules\/(?!(font-awesome)\/).*/,
+
 https://auth0.com/blog/reactjs-authentication-tutorial/
 https://vladimirponomarev.com/blog/authentication-in-react-apps-creating-components
