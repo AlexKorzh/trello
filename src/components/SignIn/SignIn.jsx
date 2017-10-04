@@ -7,8 +7,8 @@ import SignInSocial from './SignInSocial';
 import './signin.scss';
 
 export default class SignIn extends Component {
-    constructor (props) {
-        super(props);
+    constructor () {
+        super();
 
         this.state = {
             socialMediaLogin: false
@@ -48,3 +48,7 @@ export default class SignIn extends Component {
         );
     }
 }
+
+SignIn.propTypes = {
+    register:  PropTypes.func.isRequired
+};

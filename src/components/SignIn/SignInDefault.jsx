@@ -52,7 +52,8 @@ const SignInDefault = ({ changeLoginType, register}) => {
 };
 
 SignInDefault.propTypes = {
-    changeLoginType: PropTypes.func.isRequired
+    changeLoginType: PropTypes.func.isRequired,
+    register:  PropTypes.func.isRequired
 };
 
 export default SignInDefault;
