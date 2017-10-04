@@ -31,24 +31,20 @@ export default class SignIn extends Component {
         const socialMediaLogin = this.state.socialMediaLogin;
 
         return(
-            <div className="auth-signin">
-                <h2>Sign In</h2>
-                <form className="auth-form">
-                    {socialMediaLogin ?
-                        <SignInSocial 
-                            changeLoginType={this.changeLoginType} 
-                        /> :
-                        <SignInDefault 
-                            changeLoginType={this.changeLoginType}
-                            register = {this.props.register} 
-                        />
-                    }
-                </form>
+            <div className="signin-container">
+                {socialMediaLogin ?
+                    <SignInSocial 
+                        changeLoginType={this.changeLoginType} 
+                    /> :
+                    <SignInDefault 
+                        changeLoginType={this.changeLoginType}
+                    />
+                }
             </div>
         );
     }
 }
 
 SignIn.propTypes = {
-    register:  PropTypes.func.isRequired
+    // register:  PropTypes.func.isRequired
 };

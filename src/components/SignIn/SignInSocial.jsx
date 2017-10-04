@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 const SignInSocial = ({changeLoginType}) => (
-    <fieldset className="form-group auth-form-fieldset">
+    <div className="signin-social-container">
         <button className="btn btn-lg btn-block btn-google-plus">
             <i
                 className="fa fa-google-plus" 
@@ -35,21 +35,12 @@ const SignInSocial = ({changeLoginType}) => (
             Linkedin
         </button>
         <hr className="colorgraph" />
-        <button className="btn btn-lg btn-block btn-outline-primary btn-go-back" onClick={changeLoginType}>
+        <button 
+            className="btn btn-lg btn-block btn-outline-primary btn-go-back" 
+            onClick={changeLoginType}>
             Go back
         </button>
-        <hr className="colorgraph" />
-        <ul className="nav nav-pills nav-pills-custom nav-justified">
-            <li className="nav-item">
-                <a className="nav-link active" href="#">
-                    Sign in
-                </a>
-            </li>
-            <li className="nav-item">
-                <a className="nav-link" href="#">Register</a>
-            </li>
-        </ul>
-    </fieldset>
+    </div>
 );
 
 SignInSocial.propTypes = {

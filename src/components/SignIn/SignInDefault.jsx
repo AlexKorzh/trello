@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-const SignInDefault = ({ changeLoginType, register}) => {
+const SignInDefault = ({ changeLoginType }) => {
     return(
-        <fieldset className="form-group auth-form-fieldset">
-            <button 
+        <div className="signin-default-container">
+            <button
                 className="btn btn-lg btn-block btn-outline-primary btn-social-login"
                 onClick={changeLoginType}
             >
@@ -34,26 +34,12 @@ const SignInDefault = ({ changeLoginType, register}) => {
             <button className="btn btn-lg btn-enter btn-block">
                 Enter
             </button>
-            <hr className="colorgraph" />
-            <ul className="nav nav-pills nav-pills-custom nav-justified">
-                <li className="nav-item">
-                    <a className="nav-link active" href="#">
-                        Sign in
-                    </a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link"
-                        onClick = {register} 
-                        href="#">Register</a>
-                </li>
-            </ul>
-        </fieldset>
+        </div>
     );
 };
 
 SignInDefault.propTypes = {
-    changeLoginType: PropTypes.func.isRequired,
-    register:  PropTypes.func.isRequired
+    changeLoginType: PropTypes.func.isRequired
 };
 
 export default SignInDefault;
