@@ -7,7 +7,6 @@ import Auth from '../../components/Auth';
 import BoardPage from '../../components/BoardPage';
 
 export default class App extends React.Component {
-
     testMethod () {
         return 1;
     }
