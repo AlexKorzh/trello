@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SignIn from '../SignIn';
-import RegisterFrom from '../RegisterForm';
+import RegisterFrom from '../RegisterForm/RegisterForm.jsx';
 import './auth.scss';
 
 export default class Auth extends Component {
