@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import './main.scss';
-import App from './containers/App';
+import App from './containers/App/App.jsx';
 import data from './database'; 
 // Provider to map React and redux
 import { Provider } from 'react-redux'; // get access to data in redux STORE

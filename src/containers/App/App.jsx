@@ -3,7 +3,7 @@ import './app.scss';
 import Header from '../../components/Header';
 
 import RegisterForm from '../../components/RegisterForm';
-import Auth from '../../components/Auth';
+import Auth from '../../components/Auth/Auth.jsx';
 import BoardPage from '../../components/BoardPage';
 
 export default class App extends React.Component {
