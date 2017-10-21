@@ -19,13 +19,5 @@ export default class App extends React.Component {
                 {/* <BoardPage /> */}
             </div>
         );
-
-        // return(
-        //     <div className = "app-wrap">
-        //         <Header />
-        //         <Auth />
-        //         <RegisterForm /> 
-        //     </div>
-        // );
     }
 }
