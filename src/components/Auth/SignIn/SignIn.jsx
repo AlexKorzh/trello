@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import SignInDefault from './SignInDefault';
 import SignInSocial from './SignInSocial';
@@ -44,7 +43,3 @@ export default class SignIn extends Component {
         );
     }
 }
-
-SignIn.propTypes = {
-    // register:  PropTypes.func.isRequired
-};

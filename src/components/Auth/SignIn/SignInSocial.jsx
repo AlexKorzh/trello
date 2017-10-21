@@ -10,8 +10,6 @@ const SignInSocial = ({changeLoginType}) => (
             />
             Google
         </button>
-    
-
         <button className="btn btn-lg btn-block btn-facebook">
             <i
                 className="fa fa-facebook" 
@@ -19,7 +17,6 @@ const SignInSocial = ({changeLoginType}) => (
             />
             Facebook
         </button>
-
         <button className="btn btn-lg btn-block btn-twitter">
             <i
                 className="fa fa-twitter" 
