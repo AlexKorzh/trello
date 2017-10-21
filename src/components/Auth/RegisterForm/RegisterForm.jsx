@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import './registerForm.scss';
-import userEnter from '../../actions/registerUser';
-import { connect } from 'react-redux';
 
 class RegisterForm extends Component {
-    constructor (props) {
-        super(props);
-        this.isValid = false;
+    constructor () {
+        super();
+
         this.registerHandle = this.registerHandle.bind(this);
-        this.fields = [];
-        
     }
     registerHandle (event) {
         event.preventDefault();
@@ -60,16 +56,4 @@ class RegisterForm extends Component {
     }
 };
 
-function mapStateToProps (state) {
-    return {
-        users: state
-    };
-}
-
-function mapDispatchToProps (dispatch) {
-    return {
-        onEnter: user => dispatch(userEnter(user))
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterForm);
+export default RegisterForm;

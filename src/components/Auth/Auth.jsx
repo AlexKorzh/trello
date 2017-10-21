@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import SignIn from '../SignIn/SignIn.jsx';
-import RegisterFrom from '../RegisterForm/RegisterForm.jsx';
+
 import './auth.scss';
+
+import SignIn from './SignIn/SignIn.jsx';
+import RegisterFrom from './RegisterForm/RegisterForm.jsx';
 
 export default class Auth extends Component {
     constructor () {
         super();
-        this.state = {mode: 'logIn', title: 'Sign In'};
+
+        this.state = {mode: 'login', title: 'Sign In'};
         this.showLoginForm = this.showLoginForm.bind(this);
         this.showRegisterForm = this.showRegisterForm.bind(this);
     }
@@ -20,7 +23,7 @@ export default class Auth extends Component {
     }
 
     showLoginForm () {
-        this.setState({mode: 'logIn', title: 'Sign In'});
+        this.setState({mode: 'login', title: 'Sign In'});
     }
 
     showRegisterForm () {
@@ -28,15 +31,14 @@ export default class Auth extends Component {
     }
 
     render () {
-        let form;
-        const loginMode = this.state.mode === 'logIn';
-        const registerMode = this.state.mode === 'register';
+        const mode = this.state.mode;
 
-        if (loginMode) {
-            form = <SignIn />
-        } else if (registerMode) {
-            form = <RegisterFrom />
-        }
+        let modes = {
+            login: () => <SignIn />,
+            register: () => <RegisterFrom/>
+        };
+
+        let form = modes[mode]();
 
         return(
             <div className="auth-container-overlay">
@@ -53,7 +55,7 @@ export default class Auth extends Component {
                                             <li className="nav-item">
                                                 <a 
                                                     role="button" 
-                                                    className={`nav-link ${loginMode && "active"}`} 
+                                                    className={`nav-link ${mode == 'login' && "active"}`} 
                                                     onClick={this.showLoginForm}>
                                                     Sign in
                                                 </a>
@@ -61,7 +63,7 @@ export default class Auth extends Component {
                                             <li className="nav-item">
                                                 <a 
                                                     role="button" 
-                                                    className={`nav-link ${registerMode && "active"}`} 
+                                                    className={`nav-link ${mode == 'register' && "active"}`} 
                                                     onClick={this.showRegisterForm}
                                                 >Register</a>
                                             </li>
