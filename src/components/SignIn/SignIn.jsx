@@ -23,7 +23,7 @@ export default class SignIn extends Component {
         const socialMediaLogin = this.state.socialMediaLogin;
 
         this.setState({
-            socialMediaLogin: socialMediaLogin ? false : true
+            socialMediaLogin: !socialMediaLogin
         });
     }
 
