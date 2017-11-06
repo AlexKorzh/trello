@@ -4,7 +4,7 @@ import './app.scss';
 import Auth from '../../components/Auth/Auth.jsx';
 import BoardPage from '../../components/BoardPage/BoardPage.jsx';
 
-export default class App extends React.Component {
+class App extends React.Component {
     testMethod () {
         return 1;
     }
@@ -13,7 +13,10 @@ export default class App extends React.Component {
         return(
             <div>
                 <Auth />
+                {this.props.children}
             </div>
         );
     }
 }
+
+export default App;
