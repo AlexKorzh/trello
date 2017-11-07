@@ -1,16 +1,15 @@
 import React from 'react';
+import Header from '../../components/Header/Header.jsx';
 
 class Welcome extends React.Component {
-    constructor (props) {
-        super(props);
+    testMethod () {
+        return 1;
     }
-    show () {
 
-    }
     render () {
         return(
             <div>
-                WelocmePAge
+                <Header />
             </div>
         );
     }

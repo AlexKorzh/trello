@@ -1,6 +1,6 @@
 import React from 'react';
 import './boardPage.scss';
-import './Header/Header.jsx'
+import '../Header/Header.jsx'
 import BoardButton from './BoardButton/BoardButton.jsx';
 
 const BoardPage = () => {

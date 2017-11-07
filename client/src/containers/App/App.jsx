@@ -1,20 +1,43 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './app.scss';
+import reducers from '../../reducers';
+import { AUTH_USER } from '../../actions/types';
 
-import Auth from '../../components/Auth/Auth.jsx';
-import BoardPage from '../../components/BoardPage/BoardPage.jsx';
+import Welcome from '../Welcome/Welcome.jsx';
+import SignIn from '../../components/SignIn/SignIn.jsx';
+import SignUp from './../../components/SignUp/SignUp.jsx';
+// Provider to map React and redux
+// get access to data in redux STORE
+import { Route } from 'react-router'; 
+import reduxThunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import createHistory from 'history/createBrowserHistory';
+import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 
-class App extends React.Component {
-    testMethod () {
-        return 1;
-    }
+const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+const store = createStoreWithMiddleware(
+    reducers,
+    // Configuration for redux devTools 
+    window.__REDUX_DEVTOOLS_EXTENSION__ 
+    && window.__REDUX_DEVTOOLS_EXTENSION__() 
+);
 
+const history = createHistory();
+const middleware = routerMiddleware(history);
+
+class App extends Component {
     render () {
         return(
-            <div>
-                <Auth />
-                {this.props.children}
-            </div>
+            <Provider store={store}>
+                <ConnectedRouter history = {history}>
+                    <div id = "app">
+                        <Route exact path="/" component={Welcome}/>
+                        <Route path="/signin" component={SignIn}/>
+                        <Route path="/signup" component={SignUp}/>
+                    </div>
+                </ConnectedRouter>
+            </Provider>
         );
     }
 }

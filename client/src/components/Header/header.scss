@@ -1,0 +1,21 @@
+.header {
+    padding: 5px 20px;
+    background-color: #026AA7;
+    display: flex;
+    .logo-wrap {
+        margin: 0 auto;
+        display: block;
+        width: 80px;
+        .logo {
+            width: 100%;
+        }
+    }
+    .nav {
+        .nav-item {
+            margin-right: 10px;
+            &:last-child {
+                margin-right: 0px;
+            }
+        }
+    }
+}
