@@ -29,7 +29,7 @@ export function signinUser ({ email, password }) {
                 localStorage.setItem('token', response.data.token);
                 // - redirect to the route `/feature`
                 
-                browserHistory.push('/feature');
+                browserHistory.push('/boards');
             })
             .catch(() => {
                 // If request it bad...
@@ -47,7 +47,7 @@ export function signupUser ({ email, password }) {
                 dispatch({ type: AUTH_USER });
                 localStorage.setItem('token', response.data.token);
 
-                browserHistory.push('/feature');
+                browserHistory.push('/boards');
             })
             .catch(serve => {
                 dispatch(authError(serve.response.data.error))

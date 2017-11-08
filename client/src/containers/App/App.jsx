@@ -6,6 +6,8 @@ import { AUTH_USER } from '../../actions/types';
 import Welcome from '../Welcome/Welcome.jsx';
 import SignIn from '../../components/SignIn/SignIn.jsx';
 import SignUp from './../../components/SignUp/SignUp.jsx';
+import requireAuth from '../../components/Auth/require_auth';
+import BoardPage from '../../components/BoardPage/BoardPage.jsx';
 
 import history from './history';
 import { Router } from 'react-router-dom';
@@ -25,6 +27,13 @@ const store = createStoreWithMiddleware(
     && window.__REDUX_DEVTOOLS_EXTENSION__() 
 );
 
+const token = localStorage.getItem('token');
+// If we have a token, consider the user to be signed in 
+if (token) {
+    // we need to update application state
+    store.dispatch({ type: AUTH_USER });
+}
+
 class App extends Component {
     test () {
         
@@ -37,6 +46,7 @@ class App extends Component {
                         <Route exact path="/" component={Welcome}/>
                         <Route path="/signin" component={SignIn}/>
                         <Route path="/signup" component={SignUp}/>
+                        <Route path = "/boards" component = {requireAuth(BoardPage)}/> 
                     </div>
                 </Router>
             </Provider>
