@@ -1,12 +1,13 @@
 import React from 'react';
 import './boardPage.scss';
-import '../Header/Header.jsx'
+import Header from '../Header/Header.jsx'
 import BoardButton from './BoardButton/BoardButton.jsx';
 
 const BoardPage = () => {
     return (
-        <div className="board-page container">
-            <div className = "board-wrap">
+        <div className="board-page">
+            <Header />
+            <div className = "board-wrap container">
                 <BoardButton />
             </div>
         </div>

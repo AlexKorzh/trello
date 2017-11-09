@@ -28,7 +28,8 @@ class BoardButton extends React.Component {
                 </button>
                 <BoardForm 
                     close = {this.closeModal} 
-                    show = {this.state.isModalOpen} />
+                    show = {this.state.isModalOpen} 
+                />
             </div>                
         );
     }
