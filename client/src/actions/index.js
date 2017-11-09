@@ -4,7 +4,8 @@ import {
     AUTH_USER, 
     AUTH_ERROR, 
     UNAUTH_USER,
-    FETCH_MESSAGE
+    FETCH_MESSAGE,
+    CREATE_BOARD
 } from './types';
 
 const ROOT_URL = "http://localhost:3090";
@@ -14,6 +15,20 @@ export function authError (error) {
         type: AUTH_ERROR,
         payload: error
     };
+}
+
+export const createBoard = title => {
+    return dispatch => {
+        axios.post(
+            `${ROOT_URL}/createBoard`,
+            {title}
+        ).then(response => {
+            console.log('Create Board Response:', response.data.message);
+        });
+
+        console.log('C R E A T E = B O A R D');
+        dispatch({type: CREATE_BOARD});
+    }
 }
 
 export function signinUser ({ email, password }) {
@@ -27,7 +42,7 @@ export function signinUser ({ email, password }) {
                 // - Save the JWT token to the localStorage fot the future request
                 localStorage.setItem('token', response.data.token);
                 // - redirect to the route `/feature`
-                
+                console.log('Auth -->', response);
                 browserHistory.push('/boards');
             })
             .catch(() => {

@@ -11,7 +11,13 @@ function tokenForUser (user) {
 function signin (req, res, next) {
     //User has already head their email and password auth'd
     // We just need to give them a token
-    res.send({token: tokenForUser(req.user)});
+    res.send({
+        token: tokenForUser(req.user), 
+        userData: {
+            id: req.user.id,
+            email: req.user.email
+        }
+    });
 }
 
 function signup (req, res, next) {

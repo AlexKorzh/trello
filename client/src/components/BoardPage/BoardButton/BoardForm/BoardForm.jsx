@@ -1,17 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import PropTypes from 'prop-types';
+
+import { createBoard } from '../../../../actions';
+
 import './boardForm.scss';
 
 class BoardForm extends Component {
     constructor () {
         super();
+
+        this.state = {
+            title: ''
+        };
         
-        this.createBoard = this.createBoard.bind(this);
+        this.handeTitleChange = this.handeTitleChange.bind(this);
+        this.handleCreateBoard = this.handleCreateBoard.bind(this);
     }
 
-    createBoard () {
+    handleCreateBoard () {
         console.log('::Creat Board::');
+        this.props.onCreateBoard(this.state.title);
+    }
+
+    handeTitleChange (e) {
+        const title = e.target.value;
+
+        this.setState({title});
     }
     
     render () {
@@ -32,10 +48,11 @@ class BoardForm extends Component {
                     className = "board-name form-control" 
                     type = "text"
                     placeholder = "Например, «Издание календаря»…"
+                    onChange = { this.handeTitleChange }
                 />
                 <button
                     className = "btn btn-success"
-                    onClick = { this.createBoard }
+                    onClick = { this.handleCreateBoard }
                 >
                     Созадть
                 </button>
@@ -44,9 +61,18 @@ class BoardForm extends Component {
     }
 };
 
+BoardForm.propTypes = {
+    onCreateBoard: PropTypes.func
+};
+
 export default connect(
     (state, ownProps) => {
         console.log('::state ', state); // state
         console.log('::ownProps ', ownProps); // ownProps
-    }
+    },
+    dispatch => ({
+        onCreateBoard: title => {
+            dispatch(createBoard(title));
+        }
+    })
 )(BoardForm);

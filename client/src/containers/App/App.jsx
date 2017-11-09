@@ -9,7 +9,6 @@ import SignUp from './../../components/SignUp/SignUp.jsx';
 import SignOut from './../../components/SignOut/SignOut.jsx';
 import requireAuth from '../../components/Auth/require_auth';
 import BoardPage from '../../components/BoardPage/BoardPage.jsx';
-import NoMatch from '../../components/NoMatch/NoMatch.jsx';
 
 import history from './history';
 import { Router } from 'react-router-dom';

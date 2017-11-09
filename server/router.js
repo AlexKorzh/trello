@@ -1,4 +1,5 @@
 const Auth = require('./controllers/auth');// This is a controller function
+const Board = require('./controllers/board');// This is a controller function
 const passportService = require('./services/passport');
 const passport = require('passport');
 
@@ -13,4 +14,5 @@ module.exports = function (app) {
     // requireSignIn - is a middleWare calls before Auth.sign controller function
     app.post('/signin',requireSignIn, Auth.signin);
     app.post('/signup', Auth.signup);
+    app.post('/createBoard', Board.create);
 }
