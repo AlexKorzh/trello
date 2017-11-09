@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import './boardForm.scss';
 
-class BoardForm extends React.Component {
+class BoardForm extends Component {
     constructor () {
         super();
-        this.openStatus = '';
+        
+        this.createBoard = this.createBoard.bind(this);
+    }
+
+    createBoard () {
+        console.log('::Creat Board::');
     }
     
     render () {
@@ -26,10 +33,20 @@ class BoardForm extends React.Component {
                     type = "text"
                     placeholder = "Например, «Издание календаря»…"
                 />
-                <button className = "btn btn-success">Созадть</button>
+                <button
+                    className = "btn btn-success"
+                    onClick = { this.createBoard }
+                >
+                    Созадть
+                </button>
             </div>
         );
     }
 };
 
-export default BoardForm;
+export default connect(
+    (state, ownProps) => {
+        console.log('::state ', state); // state
+        console.log('::ownProps ', ownProps); // ownProps
+    }
+)(BoardForm);
