@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './header.scss';
+import * as actions from '../../actions';
 import logo from '../../assets/images/logo.png';
 import { Link } from 'react-router-dom';
 
 class Header extends Component {
-    constructor () {
-        super();
+    constructor (props) {
+        super(props);
     }
     renderButtons (config) {
-        const { text, btnClass, route, key} = config;
+        const { text, btnClass, route, auth, key } = config;
         
         return (
             <li className = "nav-item" key = {key}>
-                <Link 
+                <Link
                     className = {`btn ${btnClass}`}
                     to = {`/${route}`}>
                     {text}
@@ -23,19 +24,30 @@ class Header extends Component {
     }
     render () {
         let btns = [];
+        console.log(this.props.authenticated);
 
-        if (this.props.auth) {
+        if (!this.props.authenticated) {
             btns.push(this.renderButtons({
                 text: 'Войти', 
                 btnClass: 'btn-success',
                 route: 'signin',
+                auth: true,
                 key: 1
             }));
             btns.push(this.renderButtons({
                 text: 'Регистрация', 
                 btnClass: 'btn-success',
                 route: 'signup',
+                auth: true,
                 key: 2
+            })); 
+        } else {
+            btns.push(this.renderButtons({
+                text: 'Выйти', 
+                btnClass: 'btn-dark',
+                route: 'signout',
+                auth: false,
+                key: 3
             })); 
         }
         return (
@@ -55,8 +67,8 @@ class Header extends Component {
 
 function mapStateToProps (state) {
     return { 
-        auth: state.auth
-    };
+        authenticated: state.auth.authenticated 
+    }
 }
 
-export default connect(mapStateToProps, null)(Header);
+export default connect(mapStateToProps, actions)(Header);

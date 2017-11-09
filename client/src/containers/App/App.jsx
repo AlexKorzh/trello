@@ -6,8 +6,10 @@ import { AUTH_USER } from '../../actions/types';
 import Welcome from '../Welcome/Welcome.jsx';
 import SignIn from '../../components/SignIn/SignIn.jsx';
 import SignUp from './../../components/SignUp/SignUp.jsx';
+import SignOut from './../../components/SignOut/SignOut.jsx';
 import requireAuth from '../../components/Auth/require_auth';
 import BoardPage from '../../components/BoardPage/BoardPage.jsx';
+import NoMatch from '../../components/NoMatch/NoMatch.jsx';
 
 import history from './history';
 import { Router } from 'react-router-dom';
@@ -43,9 +45,10 @@ class App extends Component {
             <Provider store={store}>
                 <Router history={history}>
                     <div id = "app">
-                        <Route exact path="/" component={Welcome}/>
+                        <Route exact = {true} path="/" component={Welcome}/>
                         <Route path="/signin" component={SignIn}/>
                         <Route path="/signup" component={SignUp}/>
+                        <Route path="/signout" component={SignOut}/>
                         <Route path = "/boards" component = {requireAuth(BoardPage)}/> 
                     </div>
                 </Router>
