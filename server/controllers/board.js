@@ -1,8 +1,10 @@
 const Board = require('../models/Board');
+const User = require('../models/User');
 const config = require('../config');
 
 function create (req, res, next) {
     const title = req.body.title;
+    const userId = req.user._id;
 
     const board = new Board({title});
 
@@ -10,7 +12,20 @@ function create (req, res, next) {
     board.save(function (error) {
         if (error) return next(error);
             
-        // res.json({title});
+        User.findById(userId, function(err, user) {
+            if (err) throw err;
+        
+            // change the users location
+            user.boards.push(board);
+        
+            // save the user
+            user.save(function(err) {
+            if (err) throw err;
+                console.log('User successfully updated!');
+            });
+        
+        });
+
         
     });
 

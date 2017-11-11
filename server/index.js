@@ -1,3 +1,4 @@
+//Entry point of the App
 const express = require('express');
 const http = require('http');
 const bodyParser = require('body-parser');
