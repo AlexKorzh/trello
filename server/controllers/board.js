@@ -3,9 +3,10 @@ const config = require('../config');
 
 function create (req, res, next) {
     const title = req.body.title;
-console.log('----------->>', req.body);
+
     const board = new Board({title});
 
+    console.log('user ----------->>', req.user._id);
     board.save(function (error) {
         if (error) return next(error);
             

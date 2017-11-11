@@ -10,6 +10,8 @@ import {
 
 const ROOT_URL = "http://localhost:3090";
 
+const authorization = localStorage.getItem('token');
+
 export function authError (error) {
     return {
         type: AUTH_ERROR,
@@ -21,7 +23,8 @@ export const createBoard = title => {
     return dispatch => {
         axios.post(
             `${ROOT_URL}/createBoard`,
-            {title}
+            {title},
+            {headers: {authorization}}
         ).then(response => {
             console.log('Create Board Response:', response.data.message);
         });

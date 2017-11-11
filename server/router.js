@@ -14,5 +14,5 @@ module.exports = function (app) {
     // requireSignIn - is a middleWare calls before Auth.sign controller function
     app.post('/signin',requireSignIn, Auth.signin);
     app.post('/signup', Auth.signup);
-    app.post('/createBoard', Board.create);
+    app.post('/createBoard', requireAuth, Board.create);
 }
