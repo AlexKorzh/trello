@@ -15,4 +15,5 @@ module.exports = function (app) {
     app.post('/signin',requireSignIn, Auth.signin);
     app.post('/signup', Auth.signup);
     app.post('/createBoard', requireAuth, Board.create);
+    app.post('/getAllBoards', requireAuth, Board.getAllBoards);
 }
