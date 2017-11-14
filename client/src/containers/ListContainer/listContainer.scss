@@ -1,0 +1,79 @@
+$list-page-bg: #0078bf;
+body  {
+    background-color: $list-page-bg;
+}
+.list-page {
+    padding-top: 20px;
+}
+.list-container, .add-list-container {
+    width: 270px;
+    margin: 0 5px;
+    height: 100%;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+    white-space: nowrap;
+}
+.add-list-container {
+    position: relative;
+    .add-list-btn {
+        border-radius: 3px;
+        cursor: pointer;
+        display: block;
+        padding: 10px;
+        font-size: 14px;
+        box-sizing: border-box;
+        color: rgba(255,255,255,.7);
+        transition: color 85ms ease-in;
+        background: rgba(0,0,0,.12);
+        -webkit-transition: background 85ms ease-in;
+        &:hover {
+            background: rgba(0,0,0,0.3);
+        }
+    }
+    .add-list-form {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        border-radius: 3px;
+        box-sizing: border-box;
+        padding: 4px;
+        background: #E2E4E6;
+        opacity: 0;
+        transition: opacity 200ms, visibility 100ms;
+        &.hide {
+            visibility: hidden;
+        }
+        &.show {
+            opacity: 1;
+            visibility: visible;
+        } 
+        .add-list-form__input {
+            font-size: 14px;
+            box-sizing: border-box;
+            width: inherit;
+            -webkit-appearance: none;
+            box-shadow: inset 0 1px 8px rgba(0,0,0,.15);
+            background: rgba(0,0,0,.05);
+            border-color: #aaa;
+            display: block;
+            margin: 0;
+            border: 1px solid #aaa;
+            border-radius: 3px;
+            display: block;
+            margin-bottom: 9pt;
+            outline: none;
+            padding: 7px;
+        }
+        .close {
+            outline: none;
+            cursor: pointer;
+            float: none;
+            font-size: 2.5rem;
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 10px;
+        }
+    }
+}

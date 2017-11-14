@@ -1,7 +1,8 @@
 import React from 'react';
 import './boardPage.scss';
-import Header from '../Header/Header.jsx'
+import Header from '../Header/Header.jsx';
 import BoardButton from './BoardButton/BoardButton.jsx';
+// import ListContainer from '../../containers/ListContainer/ListContainer.jsx';
 
 const BoardPage = () => {
     return (

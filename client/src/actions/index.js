@@ -5,7 +5,8 @@ import {
     AUTH_ERROR, 
     UNAUTH_USER,
     FETCH_MESSAGE,
-    CREATE_BOARD
+    CREATE_BOARD,
+    CREATE_LIST
 } from './types';
 
 const ROOT_URL = "http://localhost:3090";
@@ -31,6 +32,21 @@ export const createBoard = title => {
 
         console.log('C R E A T E = B O A R D');
         dispatch({type: CREATE_BOARD});
+    }
+}
+
+export const createList = title => {
+    return dispatch => {
+        axios.post(
+            `${ROOT_URL}/boards`,
+            {title},
+            {headers: {authorization}}
+        ).then(response => {
+            console.log('Create LIST Response:', response.data.message);
+        });
+
+        console.log('CREATE LIST ________>>>');
+        dispatch({type: CREATE_LIST});
     }
 }
 

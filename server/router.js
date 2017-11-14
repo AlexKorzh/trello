@@ -1,5 +1,6 @@
 const Auth = require('./controllers/auth');// This is a controller function
 const Board = require('./controllers/board');// This is a controller function
+const List = require('./controllers/list');// This is a controller function
 const passportService = require('./services/passport');
 const passport = require('passport');
 
@@ -15,4 +16,7 @@ module.exports = function (app) {
     app.post('/signin',requireSignIn, Auth.signin);
     app.post('/signup', Auth.signup);
     app.post('/createBoard', requireAuth, Board.create);
+
+    // It will be change
+    app.post('/boards', requireAuth, List.create);
 }
