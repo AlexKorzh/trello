@@ -1,6 +1,7 @@
 import axios from 'axios';
 import browserHistory from '../containers/App/history';
-import { 
+import {
+    GET_USER_BOARDS,
     AUTH_USER, 
     AUTH_ERROR, 
     UNAUTH_USER,
@@ -12,6 +13,14 @@ import {
 const ROOT_URL = "http://localhost:3090";
 
 const authorization = localStorage.getItem('token');
+
+export const getUserBoards = (payload) => {
+    console.log('=> ', payload)
+    return {
+        type: GET_USER_BOARDS,
+        payload
+    }
+}
 
 export function authError (error) {
     return {

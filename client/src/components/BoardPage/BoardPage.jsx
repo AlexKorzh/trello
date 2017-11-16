@@ -17,11 +17,12 @@ class BoardPage extends Component {
     }
 
     componentDidMount () {
-        console.log('componentDidMount:');
         this.props.onFetchBoards();
     }
 
     render () {
+        // console.log('boards >>>', this.state);
+        console.log('render props >>>', this.props.boards);
         return (
             <div className="board-page">
                 <Header />
@@ -38,7 +39,9 @@ BoardPage.propTypes = {
 };
 
 export default connect(
-    state => ({}),
+    state => ({
+        boards: state.boards
+    }),
     dispatch => ({
         onFetchBoards: () => {
             dispatch(fetchBoards());

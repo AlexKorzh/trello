@@ -67,8 +67,7 @@ BoardForm.propTypes = {
 
 export default connect(
     (state, ownProps) => {
-        console.log('::state ', state); // state
-        console.log('::ownProps ', ownProps); // ownProps
+
     },
     dispatch => ({
         onCreateBoard: title => {
