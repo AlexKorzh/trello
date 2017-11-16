@@ -1,5 +1,6 @@
 const Board = require('../models/Board');
 const User = require('../models/User');
+const mongoose = require('mongoose');
 const config = require('../config');
 
 function create (req, res, next) {
@@ -35,8 +36,22 @@ function create (req, res, next) {
     res.send({message: 'New board successfully created'});
 }
 
-function getAllBoards (req, res, next) {
-    console.log('req, res, next', req, res, next);
+function getAllBoards (req, res) {
+    const user = req.user;
+    const boards = user.boards;
+    let result = [];
+
+    Board.find({
+        '_id': {
+            $in: boards.map(function (item) {
+                return mongoose.Types.ObjectId(item);
+            })
+        }
+    }, sendResponse).select('_id, title');
+
+    function sendResponse (error, data) {
+        res.send({boards: data});
+    }
 }
 
 exports.create = create;

@@ -17,11 +17,12 @@ class BoardPage extends Component {
     }
 
     componentDidMount () {
-        console.log('componentDidMount:');
         this.props.onFetchBoards();
     }
 
     render () {
+        // console.log('boards >>>', this.state);
+        console.log('render props >>>', this.props.boards);
         return (
             <div className="board-page">
                 <Header />
@@ -37,10 +38,13 @@ BoardPage.propTypes = {
     onFetchBoards: PropTypes.func.isRequired
 };
 
-function mapDispatchToProps (dispatch) {
-    return {
-        onFetchBoards: () => dispatch(fetchBoards())
-    };
-}
-
-export default connect(null, mapDispatchToProps)(BoardPage);
+export default connect(
+    state => ({
+        boards: state.boards
+    }),
+    dispatch => ({
+        onFetchBoards: () => {
+            dispatch(fetchBoards());
+        }
+    })
+)(BoardPage);

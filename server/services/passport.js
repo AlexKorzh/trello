@@ -44,6 +44,7 @@ const jwtOprions = {
 
 // Create JWT stragety
 const jwtLogin = new JwtStragety(jwtOprions, function (payload, done) {
+    console.log('JWT');
      // See if the user id in Payload exist in pur database
 
      // if it does, call 'done' with that other

@@ -19,7 +19,7 @@ import reduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import createHistory from 'history/createBrowserHistory';
-
+import { composeWithDevTools } from 'redux-devtools-extension';
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(
     reducers,
@@ -28,7 +28,18 @@ const store = createStoreWithMiddleware(
     && window.__REDUX_DEVTOOLS_EXTENSION__() 
 );
 
+<<<<<<< HEAD
 console.log('store --->' ,store.getState());
+=======
+// const middleware = routerMiddleware(history);
+
+// const store = createStore(
+//     reducers,
+//     composeWithDevTools(applyMiddleware(thunk))
+// );
+
+console.log('((store))', store.getState());
+>>>>>>> d9dfa0ca0789b0b29c2d85270544b5d185473a49
 
 const token = localStorage.getItem('token');
 // If we have a token, consider the user to be signed in 

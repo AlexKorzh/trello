@@ -4,3 +4,4 @@ export const AUTH_ERROR = 'auth_error';
 export const FETCH_MESSAGE = 'fetch_message';
 export const CREATE_BOARD = 'create_bord';
 export const CREATE_LIST = 'create_list';
+export const GET_USER_BOARDS = 'GET_USER_BOARDS';
