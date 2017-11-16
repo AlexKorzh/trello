@@ -19,8 +19,8 @@ function create (req, res, next) {
         User.findById(id, function(err, user) {
             if (err) throw err;
         
-            // change the users location
-            user.boards.push(board);
+            // add board 
+            user.addBoard(board);
         
             // save the user
             user.save(function(err) {
