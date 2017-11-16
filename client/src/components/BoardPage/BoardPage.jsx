@@ -37,11 +37,10 @@ BoardPage.propTypes = {
     onFetchBoards: PropTypes.func.isRequired
 };
 
-export default connect(
-    state => ({}),
-    dispatch => ({
-        onFetchBoards: () => {
-            dispatch(fetchBoards());
-        }
-    })
-)(BoardPage);
+function mapDispatchToProps (dispatch) {
+    return {
+        onFetchBoards: () => dispatch(fetchBoards())
+    };
+}
+
+export default connect(null, mapDispatchToProps)(BoardPage);

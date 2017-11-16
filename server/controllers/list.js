@@ -5,16 +5,32 @@ const config = require('../config');
 function create (req, res, next) {
     const title = req.body.title;
     const userId = req.user._id;
-    const boardId = req.user.boards[0];
+    // boardId - gets ftom the request body
+    // const boardId = req.body.boardId;
 
-    console.log("title --------->" ,title);
-    console.log("board id --------->" ,boardId);
-
-    const list = new List({title});
+    const list = new List({
+        title,
+        // board: boardId
+    });
 
     list.save(function (error) {
         if (error) return next(error);
-        console.log("list saves");
+
+        User.findById(userId, function(err, user) {
+            if (err) throw err;
+
+
+            // change the users location
+    
+            // user.boards[0].lists.push(list);
+        
+            // save the user
+            user.save(function(err) {
+            if (err) throw err;
+                console.log('User successfully updated!');
+            });
+        
+        });
     });
 
     res.send({message: 'New list successfully created'});

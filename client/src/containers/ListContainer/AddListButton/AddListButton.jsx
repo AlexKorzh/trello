@@ -13,7 +13,7 @@ class AddLisButton extends Component {
 
     handleSave () {
         const title = this.refs.listTitle.value;
-        debugger;
+        
         this.props.saveList(title);
     }
 

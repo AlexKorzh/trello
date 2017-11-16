@@ -28,6 +28,8 @@ const store = createStoreWithMiddleware(
     && window.__REDUX_DEVTOOLS_EXTENSION__() 
 );
 
+console.log('store --->' ,store.getState());
+
 const token = localStorage.getItem('token');
 // If we have a token, consider the user to be signed in 
 if (token) {

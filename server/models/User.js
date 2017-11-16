@@ -42,6 +42,18 @@ userSchema.methods.comparePassword = function (candidatePassword, callback) {
     });
 }
 
+userSchema.methods.addBoard = function (board) {
+    this.boards.push(board);
+}
+
+userSchema.methods.addList = function (boardId, list) {
+    this.boards.forEach((board) => {
+        if (board._id === boardId) {
+            board.lists.push(list);
+        }
+    });
+}
+
 //Create the model class
 const User = mongoose.model('User', userSchema);
 
