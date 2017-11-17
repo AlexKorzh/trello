@@ -7,6 +7,15 @@ const boardSchema = new Schema({
     lists: [{ type: Schema.Types.ObjectId, ref: 'List'}]
 });
 
+boardSchema.methods.getPublicFields = function () {
+    var fields = {
+        title: this.title,
+        id: this._id
+    };
+
+    return fields;
+};
+
 const Board = mongoose.model('Board', boardSchema);
 
 module.exports = Board;

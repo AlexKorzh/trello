@@ -14,10 +14,21 @@ const ROOT_URL = "http://localhost:3090";
 
 const authorization = localStorage.getItem('token');
 
+/*
+ * action creators
+ */
+
 export const getUserBoards = (payload) => {
     console.log('=> ', payload)
     return {
         type: GET_USER_BOARDS,
+        payload
+    }
+}
+
+export const createBoardAction = (payload) => {
+    return {
+        type: CREATE_BOARD,
         payload
     }
 }
@@ -36,11 +47,8 @@ export const createBoard = title => {
             {title},
             {headers: {authorization}}
         ).then(response => {
-            console.log('Create Board Response:', response.data.message);
+            dispatch(createBoardAction(response.data.board));
         });
-
-        console.log('C R E A T E = B O A R D');
-        dispatch({type: CREATE_BOARD});
     }
 }
 

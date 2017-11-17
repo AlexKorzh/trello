@@ -6,7 +6,7 @@ import './BoardCard.scss';
 const BoardCard = (props) => {
     return (
         <div className="col-3">
-            <div className="card board-card text-white bg-info p-2">
+            <div className="card board-card text-white bg-card p-2">
                 { props.title }
             </div>
         </div>
