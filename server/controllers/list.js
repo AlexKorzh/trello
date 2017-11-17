@@ -1,10 +1,12 @@
 const User = require('../models/User');
 const List = require('../models/List');
+const Board = require('../models/Board');
 const config = require('../config');
 
 function create (req, res, next) {
     const title = req.body.title;
     const userId = req.user._id;
+    const userBoards = user.boards;
     // boardId - gets ftom the request body
     // const boardId = req.body.boardId;
 
@@ -19,11 +21,9 @@ function create (req, res, next) {
         User.findById(userId, function(err, user) {
             if (err) throw err;
 
-
-            // change the users location
-    
-            // user.boards[0].lists.push(list);
-        
+            // Find board by id wich belongs to the user and push new list to lists
+            user.addList(boardId, list);
+            
             // save the user
             user.save(function(err) {
             if (err) throw err;
@@ -32,6 +32,10 @@ function create (req, res, next) {
         
         });
     });
+
+    function saveList () {
+
+    }
 
     res.send({message: 'New list successfully created'});
 
