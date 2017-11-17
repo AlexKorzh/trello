@@ -1,13 +1,10 @@
 @import '../../../assets/styles/variables';
 
 .board-card {
-    min-height: 100px;
     font-weight: bold;
     margin-bottom: 20px;
-    cursor: pointer;
     &.bg-card {
         background: $bg-green;
-        transition: 0.3s ease all;
         &:hover {
             background: darken($bg-green, 5%);
         }

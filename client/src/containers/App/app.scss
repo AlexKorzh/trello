@@ -167,6 +167,16 @@ body {
     }
 }
 
+.card-custom {
+    min-height: 100px;
+    border: 0;
+    transition: 0.3s ease all;
+    cursor: pointer;
+    &:focus {
+        outline: none;
+    }
+}
+
 @media screen and (max-width: 340px) {
     .btn-social-login {
         font-size: 18px;

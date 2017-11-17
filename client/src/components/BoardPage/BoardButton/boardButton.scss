@@ -1,10 +1,26 @@
-.add-board-btn {
-    padding: 60px 40px;
-    z-index: 10;
+@import '../../../assets/styles/variables';
+
+.button-create {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    width: 100%;
+    background: $bg-button-create;
+    color: $color-button-create;
+
+    &:hover {
+        background: darken($bg-button-create, 5%);
+        color: darken($color-button-create, 15%);
+    }
 }
-.button-wrap {
-    position: relative;
-}
-.close-card {
-    cursor: pointer;
-}
+// .add-board-btn {
+//     padding: 60px 40px;
+//     z-index: 10;
+// }
+// .button-wrap {
+//     position: relative;
+// }
+// .close-card {
+//     cursor: pointer;
+// }

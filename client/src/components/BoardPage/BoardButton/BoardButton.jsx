@@ -20,15 +20,16 @@ class BoardButton extends React.Component {
 
     render () {
         return (
-            <div className = "button-wrap">
-                <button 
-                    className = "btn add-board-btn btn-secondary" 
-                    onClick = {this.openModal}>
+            <div className = "col-3">
+                <button
+                    className = "card card-custom p-2 button-create"
+                    onClick = { this.openModal }
+                >
                     Создать новую доску…
                 </button>
                 <BoardForm 
                     close = {this.closeModal} 
-                    show = {this.state.isModalOpen} 
+                    show = {this.state.isModalOpen}
                 />
             </div>                
         );
