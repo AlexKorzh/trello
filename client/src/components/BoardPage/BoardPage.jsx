@@ -22,7 +22,6 @@ class BoardPage extends Component {
             <div className = "board-page">
                 <Header />
                 <div className = "board-wrap container">
-                    <BoardButton />
                     <div className = "list-wrap">
                         <div className="row">
                             {
@@ -35,6 +34,7 @@ class BoardPage extends Component {
                                     );
                                 })
                             }
+                            <BoardButton />
                         </div>
                     </div>
                 </div>

@@ -20,8 +20,12 @@ class BoardForm extends Component {
     }
 
     handleCreateBoard () {
-        console.log('::Creat Board::');
+        const title = '';
+
         this.props.onCreateBoard(this.state.title);
+        this.props.close();
+
+        this.setState({title});
     }
 
     handeTitleChange (e) {
@@ -48,6 +52,7 @@ class BoardForm extends Component {
                     className = "board-name form-control" 
                     type = "text"
                     placeholder = "Например, «Издание календаря»…"
+                    value = { this.state.title }
                     onChange = { this.handeTitleChange }
                 />
                 <button
@@ -62,7 +67,9 @@ class BoardForm extends Component {
 };
 
 BoardForm.propTypes = {
-    onCreateBoard: PropTypes.func
+    onCreateBoard: PropTypes.func,
+    show: PropTypes.boolean,
+    close: PropTypes.func
 };
 
 export default connect(
