@@ -28,7 +28,10 @@ function create (req, res, next) {
         });
     }); 
 
-    res.send({message: 'New board successfully created'});
+
+    const response = board.getPublicFields();
+
+    res.send({message: 'New board successfully created', board: response});
 }
 
 function getAllBoards (req, res) {
