@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './addListButton.scss';
 import { connect } from 'react-redux';
 import { createList } from '../../../actions';
 

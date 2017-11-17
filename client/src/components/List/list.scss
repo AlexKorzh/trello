@@ -1,0 +1,31 @@
+.list-container {
+    background: #E2E4E6;
+    border-radius: 3px;
+    // display: flex;
+    // flex-direction: column;
+    max-height: 100%;
+    position: relative;
+    white-space: normal;
+    .list-c__head {
+        padding: 8px;
+        font-size: 15px;
+        font-weight: 700;
+    }
+    .add-card-btn {
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        border-radius: 0 0 3px 3px;
+        color: #838c91;
+        flex: 0 0 auto;
+        padding: 8px 10px;
+        position: relative;
+        text-decoration: none;
+        user-select: none;
+        &:hover {
+            background-color: #CDD2D4;
+            color: #4d4d4d;
+            text-decoration: underline;
+        }
+    }
+}
