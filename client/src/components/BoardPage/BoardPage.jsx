@@ -20,7 +20,7 @@ class BoardPage extends Component {
 
     render () {
         const boards = this.props.boards;
-
+console.log('BOARDS', this.props.boards);
         return (
             <div className = "board-page">
                 <Header />
@@ -33,6 +33,7 @@ class BoardPage extends Component {
                                         <BoardCard 
                                             key = { index }
                                             title={ board.title }
+                                            id = { board._id }
                                         />
                                     );
                                 })
