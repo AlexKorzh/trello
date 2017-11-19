@@ -11,7 +11,6 @@ import BoardButton from './BoardButton/BoardButton.jsx';
 import BoardCard from './BoardCard/BoardCard.jsx';
 
 import List from '../List/List.jsx';
-// import ListContainer from '../../containers/ListContainer/ListContainer.jsx';
 
 class BoardPage extends Component {
     componentDidMount () {
@@ -20,7 +19,7 @@ class BoardPage extends Component {
 
     render () {
         const boards = this.props.boards;
-console.log('BOARDS', this.props.boards);
+
         return (
             <div className = "board-page">
                 <Header />

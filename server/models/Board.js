@@ -10,7 +10,7 @@ const boardSchema = new Schema({
 boardSchema.methods.getPublicFields = function () {
     var fields = {
         title: this.title,
-        id: this._id
+        _id: this._id
     };
 
     return fields;
