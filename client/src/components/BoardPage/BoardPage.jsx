@@ -27,7 +27,6 @@ console.log('BOARDS', this.props.boards);
                 <div className = "board-wrap container">
                     <div className = "list-wrap">
                         <div className="row">
-                            {/* <ListContainer /> */}
                             {
                                 boards.map((board, index) => {
                                     return (
@@ -39,7 +38,7 @@ console.log('BOARDS', this.props.boards);
                                     );
                                 })
                             }
-                            <BoardButton />
+                            <BoardButton /> 
                         </div>
                     </div>
                 </div>

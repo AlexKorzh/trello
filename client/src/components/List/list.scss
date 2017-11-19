@@ -1,3 +1,9 @@
+.show {
+    display: block !important;
+}
+.hide {
+    display: none !important;
+}
 .list-container {
     background: #E2E4E6;
     border-radius: 3px;
@@ -6,8 +12,10 @@
     max-height: 100%;
     position: relative;
     white-space: normal;
-    .list-c__head {
+    .card-info, .list-c__head  {
         padding: 8px;
+    }
+    .list-c__head {
         font-size: 15px;
         font-weight: 700;
     }
@@ -26,6 +34,33 @@
             background-color: #CDD2D4;
             color: #4d4d4d;
             text-decoration: underline;
+        }
+    }
+    .card, .card-info__title  {
+        min-height: 66px;
+        width: 100%;
+        font-size: 14px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-bottom: 6px;
+        position: relative;
+        resize: none;
+        outline: none;
+        z-index: 0;
+        box-shadow: 0px 1px 3px 0px rgba(50, 50, 50, 0.2);
+        transition: box-shadow 0.2s linear;
+        &:hover {
+            box-shadow: 0px 1px 4px 0px rgba(50, 50, 50, 0.4);
+        }
+    }
+    .card-info {
+        .card-info__title {
+            overflow: hidden;
+            padding: 6px 6px 2px 8px;
+            position: relative;
+            z-index: 10;
         }
     }
 }
