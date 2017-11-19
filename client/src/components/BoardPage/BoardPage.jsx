@@ -27,7 +27,6 @@ class BoardPage extends Component {
                 <div className = "board-wrap container">
                     <div className = "list-wrap">
                         <div className="row">
-                            {/* <ListContainer /> */}
                             {
                                 boards.map((board, index) => {
                                     return (
@@ -38,7 +37,7 @@ class BoardPage extends Component {
                                     );
                                 })
                             }
-                            <BoardButton />
+                            <BoardButton /> 
                         </div>
                     </div>
                 </div>

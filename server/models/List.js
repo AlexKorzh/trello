@@ -6,6 +6,15 @@ const listSchema = new Schema({
     board: {type: Schema.Types.ObjectId, ref: 'Board'},
 });
 
+listSchema.methods.getPublicFields = function () {
+    var fields = {
+        title: this.title,
+        id: this._id
+    };
+
+    return fields;
+};
+
 const List = mongoose.model('List', listSchema);
 
 module.exports = List;

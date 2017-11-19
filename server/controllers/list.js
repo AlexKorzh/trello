@@ -33,12 +33,13 @@ function create (req, res, next) {
         });
     });
 
-    function saveList () {
+    const response = list.getPublicFields();
 
-    }
-
-    res.send({message: 'New list successfully created'});
-
+    res.send({
+        message: 'New list successfully created',
+        list: response
+    });
+    
 }
 
 exports.create = create;
