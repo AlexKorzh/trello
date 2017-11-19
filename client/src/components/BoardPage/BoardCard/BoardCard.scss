@@ -5,6 +5,7 @@
     margin-bottom: 20px;
     &.bg-card {
         background: $bg-green;
+        text-decoration: none;
         &:hover {
             background: darken($bg-green, 5%);
         }

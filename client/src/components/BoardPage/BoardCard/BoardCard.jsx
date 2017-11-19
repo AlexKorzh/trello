@@ -6,9 +6,9 @@ import './BoardCard.scss';
 const BoardCard = (props) => {
     return (
         <div className="col-3">
-            <div className="card card-custom board-card text-white bg-card p-2">
+            <a href={`/boards/${props.id}`} className="card card-custom board-card text-white bg-card p-2">
                 { props.title }
-            </div>
+            </a>
         </div>
     );
 };
