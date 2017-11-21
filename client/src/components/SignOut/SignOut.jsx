@@ -13,7 +13,6 @@ class SignOut extends Component {
     }
 
     render () {
-        console.log(this.props);
         return (
             <div className = "signout-page">
                 <Header />

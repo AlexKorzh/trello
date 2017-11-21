@@ -36,7 +36,7 @@ class Signup extends Component {
     render () {
         const { handleSubmit } = this.props;
         return (
-            <div className="row overlay align-items-center">
+            <div className="overlay align-items-center">
                 <div className="col-md-3 mx-sm-auto auth-form">
                     <div className="signin-container signin-default-container">
                         <Form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>

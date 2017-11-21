@@ -13,7 +13,7 @@ import BoardCard from './BoardCard/BoardCard.jsx';
 import List from '../List/List.jsx';
 
 class BoardPage extends Component {
-    componentDidMount () {
+    componentWillMount () {debugger;
         this.props.onFetchBoards();
     }
 
@@ -69,5 +69,6 @@ const mapDispatchToProps = dispatch => {
         }
     };
 };
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoardPage);

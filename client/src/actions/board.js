@@ -1,9 +1,10 @@
 import { getUserBoards } from '../actions';
-import authorization from '../utils/auth';
+// import authorization from '../utils/auth';
 import currentHost from '../utils/host';
 import axios from 'axios';
 
 const fetchBoards = () => dispatch => {
+    let authorization = localStorage.getItem('token');
     axios.post(
         `${currentHost}/getAllBoards`, null,
         {headers: {authorization}}

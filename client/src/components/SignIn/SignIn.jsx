@@ -5,6 +5,10 @@ import * as actions from '../../actions';
 import './signin.scss';
 
 class Signin extends Component {
+    constructor () {
+        super();
+    }
+    
     handleFormSubmit ({ email, password }) {
         this.props.signinUser({ email, password });
     }
@@ -23,16 +27,6 @@ class Signin extends Component {
     render () {
         const { handleSubmit } = this.props;
 
-        const iput = field => {
-            const { input, type, placeholder } = field;
-            return (
-                <input {...input} type={type} 
-                    className="form-control form-control-lg"
-                    placeholder = {placeholder} 
-                />
-            );
-        };
-
         return (
             <div className="row overlay align-items-center">
                 <div className="col-md-3 mx-sm-auto auth-form">
@@ -41,13 +35,13 @@ class Signin extends Component {
                             <div className="form-group form-group-custom">
                                 <Field name="email"
                                     type="email"
-                                    component={iput}
+                                    component={inputField}
                                     placeholder = "email" />
                             </div>
                             <div className="form-group form-group-custom">
                                 <Field name="password"
                                     type="password"
-                                    component={iput}
+                                    component={inputField}
                                     placeholder = "password" />
                             </div>
                             {this.renderAlert()}
@@ -63,9 +57,18 @@ class Signin extends Component {
     }
 }
 
+const inputField = field => {
+    const { input, type, placeholder } = field;
+    return (
+        <input {...input} type={type} 
+            className="form-control form-control-lg"
+            placeholder = {placeholder}
+        />
+    );
+};
+
 function mapStateToProps (state) {
     return { 
-        // form: state.form,
         errorMessage: state.auth.error
     };
 }
