@@ -3,11 +3,10 @@ import './listPage.scss';
 import { connect } from 'react-redux';
 import Header from '../../components/Header/Header.jsx';
 import AddListButton from '../../components/List/AddListButton/AddListButton.jsx';
+
 import List from '../../components/List/List.jsx';
 import fetchBoardLists from '../../actions/lists';
 import getBoardId from '../../utils/getBoardId';
-
-import Scrollbars from '../../utils/CustomScrollbars';
 
 class ListPage extends Component {
     constructor () {
