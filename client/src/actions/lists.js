@@ -1,5 +1,5 @@
 import { getBoardLists } from '../actions';
-import authorization from '../utils/auth';
+import authorization from '../utils/getToken';
 import currentHost from '../utils/host';
 import axios from 'axios';
 

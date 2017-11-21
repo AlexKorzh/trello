@@ -13,7 +13,9 @@ import BoardCard from './BoardCard/BoardCard.jsx';
 import List from '../List/List.jsx';
 
 class BoardPage extends Component {
-    componentDidMount () {
+    componentWillMount () {
+
+        console.log('componentDidMount')
         this.props.onFetchBoards();
     }
 
