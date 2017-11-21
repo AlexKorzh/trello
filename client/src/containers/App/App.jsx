@@ -9,7 +9,7 @@ import SignUp from './../../components/SignUp/SignUp.jsx';
 import SignOut from './../../components/SignOut/SignOut.jsx';
 import requireAuth from '../../components/Auth/require_auth';
 import BoardPage from '../../components/BoardPage/BoardPage.jsx';
-import ListContainer from '../../containers/ListContainer/ListContainer';
+import ListPage from '../../containers/ListPage/ListPage.jsx';
 
 import history from './history';
 import { Router } from 'react-router-dom';
@@ -52,7 +52,7 @@ class App extends Component {
                         <Route path="/signup" component={SignUp}/>
                         <Route path="/signout" component={SignOut}/>
                         <Route exact path = "/boards" component = {requireAuth(BoardPage)}/>
-                        <Route path = "/boards/:id" component = {requireAuth(ListContainer)}/>
+                        <Route path = "/boards/:id" component = {requireAuth(ListPage)}/>
                     </div>
                 </Router>
             </Provider>

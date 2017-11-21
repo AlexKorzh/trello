@@ -1,9 +1,20 @@
-// $list-page-bg: #0078bf;
-// body  {
-//     background-color: $list-page-bg;
-// }
 .list-page {
-    padding-top: 20px;
+    .list-page__container {
+        position: relative;
+        height: calc(100vh - 50px);
+    }
+    .list-page__wrap {
+        padding-top: 30px; 
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
 }
 .list-container, .add-list-container {
     width: 270px;

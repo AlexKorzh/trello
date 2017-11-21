@@ -39,6 +39,9 @@ function getAllBoards (req, res) {
     const boards = user.boards;
     let result = [];
 
+
+    console.log('B O A R D S --------------------->', user);
+
     Board.find({
         '_id': {
             $in: boards.map(function (item) {

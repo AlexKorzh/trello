@@ -18,6 +18,7 @@ module.exports = function (app) {
     app.post('/createBoard', requireAuth, Board.create);
 
     // It will be change
-    app.post('/boards', requireAuth, List.create);
+    app.post('/boards/createList', requireAuth, List.create);
+    app.post('/getBoardLists', requireAuth, List.getBoardLists);
     app.post('/getAllBoards', requireAuth, Board.getAllBoards);
 }

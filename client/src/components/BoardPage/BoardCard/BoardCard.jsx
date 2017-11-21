@@ -12,8 +12,9 @@ class BoardCard extends Component {
     }
     goTo () {
         const id = this.props.id;
+        const title = this.props.title;
 
-        this.props.history.push(`/boards/${id}`);
+        this.props.history.push(`/boards/${id}/${title}`);
     }
 
     render () {

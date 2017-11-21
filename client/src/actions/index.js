@@ -7,7 +7,8 @@ import {
     UNAUTH_USER,
     FETCH_MESSAGE,
     CREATE_BOARD,
-    CREATE_LIST
+    CREATE_LIST,
+    GET_BOARD_LISTS
 } from './types';
 
 const ROOT_URL = "http://localhost:3090";
@@ -26,9 +27,24 @@ export const getUserBoards = (payload) => {
     }
 }
 
+export const getBoardLists = (payload) => {
+    console.log('=> ', payload)
+    return {
+        type: GET_BOARD_LISTS,
+        payload
+    }
+}
+
 export const createBoardAction = (payload) => {
     return {
         type: CREATE_BOARD,
+        payload
+    }
+}
+
+export const createListAction = (payload) => {
+    return {
+        type: CREATE_LIST,
         payload
     }
 }
@@ -52,18 +68,17 @@ export const createBoard = title => {
     }
 }
 
-export const createList = title => {
+export const createList = (title, boardId) => {;
     return dispatch => {
         axios.post(
-            `${ROOT_URL}/boards`,
-            {title},
+            `${ROOT_URL}/boards/createList`,
+            {title, boardId},
             {headers: {authorization}}
         ).then(response => {
             console.log('Create LIST Response:', response.data.message);
+            dispatch(createListAction(response.data.list));
         });
-
         console.log('CREATE LIST ________>>>');
-        dispatch({type: CREATE_LIST});
     }
 }
 

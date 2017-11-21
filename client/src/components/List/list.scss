@@ -5,13 +5,13 @@
     display: none !important;
 }
 .list-container {
-    background: #E2E4E6;
-    border-radius: 3px;
-    // display: flex;
-    // flex-direction: column;
-    max-height: 100%;
-    position: relative;
-    white-space: normal;
+    .list-wrap {
+        background: #E2E4E6;
+        border-radius: 3px;
+        max-height: 100%;
+        position: relative;
+        white-space: normal;
+    }
     .card-info, .list-c__head  {
         padding: 8px;
     }

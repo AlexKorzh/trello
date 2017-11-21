@@ -73,9 +73,7 @@ BoardForm.propTypes = {
 };
 
 export default connect(
-    (state, ownProps) => {
-
-    },
+    null,
     dispatch => ({
         onCreateBoard: title => {
             dispatch(createBoard(title));

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './addListButton.scss';
 import { connect } from 'react-redux';
 import { createList } from '../../../actions';
+import getBoardId from '../../../utils/getBoardId';
 
 class AddLisButton extends Component {
     constructor (props) {
@@ -14,8 +15,9 @@ class AddLisButton extends Component {
 
     handleSave () {
         const title = this.refs.listTitle.value;
-        
-        this.props.saveList(title);
+        const boardId = getBoardId();
+
+        this.props.saveList(title, boardId);
     }
 
     openFrom () {
@@ -27,6 +29,7 @@ class AddLisButton extends Component {
     }
 
     render () {
+        console.log(this.props);
         let formStaus = !this.state.isOpen ? 'hide' : 'show';
 
         return (
@@ -60,16 +63,10 @@ class AddLisButton extends Component {
     }
 };
 
-function mapStateToProps (state) {
-    return {
-        lists: state
-    };
-}
-
 function mapDispatchToProps (dispatch) {
     return {
-        saveList: title => dispatch(createList(title))
+        saveList: (title, boardId) => dispatch(createList(title, boardId))
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddLisButton);
+export default connect(null, mapDispatchToProps)(AddLisButton);
