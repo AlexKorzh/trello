@@ -10,7 +10,7 @@ import {
     CREATE_BOARD,
     CREATE_LIST,
     GET_BOARD_LISTS
-} from './types';
+} from './actionTypes';
 
 const ROOT_URL = "http://localhost:3090";
 
