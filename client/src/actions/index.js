@@ -1,5 +1,6 @@
 import axios from 'axios';
-import browserHistory from '../containers/App/history';
+import browserHistory from '../utils/history';
+import getToken from '../utils/getToken';
 import {
     GET_USER_BOARDS,
     AUTH_USER, 
@@ -12,8 +13,6 @@ import {
 } from './actionTypes';
 
 const ROOT_URL = "http://localhost:3090";
-
-const authorization = localStorage.getItem('token');
 
 /*
  * action creators
@@ -58,22 +57,23 @@ export function authError (error) {
 
 export const createBoard = title => {
     return dispatch => {
+        // let token = getToken();
         axios.post(
             `${ROOT_URL}/createBoard`,
             {title},
-            {headers: {authorization}}
+            {headers: { authorization: getToken() } }
         ).then(response => {
             dispatch(createBoardAction(response.data.board));
         });
     }
 }
 
-export const createList = (title, boardId) => {;
+export const createList = (title, boardId) => {
     return dispatch => {
         axios.post(
             `${ROOT_URL}/boards/createList`,
             {title, boardId},
-            {headers: {authorization}}
+            {headers: { authorization: getToken() } }
         ).then(response => {
             console.log('Create LIST Response:', response.data.message);
             dispatch(createListAction(response.data.list));
@@ -127,8 +127,8 @@ export function signoutUser () {
 
 export function fetchMessage () {
     return function (dispatch) {
-        axios.get(ROOT_URL, {
-            headers: { authorization: localStorage.getItem('token') }
+        axios.get(ROOT_URL, { 
+            headers: { authorization: getToken() } 
         })
             .then(response => {
                 dispatch({
