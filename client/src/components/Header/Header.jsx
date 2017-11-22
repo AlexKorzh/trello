@@ -52,7 +52,7 @@ class Header extends Component {
         }
         return (
             <header className="header">
-                <Link to = "/" className = "logo-wrap">
+                <Link to = "/boards" className = "logo-wrap">
                     <img className = "logo" src = {logo} alt = "logo"/>
                 </Link>
                 <ul className = "nav nav-pills">

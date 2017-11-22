@@ -11,7 +11,7 @@ import requireAuth from '../../components/Auth/require_auth';
 import BoardPage from '../../components/BoardPage/BoardPage.jsx';
 import ListPage from '../../containers/ListPage/ListPage.jsx';
 
-import history from './history';
+import history from '../../utils/history';
 import { Router } from 'react-router-dom';
 import { Route } from 'react-router'; 
 import reduxThunk from 'redux-thunk';
