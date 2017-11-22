@@ -1,5 +1,5 @@
 import { getBoardLists } from '../actions';
-import authorization from '../utils/getToken';
+import getToken from '../utils/getToken';
 import currentHost from '../utils/host';
 import axios from 'axios';
 
@@ -7,7 +7,7 @@ const fetchBoardLists = (boardId) => dispatch => {
     axios.post(
         `${currentHost}/getBoardLists`, 
         {boardId},
-        {headers: {authorization}}
+        {headers: {authorization: getToken()}}
     ).then(function (response) {
         const lists = response.data.lists;
         dispatch(getBoardLists(lists));
