@@ -1,6 +1,6 @@
 import { 
     GET_USER_BOARDS, CREATE_BOARD
-} from '../actions/types';
+} from '../actions/actionTypes';
 
 export default function (state = [], action) {
     console.log('actions', action)
