@@ -11,7 +11,7 @@ class ListPage extends Component {
     constructor () {
         super();
     }
-    componentDidMount () {debugger;
+    componentDidMount () {
         const boardId = getBoardId();
         this.props.onFetchBoardLists(boardId);
     }

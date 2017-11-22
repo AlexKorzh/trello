@@ -15,9 +15,14 @@ class AddLisButton extends Component {
 
     handleSave () {
         const title = this.refs.listTitle.value;
-        const boardId = getBoardId();
-
-        this.props.saveList(title, boardId);
+        if (title != '') {
+            const boardId = getBoardId();
+            
+            this.props.saveList(title, boardId);
+            this.closeForm();
+        } else {
+            this.refs.listTitle.placeholder = 'Введите название списка';
+        }
     }
 
     openFrom () {
@@ -39,7 +44,7 @@ class AddLisButton extends Component {
                     onClick = {this.openFrom}
                     className = "add-list-btn">Добавить список...</span>
                 <div className = {`add-list-form ${formStaus}`}>
-                    <input 
+                    <input
                         className = "add-list-form__input" 
                         type = "text"
                         ref = "listTitle" 
