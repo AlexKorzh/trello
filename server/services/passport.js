@@ -8,6 +8,8 @@ const LocalStragety = require('passport-local');
 //Creacte local stragety
 const localOptions = {usernameField: 'email'};
 const localLogin = new LocalStragety(localOptions, function (email, password, done) {
+    console.log('EMAIL --------->',email);
+    console.log('PASSWORD ------->',password);
     // Verify this email and password, call done with user
     // if it is the correct email and password
     // otherwise, call done with falls
@@ -15,7 +17,9 @@ const localLogin = new LocalStragety(localOptions, function (email, password, do
     // to Find email in database we use USER MODEL
     // all searches operation return a callback
     User.findOne({email: email}, function (err, user) {
+        console.log('USER ------->',user);
         if (err) {
+            console.log('ERROR------> ',error);
             return done(err);
         }
         if (!user) {
@@ -24,6 +28,8 @@ const localLogin = new LocalStragety(localOptions, function (email, password, do
 
         //compare passwords - is 'password' equal to a user 'password'
         user.comparePassword(password, function (err, isMatch) {
+            console.log('ERROR --------------->' ,err);
+            console.log('isMatch --------------->' ,isMatch);
             if (err) {
                 return done(err);
             }
@@ -37,18 +43,16 @@ const localLogin = new LocalStragety(localOptions, function (email, password, do
 });
 
 // SetUp options for JWT Stragety
-const jwtOprions = {
+const jwtOptions = {
     jwtFromRequest: ExtractJWt.fromHeader('authorization'),
     secretOrKey: config.secret
 };
 
 // Create JWT stragety
-const jwtLogin = new JwtStragety(jwtOprions, function (payload, done) {
+const jwtLogin = new JwtStragety(jwtOptions, function (payload, done) {
     console.log('JWT');
      // See if the user id in Payload exist in pur database
-
      // if it does, call 'done' with that other
-
      // otherwise, call done without a user object
      User.findById(payload.sub, function (err, user) {
          if (err) {

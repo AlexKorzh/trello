@@ -13,21 +13,19 @@ function create (req, res, next) {
     });
 
     board.save(function (error) {
-        if (error) return next(error);       
+        if (error) return next(error);
+
+        User.update(
+            { _id: id },
+            { $push: { boards: board }},
+            callback
+        );
+
+        function callback (err, doc) {
+            if (err) throw err;
+            console.log('B O A R D U S E R -------->' ,doc);
+        }
     });
-
-    User.findById(id, function(err, user) {
-        if (err) throw err;
-        // add board 
-        user.addBoard(board);
-        
-        // save the user
-        user.save(function(err) {
-        if (err) throw err;
-            console.log('User successfully updated!');
-        });
-    }); 
-
 
     const response = board.getPublicFields();
 
@@ -38,7 +36,6 @@ function getAllBoards (req, res) {
     const user = req.user;
     const boards = user.boards;
     let result = [];
-
 
     console.log('B O A R D S --------------------->', user);
 

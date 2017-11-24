@@ -4,6 +4,16 @@ import { reduxForm, Field, Form } from 'redux-form';
 import * as actions from '../../actions';
 import './signin.scss';
 
+const inputField = field => {
+    const { input, type, placeholder } = field;
+    return (
+        <input {...input} type={type} 
+            className="form-control form-control-lg"
+            placeholder = {placeholder}
+        />
+    );
+};
+
 class Signin extends Component {
     constructor () {
         super();
@@ -28,7 +38,7 @@ class Signin extends Component {
         const { handleSubmit } = this.props;
 
         return (
-            <div className="row overlay align-items-center">
+            <div className="overlay">
                 <div className="col-md-3 mx-sm-auto auth-form">
                     <div className="signin-container signin-default-container">
                         <Form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
@@ -56,16 +66,6 @@ class Signin extends Component {
         );
     }
 }
-
-const inputField = field => {
-    const { input, type, placeholder } = field;
-    return (
-        <input {...input} type={type} 
-            className="form-control form-control-lg"
-            placeholder = {placeholder}
-        />
-    );
-};
 
 function mapStateToProps (state) {
     return { 

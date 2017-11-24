@@ -96,7 +96,8 @@ export function signinUser ({ email, password }) {
                 console.log('Auth -->', response);
                 browserHistory.push('/boards');
             })
-            .catch(() => {
+            .catch((error) => {
+                console.dir(error);
                 // If request it bad...
                 // - Show an error to the user
                 dispatch(authError('Bad Login Info'));
