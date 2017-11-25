@@ -16,6 +16,11 @@ listSchema.methods.getPublicFields = function () {
     return fields;
 };
 
+listSchema.pre('remove', function(next) {
+    // Remove all the assignment docs that reference the removed person.
+    this.model('Assignment').remove({ list: this._id }, next);
+});
+
 const List = mongoose.model('List', listSchema);
 
 module.exports = List;

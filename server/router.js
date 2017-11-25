@@ -26,4 +26,7 @@ module.exports = function (app) {
     app.post('/getBoardLists', requireAuth, List.getBoardLists);
     app.post('/getAllBoards', requireAuth, Board.getAllBoards);
     app.post('/getAllCards', requireAuth, Card.getAllCards);
+
+    // DELETE
+    app.post('/deleteBoard', requireAuth, Board.deleteBoard);
 }

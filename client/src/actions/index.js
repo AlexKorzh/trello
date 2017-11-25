@@ -11,7 +11,8 @@ import {
     CREATE_LIST,
     GET_BOARD_LISTS,
     CREATE_CARD,
-    GET_CARD_LISTS
+    GET_CARD_LISTS,
+    DELETE_BOARD
 } from './actionTypes';
 
 const ROOT_URL = "http://localhost:3090";
@@ -19,6 +20,13 @@ const ROOT_URL = "http://localhost:3090";
 /*
  * action creators
  */
+
+export const deleteBoardAction = (boardId) => {
+    return {
+        type: DELETE_BOARD,
+        payload
+    }
+}
 
 export const getUserBoards = (payload) => {
     console.log('=> ', payload)
@@ -70,6 +78,18 @@ export function authError (error) {
         type: AUTH_ERROR,
         payload: error
     };
+}
+
+export const deleteBoard = boardId => {
+    return dispatch => {
+        axios.post(
+            `${ROOT_URL}/deleteBoard`,
+            {boardId},
+            {headers: { authorization: getToken() } }
+        ).then(response => {
+            dispatch(deleteBoardAction(response.data.board));
+        });
+    }
 }
 
 export const createBoard = title => {

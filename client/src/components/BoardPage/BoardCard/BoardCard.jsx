@@ -12,7 +12,7 @@ class BoardCard extends Component {
         super();
 
         this.goTo = this.goTo.bind(this);
-        this.deleteBoard = this.deleteBoard.bind(this);
+        this.handleBoardDelete = this.handleBoardDelete.bind(this);
     }
 
     goTo () {
@@ -22,10 +22,12 @@ class BoardCard extends Component {
         this.props.history.push(`/boards/${id}/${title}`);
     }
 
-    deleteBoard (e) {
+    handleBoardDelete (e) {debugger;
         e.stopPropagation();
 
-        const { id } = this.props;
+        const boardId  = this.props.id;
+
+        this.props.onDelete(boardId);
     }
 
     render () {
@@ -45,7 +47,7 @@ class BoardCard extends Component {
                     <DeleteIcon 
                         className="delete-icon"
                         style={ styles }
-                        onClick = { this.deleteBoard }
+                        onClick = { this.handleBoardDelete }
                     />
                 </a>
             </div>
