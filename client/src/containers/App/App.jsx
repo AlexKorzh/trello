@@ -21,6 +21,8 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import createHistory from 'history/createBrowserHistory';
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(
     reducers,
@@ -44,18 +46,20 @@ class App extends Component {
     }
     render () {
         return(
-            <Provider store={store}>
-                <Router history={history}>
-                    <div id = "app">
-                        <Route exact = {true} path="/" component={Welcome}/>
-                        <Route path="/signin" component={SignIn}/>
-                        <Route path="/signup" component={SignUp}/>
-                        <Route path="/signout" component={SignOut}/>
-                        <Route exact path = "/boards" component = {requireAuth(BoardPage)}/>
-                        <Route path = "/boards/:id" component = {requireAuth(ListPage)}/>
-                    </div>
-                </Router>
-            </Provider>
+            <MuiThemeProvider>
+                <Provider store={store}>
+                    <Router history={history}>
+                        <div id = "app">
+                            <Route exact = {true} path="/" component={Welcome}/>
+                            <Route path="/signin" component={SignIn}/>
+                            <Route path="/signup" component={SignUp}/>
+                            <Route path="/signout" component={SignOut}/>
+                            <Route exact path = "/boards" component = {requireAuth(BoardPage)}/>
+                            <Route path = "/boards/:id" component = {requireAuth(ListPage)}/>
+                        </div>
+                    </Router>
+                </Provider>
+            </MuiThemeProvider>
         );
     }
 }

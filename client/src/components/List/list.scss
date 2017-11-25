@@ -12,7 +12,9 @@
         position: relative;
         white-space: normal;
     }
-    .card-info, .list-c__head  {
+    .card,
+    .card-info, 
+    .list-c__head {
         padding: 8px;
     }
     .list-c__head {
@@ -37,7 +39,7 @@
         }
     }
     .card, .card-info__title  {
-        min-height: 66px;
+        min-height: 80px;
         width: 100%;
         font-size: 14px;
         background-color: #fff;

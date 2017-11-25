@@ -9,7 +9,9 @@ import {
     FETCH_MESSAGE,
     CREATE_BOARD,
     CREATE_LIST,
-    GET_BOARD_LISTS
+    GET_BOARD_LISTS,
+    CREATE_CARD,
+    GET_CARD_LISTS
 } from './actionTypes';
 
 const ROOT_URL = "http://localhost:3090";
@@ -34,6 +36,14 @@ export const getBoardLists = (payload) => {
     }
 }
 
+export const getCardLists = (payload) => {
+    console.log('=> ', payload)
+    return {
+        type: GET_CARD_LISTS,
+        payload
+    }
+}
+
 export const createBoardAction = (payload) => {
     return {
         type: CREATE_BOARD,
@@ -48,6 +58,13 @@ export const createListAction = (payload) => {
     }
 }
 
+export const createCardAction = (payload) => {
+    return {
+        type: CREATE_CARD,
+        payload
+    }
+}
+
 export function authError (error) {
     return {
         type: AUTH_ERROR,
@@ -57,13 +74,24 @@ export function authError (error) {
 
 export const createBoard = title => {
     return dispatch => {
-        // let token = getToken();
         axios.post(
             `${ROOT_URL}/createBoard`,
             {title},
             {headers: { authorization: getToken() } }
         ).then(response => {
             dispatch(createBoardAction(response.data.board));
+        });
+    }
+}
+
+export const createCard = (title, listId) => {
+    return dispatch => {
+        axios.post(
+            `${ROOT_URL}/createCard`,
+            {title, listId},
+            {headers: { authorization: getToken() } }
+        ).then(response => {
+            dispatch(createCardAction(response.data.card));
         });
     }
 }
