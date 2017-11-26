@@ -16,57 +16,33 @@ function create (req, res, next) {
     board.save(function (error) {
         if (error) return next(error);
 
-        User.update(
-            { _id: id },
-            { $push: { boards: board }},
-            callback
-        );
-
-        function callback (err, doc) {
-            if (err) throw err;
-            console.log('B O A R D U S E R -------->' ,doc);
-        }
+        send();
     });
 
-    const response = board.getPublicFields();
+    function send (response) {
+        const data = board.getPublicFields();
 
-    res.send({message: 'New board successfully created', board: response});
+        res.send({message: 'New board successfully created', board: data});
+    }
 }
 
 function getAllBoards (req, res) {
     const user = req.user;
-    const boards = user.boards;
-    let result = [];
+    const userId = user.id;
 
-    console.log('B O A R D S --------------------->', user);
+    Board.find({creator: userId}, sendResponse).select('_id, title');
 
-    Board.find({
-        '_id': {
-            $in: boards.map(function (item) {
-                return mongoose.Types.ObjectId(item);
-            })
-        }
-    }, sendResponse).select('_id, title');
-
-    function sendResponse (error, data) {
-        res.send({boards: data});
+    function sendResponse (error, docs) {
+        res.send({boards: docs});
     }
 }
 
 function deleteBoard (req, res, next) {
     const boardId = req.body.boardId;
 
-    console.log('BOARD ID --------> ',boardId);
-
-    Board.findOneAndRemove({_id: boardId}, (err, response) => {
-        // note that if you have populated the Event documents to
-        // the person documents, you have to extract the id from the
-        // req.body.eventsAttended object 
-        console.log('response --------> ',response);
-        List.remove({_id: { $in: response.lists }}, (err, res) => {
-            console.log('response --------> ',res);
-        })
-    })
+        Board.findOneAndRemove({_id: boardId}, (err, response) => {
+            res.send({board: boardId});
+    });
 }
 
 exports.create = create;

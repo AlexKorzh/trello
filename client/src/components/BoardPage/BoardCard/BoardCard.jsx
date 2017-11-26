@@ -24,9 +24,11 @@ class BoardCard extends Component {
     handleBoardDelete (e) {
         e.stopPropagation();
 
-        const boardId  = this.props.id;
+        const { id }  = this.props;
 
-        this.props.onDelete(boardId);
+        console.log(id);
+
+        this.props.onDelete(id);
     }
 
     render () {

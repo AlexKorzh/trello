@@ -1,16 +1,12 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
+const Schema = mongoose.Schema;
 
-//Define our model 
 const userSchema = new Schema({
     email: { type: String, unique: true, lowercase: true },
-    password: String,
-    boards: [{ type: Schema.Types.ObjectId, ref: 'Board' }]
+    password: String
 });
 
-// On save Hook, encrypt password
-// Before saving a model, run this function
 userSchema.pre('save', function (next) {
     // get access to the user model
     const user = this;
@@ -35,21 +31,12 @@ userSchema.pre('save', function (next) {
 
 userSchema.methods.comparePassword = function (candidatePassword, callback) {
     bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
-        console.log('candidatePassword ------------>',candidatePassword);
-        console.log('this.password ------------>',this.password);
-        if (err) {
-            return callback(err);
-        }
+        if (err) return callback(err);
+
         callback(null, isMatch);
     });
-}
+};
 
-userSchema.methods.addBoard = function (board) {
-    this.boards.push(board);
-}
-
-//Create the model class
 const User = mongoose.model('User', userSchema);
 
-// Export the model
 module.exports = User;

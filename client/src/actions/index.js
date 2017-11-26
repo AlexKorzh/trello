@@ -21,7 +21,7 @@ const ROOT_URL = "http://localhost:3090";
  * action creators
  */
 
-export const deleteBoardAction = (boardId) => {
+export const deleteBoardAction = (payload) => {
     return {
         type: DELETE_BOARD,
         payload

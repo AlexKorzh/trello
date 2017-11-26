@@ -45,7 +45,7 @@ class List extends Component {
 
         let addCardBtnStatus = this.state.isAddCardOpen ? 'hide' : 'show',
             cardInfoBtnStatus = !this.state.isAddCardOpen ? 'hide' : 'show';
-
+console.log('RENDER ->', this.props.id);
         return (
             <div className = "list-container">
                 <div className = "list-wrap">

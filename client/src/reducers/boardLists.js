@@ -1,7 +1,6 @@
 import { 
     CREATE_LIST, 
-    GET_BOARD_LISTS,
-    DELETE_BOARD
+    GET_BOARD_LISTS
 } from '../actions/actionTypes';
 
 export default function (state = [], action) {
@@ -10,8 +9,6 @@ export default function (state = [], action) {
             return action.payload
         case CREATE_LIST: 
             return [...state, action.payload]
-        case DELETE_BOARD: 
-            return [...state, action.payload]    
     }
     return state;
 }
