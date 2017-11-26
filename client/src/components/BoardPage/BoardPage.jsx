@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
 import fetchBoards from '../../actions/board';
+import { deleteBoard } from '../../actions/index';
 
 import './boardPage.scss';
 
@@ -33,6 +34,7 @@ class BoardPage extends Component {
                                             key = { index }
                                             title={ board.title }
                                             id = { board._id }
+                                            onDelete = { this.props.onDeleteBoard }
                                         />
                                     );
                                 })
@@ -66,6 +68,9 @@ const mapDispatchToProps = dispatch => {
     return {
         onFetchBoards: () => {
             dispatch(fetchBoards())
+        },
+        onDeleteBoard: (boardId) => { 
+            dispatch(deleteBoard(boardId)) 
         }
     };
 };

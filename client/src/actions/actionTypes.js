@@ -8,3 +8,5 @@ export const CREATE_CARD = 'CREATE_CARD';
 export const GET_USER_BOARDS = 'GET_USER_BOARDS';
 export const GET_BOARD_LISTS = 'GET_BOARD_LISTS';
 export const GET_CARD_LISTS = 'GET_CARD_LISTS';
+//DELETE
+export const DELETE_BOARD = 'DELETE_BOARD';

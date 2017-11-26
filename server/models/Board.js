@@ -16,6 +16,15 @@ boardSchema.methods.getPublicFields = function () {
     return fields;
 };
 
+boardSchema.pre('remove', function(next){
+    this.model('List').update(
+        {_id: {$in: this.lists}}, 
+        {$pull: {board: this._id}}, 
+        {multi: true},
+        next
+    );
+});
+
 const Board = mongoose.model('Board', boardSchema);
 
 module.exports = Board;

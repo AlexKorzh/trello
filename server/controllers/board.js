@@ -1,4 +1,5 @@
 const Board = require('../models/Board');
+const List = require('../models/List');
 const User = require('../models/User');
 const mongoose = require('mongoose');
 const config = require('../config');
@@ -52,5 +53,22 @@ function getAllBoards (req, res) {
     }
 }
 
+function deleteBoard (req, res, next) {
+    const boardId = req.body.boardId;
+
+    console.log('BOARD ID --------> ',boardId);
+
+    Board.findOneAndRemove({_id: boardId}, (err, response) => {
+        // note that if you have populated the Event documents to
+        // the person documents, you have to extract the id from the
+        // req.body.eventsAttended object 
+        console.log('response --------> ',response);
+        List.remove({_id: { $in: response.lists }}, (err, res) => {
+            console.log('response --------> ',res);
+        })
+    })
+}
+
 exports.create = create;
 exports.getAllBoards = getAllBoards;
+exports.deleteBoard = deleteBoard;
