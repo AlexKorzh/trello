@@ -3,6 +3,7 @@
 .board-card {
     font-weight: bold;
     margin-bottom: 20px;
+    overflow: hidden;
     &.bg-card {
         background: $bg-green;
         text-decoration: none;
@@ -10,7 +11,13 @@
             background: darken($bg-green, 5%);
         }
     }
+    &:hover {
+        .delete-icon {
+            transform: translateY(0);
+        }
+    }
     .delete-icon {
-        color: rgba(127, 77, 77, 0.87);
+        right: 8px;
+        transform: translateY(-32px);
     }
 }

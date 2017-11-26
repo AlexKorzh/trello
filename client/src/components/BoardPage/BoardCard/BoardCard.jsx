@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
-import mui from 'material-ui';
-import DeleteIcon from 'react-material-icons/icons/action/delete';
+import DeleteIcon from 'material-ui-icons/delete';
 
 import './BoardCard.scss';
 
@@ -24,7 +23,7 @@ class BoardCard extends Component {
 
     deleteBoard (e) {
         e.stopPropagation();
-
+console.log('click');
         const { id } = this.props;
     }
 
