@@ -3,7 +3,7 @@ import getToken from '../utils/getToken';
 import currentHost from '../utils/host';
 import axios from 'axios';
 
-const fetchBoardLists = (boardId) => dispatch => {
+const fetchBoardLists = (boardId, callback) => dispatch => {
     axios.post(
         `${currentHost}/getBoardLists`, 
         {boardId},
@@ -11,6 +11,7 @@ const fetchBoardLists = (boardId) => dispatch => {
     ).then(function (response) {
         const lists = response.data.lists;
         dispatch(getBoardLists(lists));
+        callback();
     })
 };
 

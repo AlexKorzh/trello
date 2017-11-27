@@ -16,12 +16,40 @@ class ListPage extends Component {
         // const lists = this.props.lists.filter((list) => list._id);
         // this.props.onFetchCards(lists);
 
-        // const boardId = getBoardId();
-        // this.props.onFetchBoardLists(boardId);
-        let getLists = new Promise((resolve, reject) => {
-            const lists = this.props.lists.filter((list) => list._id);
-            return this.props.onFetchCards(lists);
-        }); 
+        function getCards () {
+            console.log('[[ 2 ]]', this.props.lists);
+            const lists = this.props.lists.map((list) => list._id);
+         
+            this.props.onFetchCards(lists);
+        }
+
+        const test = getCards.bind(this);
+
+        const boardId = getBoardId();
+        this.props.onFetchBoardLists(boardId, () => {
+            console.log('[[ 1 ]]', this.props.lists);
+            test();
+        });
+
+
+
+
+        // async function test () {
+        //     setTimeout(() => {
+        //         'Hello from Async!'
+        //     }, 3000);
+        // }
+
+        // test();
+        // let getLists = new Promise((resolve, reject) => {debugger;
+        //     const boardId = getBoardId();
+        //     const test = this.props.onFetchBoardLists(boardId);
+        //     resolve(test);
+        // });
+
+        // getLists.then((lists) => {
+        //     console.log('lists-->', lists);
+        // });
     }
 
     render () {
@@ -59,8 +87,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchBoardLists: (boardId) => {
-            dispatch(fetchBoardLists(boardId))
+        onFetchBoardLists: (boardId, callback) => {
+            dispatch(fetchBoardLists(boardId, callback))
         },
         onFetchCards: (lists) => dispatch(fetchCards(lists))
     };

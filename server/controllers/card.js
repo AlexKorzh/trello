@@ -31,11 +31,16 @@ function create (req, res, next) {
 function getAllCards (req, res) {
     const lists = req.body.lists;
 
-    Card.find({list: listId}, sendResponse).select('_id, title, list');
+    Card.find({list: {$in: lists}}, function (err, array) {
+        console.log('sdsd', err, array);
+        console.log('sdfsdf');
+    });
 
-    function sendResponse (error, docs) {
-        res.send({cards: docs});
-    }
+    // Card.find({list: listId}, sendResponse).select('_id, title, list');
+
+    // function sendResponse (error, docs) {
+    //     res.send({cards: docs});
+    // }
 }
 
 exports.create = create;
