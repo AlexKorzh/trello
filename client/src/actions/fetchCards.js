@@ -3,10 +3,10 @@ import getToken from '../utils/getToken';
 import currentHost from '../utils/host';
 import axios from 'axios';
 
-const fetchCards = (listId) => dispatch => {
+const fetchCards = (lists) => dispatch => {
     axios.post(
         `${currentHost}/getAllCards`, 
-        {listId},
+        {lists},
         {headers: {authorization: getToken()}}
     ).then(function (response) {
         const cards = response.data.cards;

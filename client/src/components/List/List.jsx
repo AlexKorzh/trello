@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createCard } from '../../actions';
-import fetchCards from '../../actions/fetchCards';
+import { getListCards } from '../../reducers/boardLists';
 import Card from '../Card/Card.jsx';
 import './list.scss';
 
@@ -41,11 +41,10 @@ class List extends Component {
 
     render () {
         const cards = this.props.cards;
-        console.log(cards);
+        console.log('T E S T -------------->' ,cards);
 
         let addCardBtnStatus = this.state.isAddCardOpen ? 'hide' : 'show',
             cardInfoBtnStatus = !this.state.isAddCardOpen ? 'hide' : 'show';
-console.log('RENDER ->', this.props.id);
         return (
             <div className = "list-container">
                 <div className = "list-wrap">
@@ -96,16 +95,16 @@ console.log('RENDER ->', this.props.id);
     }
 };
 
-function mapStateToProps (state) {
+function mapStateToProps (state, ownProps) {
     return {
-        cards: state.cards
+        cards: getListCards(state.cards, ownProps.id)
     };
 }
 
 function mapDispatchToProps (dispatch) {
     return {
-        saveCard: (title, listId) => dispatch(createCard(title, listId)),
-        onFetchCards: (listId) => dispatch(fetchCards(listId))
+        saveCard: (title, listId) => dispatch(createCard(title, listId))
+        // onFetchCards: (listId) => dispatch(fetchCards(listId))
     };
 }
 

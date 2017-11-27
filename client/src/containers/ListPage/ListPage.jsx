@@ -6,15 +6,24 @@ import AddListButton from '../../components/List/AddListButton/AddListButton.jsx
 import List from '../../components/List/List.jsx';
 import fetchBoardLists from '../../actions/lists';
 import getBoardId from '../../utils/getBoardId';
+import fetchCards from '../../actions/fetchCards';
 
 class ListPage extends Component {
     constructor () {
         super();
     }
     componentDidMount () {
-        const boardId = getBoardId();
-        this.props.onFetchBoardLists(boardId);
+        // const lists = this.props.lists.filter((list) => list._id);
+        // this.props.onFetchCards(lists);
+
+        // const boardId = getBoardId();
+        // this.props.onFetchBoardLists(boardId);
+        let getLists = new Promise((resolve, reject) => {
+            const lists = this.props.lists.filter((list) => list._id);
+            return this.props.onFetchCards(lists);
+        }); 
     }
+
     render () {
         const lists = this.props.lists;
     
@@ -52,7 +61,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onFetchBoardLists: (boardId) => {
             dispatch(fetchBoardLists(boardId))
-        }
+        },
+        onFetchCards: (lists) => dispatch(fetchCards(lists))
     };
 };
 

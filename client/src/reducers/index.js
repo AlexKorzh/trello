@@ -9,8 +9,8 @@ const rootReducer = combineReducers({
     // routing: routerReducer,
     form,
     auth,
-    lists,
     boards,
+    lists,
     cards
 });
 

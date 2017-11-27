@@ -10,5 +10,10 @@ export default function (state = [], action) {
         case CREATE_LIST: 
             return [...state, action.payload]
     }
+
     return state;
+}
+
+export function getListCards (state, listId) {
+    return state.filter(item => item.list === listId);
 }

@@ -29,9 +29,9 @@ function create (req, res, next) {
 }
 
 function getAllCards (req, res) {
-    const listId = req.body.listId;
+    const lists = req.body.lists;
 
-    Card.find({list: listId}, sendResponse).select('_id, title');
+    Card.find({list: listId}, sendResponse).select('_id, title, list');
 
     function sendResponse (error, docs) {
         res.send({cards: docs});
