@@ -12,16 +12,23 @@ class ListPage extends Component {
     constructor () {
         super();
     }
-    componentDidMount () {
+    // const boardId = getBoardId();
+    // this.props.onFetchBoardLists(boardId);
+    componentDidMount () {debugger;
         // const lists = this.props.lists.filter((list) => list._id);
-        // this.props.onFetchCards(lists);
+        // return this.props.onFetchCards(lists);
+        
+        const promises = [];
 
-        // const boardId = getBoardId();
-        // this.props.onFetchBoardLists(boardId);
-        let getLists = new Promise((resolve, reject) => {
-            const lists = this.props.lists.filter((list) => list._id);
-            return this.props.onFetchCards(lists);
-        }); 
+        function getPromises () {
+            return new Promise(function (resolve, reject) {
+                const boardId = getBoardId();
+                resolve(this.props.onFetchBoardLists(boardId));
+            });
+        }
+        promises.push(getPromises());
+
+        console.log(promises);
     }
 
     render () {

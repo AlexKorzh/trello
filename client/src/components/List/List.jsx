@@ -15,12 +15,6 @@ class List extends Component {
         this.closeAddCardModal = this.closeAddCardModal.bind(this);
         this.onHandleAdd = this.onHandleAdd.bind(this);
     }
-    componentDidMount () {
-        const listId = this.props.id;
-
-        this.props.onFetchCards(listId);
-    }
-
     openAddCardModal () {
         this.setState({isAddCardOpen:true});
     }
