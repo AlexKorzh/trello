@@ -34,7 +34,11 @@ class List extends Component {
     }
 
     render () {
+<<<<<<< HEAD
         debugger; 
+=======
+        // debugger;
+>>>>>>> e8a0abe23f98fed32edf89726aa8950d42702d99
         const cards = this.props.cards;
         console.log('T E S T -------------->' ,cards);
 
