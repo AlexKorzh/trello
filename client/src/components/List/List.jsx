@@ -34,7 +34,7 @@ class List extends Component {
     }
 
     render () {
-        debugger;
+        debugger; 
         const cards = this.props.cards;
         console.log('T E S T -------------->' ,cards);
 
