@@ -9,9 +9,10 @@ const fetchCards = (lists) => dispatch => {
         {lists},
         {headers: {authorization: getToken()}}
     ).then(function (response) {
+        debugger;
         const cards = response.data.cards;
         dispatch(getCardLists(cards));
-    })
+    }, err => console.log(err))
 };
 
 export default fetchCards;
