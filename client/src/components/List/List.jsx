@@ -15,15 +15,6 @@ class List extends Component {
         this.closeAddCardModal = this.closeAddCardModal.bind(this);
         this.onHandleAdd = this.onHandleAdd.bind(this);
     }
-<<<<<<< HEAD
-=======
-    componentDidMount () {
-        // const listId = this.props.id;
-
-        // this.props.onFetchCards(listId);
-    }
-
->>>>>>> ae67a7e1b2abb420afe4f1350ec69d979cad9100
     openAddCardModal () {
         this.setState({isAddCardOpen:true});
     }
@@ -43,6 +34,7 @@ class List extends Component {
     }
 
     render () {
+        debugger;
         const cards = this.props.cards;
         console.log('T E S T -------------->' ,cards);
 

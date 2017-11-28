@@ -111,6 +111,7 @@ export const createCard = (title, listId) => {
             {title, listId},
             {headers: { authorization: getToken() } }
         ).then(response => {
+            debugger;
             dispatch(createCardAction(response.data.card));
         });
     }

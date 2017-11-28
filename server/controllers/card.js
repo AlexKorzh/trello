@@ -31,16 +31,17 @@ function create (req, res, next) {
 function getAllCards (req, res) {
     const lists = req.body.lists;
 
-    Card.find({list: {$in: lists}}, function (err, array) {
-        console.log('sdsd', err, array);
-        console.log('sdfsdf');
-    });
+    // Find all cards belogns to one list, by listId 
+    Card.find({list : {
+        $in: lists.map(function(item){
+             return mongoose.Types.ObjectId(item); 
+        })
+      }}, callback);
 
-    // Card.find({list: listId}, sendResponse).select('_id, title, list');
-
-    // function sendResponse (error, docs) {
-    //     res.send({cards: docs});
-    // }
+    function callback (error, docs) {
+        res.send({cards: docs});
+        console.log('R E S ------>', res.cards);
+    }
 }
 
 exports.create = create;

@@ -12,60 +12,37 @@ class ListPage extends Component {
     constructor () {
         super();
     }
-    // const boardId = getBoardId();
-    // this.props.onFetchBoardLists(boardId);
-    componentDidMount () {debugger;
-        // const lists = this.props.lists.filter((list) => list._id);
-        // return this.props.onFetchCards(lists);
-        
-        const promises = [];
-
-<<<<<<< HEAD
-        function getPromises () {
-            return new Promise(function (resolve, reject) {
-                const boardId = getBoardId();
-                resolve(this.props.onFetchBoardLists(boardId));
-            });
-        }
-        promises.push(getPromises());
-
-        console.log(promises);
-=======
-        function getCards () {
-            console.log('[[ 2 ]]', this.props.lists);
-            const lists = this.props.lists.map((list) => list._id);
-         
-            this.props.onFetchCards(lists);
-        }
-
-        const test = getCards.bind(this);
-
+    componentDidMount () {
         const boardId = getBoardId();
-        this.props.onFetchBoardLists(boardId, () => {
-            console.log('[[ 1 ]]', this.props.lists);
-            test();
-        });
+        this.props.onFetchBoardLists(boardId);
+        // const boardId = getBoardId();
+    //     // const lists = this.props.lists.filter((list) => list._id);
+    //     // return this.props.onFetchCards(lists);
 
+    //     Promise.resolve(this.props.onFetchBoardLists(boardId)) // dispatch
+    //     .then(function (response) {
+    //     console.log('1');
+    //       return response;
+    //     })
+    //     .then(test.bind);
 
+    //     const test = function (response){
+    //         console.log('2');
+    //             const lists = this.props.lists.filter((list) => list._id);
+    //             return this.props.onFetchCards(lists);
+    //     }
+        
+        // const promises = [];
 
-
-        // async function test () {
-        //     setTimeout(() => {
-        //         'Hello from Async!'
-        //     }, 3000);
+        // function getPromises () {
+        //     return new Promise(function (resolve, reject) {
+        //         const boardId = getBoardId();
+        //         resolve(this.props.onFetchBoardLists(boardId));
+        //     });
         // }
+        // promises.push(getPromises());
 
-        // test();
-        // let getLists = new Promise((resolve, reject) => {debugger;
-        //     const boardId = getBoardId();
-        //     const test = this.props.onFetchBoardLists(boardId);
-        //     resolve(test);
-        // });
-
-        // getLists.then((lists) => {
-        //     console.log('lists-->', lists);
-        // });
->>>>>>> ae67a7e1b2abb420afe4f1350ec69d979cad9100
+        // console.log(promises);
     }
 
     render () {
@@ -103,8 +80,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchBoardLists: (boardId, callback) => {
-            dispatch(fetchBoardLists(boardId, callback))
+        onFetchBoardLists: (boardId) => {
+            dispatch(fetchBoardLists(boardId))
         },
         onFetchCards: (lists) => dispatch(fetchCards(lists))
     };
