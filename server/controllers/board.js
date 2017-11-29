@@ -39,9 +39,13 @@ function getAllBoards (req, res) {
 
 function deleteBoard (req, res, next) {
     const boardId = req.body.boardId;
-
-        Board.findOneAndRemove({_id: boardId}, (err, response) => {
+    
+    Board.findById({_id:boardId}, function(err, board){
+        //... whatever you need to do prior to removal ...
+        board.remove(function(err){
+            //content is removed, and the 'remove' pre/post events are emitted
             res.send({board: boardId});
+        });
     });
 }
 

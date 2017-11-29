@@ -99,7 +99,6 @@ function mapStateToProps (state, ownProps) {
 function mapDispatchToProps (dispatch) {
     return {
         saveCard: (title, listId) => dispatch(createCard(title, listId))
-        // onFetchCards: (listId) => dispatch(fetchCards(listId))
     };
 }
 

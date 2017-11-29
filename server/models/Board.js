@@ -15,23 +15,9 @@ boardSchema.methods.getPublicFields = function () {
     return fields;
 };
 
-boardSchema.pre('remove', function (callback) {
-    this.model('List').remove({board: this._id}, (data) => {console.log(data)});
+boardSchema.pre('remove', function(next) {
+    this.model('List').remove({ board: this._id }, next);
 });
-
-// boardSchema.pre('remove', function(next){
-//     this.model('List').update(
-//         {_id: {$in: this.lists}}, 
-//         {$pull: {board: this._id}}, 
-//         {multi: true},
-//         next
-//     );
-// });
-
-// boardSchema.pre('remove', function(next) {
-//     // Remove all the assignment docs that reference the removed person.
-//     this.model('Assignment').remove({ person: this._id }, next);
-// });
 
 const Board = mongoose.model('Board', boardSchema);
 
