@@ -1,7 +1,7 @@
 import { 
     CREATE_LIST, 
     GET_BOARD_LISTS
-} from '../actions/actionTypes';
+} from '../constants/ActionTypes';
 
 export default function (state = [], action) {
     switch (action.type) {

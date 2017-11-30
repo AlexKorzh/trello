@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createCard } from '../../actions';
+import { createCardMiddleware } from '../../actions';
 import { getListCards } from '../../reducers/boardLists';
 import Card from '../Card/Card.jsx';
 import './list.scss';
@@ -34,7 +34,6 @@ class List extends Component {
     }
 
     render () {
-        // debugger;
         const cards = this.props.cards;
         console.log('T E S T -------------->' ,cards);
 
@@ -98,7 +97,8 @@ function mapStateToProps (state, ownProps) {
 
 function mapDispatchToProps (dispatch) {
     return {
-        saveCard: (title, listId) => dispatch(createCard(title, listId))
+        saveCard: (title, listId) => dispatch(createCardMiddleware(title, listId))
+        // onFetchCards: (listId) => dispatch(fetchCards(listId))
     };
 }
 

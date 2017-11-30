@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './addListButton.scss';
 import { connect } from 'react-redux';
-import { createList } from '../../../actions';
+import { createListMiddleware } from '../../../actions';
 import getBoardId from '../../../utils/getBoardId';
 
 class AddLisButton extends Component {
@@ -70,7 +70,7 @@ class AddLisButton extends Component {
 
 function mapDispatchToProps (dispatch) {
     return {
-        saveList: (title, boardId) => dispatch(createList(title, boardId))
+        saveList: (title, boardId) => dispatch(createListMiddleware(title, boardId))
     };
 }
 

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
-import fetchBoards from '../../actions/board';
-import { deleteBoard } from '../../actions/index';
+import getBoardsMiddleware from '../../actions/board';
+import { deleteBoardMiddleware } from '../../actions';
 
 import './boardPage.scss';
 
@@ -67,10 +67,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onFetchBoards: () => {
-            dispatch(fetchBoards())
+            dispatch(getBoardsMiddleware())
         },
         onDeleteBoard: (boardId) => { 
-            dispatch(deleteBoard(boardId)) 
+            dispatch(deleteBoardMiddleware(boardId)) 
         }
     };
 };

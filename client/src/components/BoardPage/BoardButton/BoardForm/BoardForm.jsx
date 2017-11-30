@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
 
-import { createBoard } from '../../../../actions';
+import { createBoardMiddleware } from '../../../../actions';
 
 import './boardForm.scss';
 
@@ -76,7 +76,7 @@ export default connect(
     null,
     dispatch => ({
         onCreateBoard: title => {
-            dispatch(createBoard(title));
+            dispatch(createBoardMiddleware(title));
         }
     })
 )(BoardForm);

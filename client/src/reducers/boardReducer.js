@@ -1,10 +1,10 @@
 import { 
-    GET_USER_BOARDS, CREATE_BOARD, DELETE_BOARD
-} from '../actions/actionTypes';
+    GET_BOARDS, CREATE_BOARD, DELETE_BOARD
+} from '../constants/ActionTypes';
 
 export default function (state = [], action) {
     switch (action.type) {
-        case GET_USER_BOARDS: 
+        case GET_BOARDS: 
             return action.payload;
         case CREATE_BOARD:
             return [...state, action.payload];

@@ -2,7 +2,7 @@ import axios from 'axios';
 import browserHistory from '../utils/history';
 import getToken from '../utils/getToken';
 import {
-    GET_USER_BOARDS,
+    GET_BOARDS,
     AUTH_USER, 
     AUTH_ERROR, 
     UNAUTH_USER,
@@ -11,135 +11,136 @@ import {
     CREATE_LIST,
     GET_BOARD_LISTS,
     CREATE_CARD,
-    GET_CARD_LISTS,
+    GET_LIST_CARDS,
     DELETE_BOARD
-} from './actionTypes';
+} from '../constants/ActionTypes';
 
 const ROOT_URL = "http://localhost:3090";
 
-/*
- * action creators
- */
 
-export const deleteBoardAction = (payload) => {
+
+
+
+
+import currentHost from '../utils/host';
+
+export const getBoards = payload => {
+    return {
+        type: GET_BOARDS,
+        payload
+    }
+}
+
+export const deleteBoard = payload => {
     return {
         type: DELETE_BOARD,
         payload
     }
 }
 
-export const getUserBoards = (payload) => {
-    console.log('=> ', payload)
-    return {
-        type: GET_USER_BOARDS,
-        payload
-    }
-}
-
-export const getBoardLists = (payload) => {
-    console.log('=> ', payload)
+export const getBoardLists = payload => {
     return {
         type: GET_BOARD_LISTS,
         payload
     }
 }
 
-export const getCardLists = (payload) => {
-    console.log('=> ', payload)
+export const getListCards = payload => {
     return {
-        type: GET_CARD_LISTS,
+        type: GET_LIST_CARDS,
         payload
     }
 }
 
-export const createBoardAction = (payload) => {
+export const createBoard = payload => {
     return {
         type: CREATE_BOARD,
         payload
     }
 }
 
-export const createListAction = (payload) => {
+export const createList = payload => {
     return {
         type: CREATE_LIST,
         payload
     }
 }
 
-export const createCardAction = (payload) => {
+export const createCard = payload => {
     return {
         type: CREATE_CARD,
         payload
     }
 }
 
-export function authError (error) {
+export const authError = error => {
     return {
         type: AUTH_ERROR,
         payload: error
-    };
+    }
 }
 
-export const deleteBoard = boardId => {
+export const deleteBoardMiddleware = boardId => {
     return dispatch => {
         axios.post(
-            `${ROOT_URL}/deleteBoard`,
+            `${currentHost}/deleteBoard`,
             {boardId},
-            {headers: { authorization: getToken() } }
+            {headers: { authorization: getToken() }}
         ).then(response => {
-            dispatch(deleteBoardAction(response.data.board));
+            dispatch(deleteBoard(response.data.board));
         });
     }
 }
 
-export const createBoard = title => {
+export const createBoardMiddleware = title => {
     return dispatch => {
         axios.post(
-            `${ROOT_URL}/createBoard`,
+            `${currentHost}/createBoard`,
             {title},
-            {headers: { authorization: getToken() } }
+            {headers: { authorization: getToken() }}
         ).then(response => {
-            dispatch(createBoardAction(response.data.board));
+            dispatch(createBoard(response.data.board));
         });
     }
 }
 
-export const createCard = (title, listId) => {
+export const createCardMiddleware = (title, listId) => {
     return dispatch => {
         axios.post(
-            `${ROOT_URL}/createCard`,
+            `${currentHost}/createCard`,
             {title, listId},
-            {headers: { authorization: getToken() } }
+            {headers: { authorization: getToken() }}
         ).then(response => {
-            debugger;
-            dispatch(createCardAction(response.data.card));
+            dispatch(createCard(response.data.card));
         });
     }
 }
 
-export const createList = (title, boardId) => {
+export const createListMiddleware = (title, boardId) => {
     return dispatch => {
         axios.post(
-            `${ROOT_URL}/boards/createList`,
+            `${currentHost}/boards/createList`,
             {title, boardId},
-            {headers: { authorization: getToken() } }
+            {headers: { authorization: getToken() }}
         ).then(response => {
-            console.log('Create LIST Response:', response.data.message);
-            dispatch(createListAction(response.data.list));
+            dispatch(createList(response.data.list));
         });
-        console.log('CREATE LIST ________>>>');
     }
 }
 
-export function signinUser ({ email, password }) {
-    return function (dispatch) {
-        // Submit email/password to the server
-        axios.post(`${ROOT_URL}/signin`, { email, password })
-            .then((response) => {
-                // If request is good...
-                // - Update state to indicate user is authenticated
+
+
+
+
+
+export const signinUser = ({ email, password }) => {
+    return dispatch => {
+        axios.post(`${currentHost}/signin`, { email, password })
+            .then(response => {
+
+
                 dispatch({ type: AUTH_USER });
-                // - Save the JWT token to the localStorage fot the future request
+
                 localStorage.setItem('token', response.data.token);
                 // - redirect to the route `/feature`
                 console.log('Auth -->', response);

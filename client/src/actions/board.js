@@ -1,10 +1,10 @@
-import { getUserBoards } from '../actions';
+import { getBoards } from '../actions';
 import getToken from '../utils/getToken';
 import currentHost from '../utils/host';
 import axios from 'axios';
 
 
-const fetchBoards = () => dispatch => {
+const getBoardsMiddleware = () => dispatch => {
     let authorization = getToken();
 
     axios.post(
@@ -13,8 +13,8 @@ const fetchBoards = () => dispatch => {
     ).then(function (response) {
         const boards = response.data.boards;
 
-        dispatch(getUserBoards(boards));
+        dispatch(getBoards(boards));
     })
 };
 
-export default fetchBoards;
+export default getBoardsMiddleware;
