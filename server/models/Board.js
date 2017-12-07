@@ -20,9 +20,11 @@ boardSchema.methods.getPublicFields = function () {
 
 boardSchema.pre('remove', function (next) {
     const List = mongoose.model('List');
-    
-    List.remove({ _id: { $in: this.lists } })
-        .then(() => next());
+    const Card = mongoose.model('Card');
+
+    List.remove({ _id: { $in: this.lists } }).exec();
+    Card.remove({board: this._id}).exec();
+    next();
 });
 
 const Board = mongoose.model('Board', boardSchema);

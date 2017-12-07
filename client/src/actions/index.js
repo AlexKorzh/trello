@@ -104,11 +104,11 @@ export const createBoardMiddleware = title => {
     }
 }
 
-export const createCardMiddleware = (title, listId) => {
+export const createCardMiddleware = (title, listId, boardId) => {
     return dispatch => {
         axios.post(
             `${currentHost}/createCard`,
-            {title, listId},
+            {title, listId, boardId},
             {headers: { authorization: getToken() }}
         ).then(response => {
             dispatch(createCard(response.data.card));

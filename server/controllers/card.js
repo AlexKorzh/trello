@@ -7,10 +7,12 @@ const config = require('../config');
 function create (req, res, next) {
     const title = req.body.title;
     const listId = req.body.listId;
+    const boardId = req.body.boardId;
 
     const card = new Card({
         title,
-        list: listId
+        list: listId,
+        board: boardId
     });
 
     card.save(function (error) {

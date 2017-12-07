@@ -5,6 +5,8 @@ import { getListCards } from '../../reducers/boardLists';
 import Card from '../Card/Card.jsx';
 import './list.scss';
 
+import getBoardId from '../../utils/getBoardId';
+
 class List extends Component {
     constructor () {
         super();
@@ -27,8 +29,9 @@ class List extends Component {
     onHandleAdd () {
         const listId = this.props.id;
         const title = this.cardTitle.value;
+        const boardId = getBoardId();
 
-        this.props.saveCard(title, listId);
+        this.props.saveCard(title, listId, boardId);
 
         this.closeAddCardModal();
     }
@@ -97,7 +100,7 @@ function mapStateToProps (state, ownProps) {
 
 function mapDispatchToProps (dispatch) {
     return {
-        saveCard: (title, listId) => dispatch(createCardMiddleware(title, listId))
+        saveCard: (title, listId, boardId) => dispatch(createCardMiddleware(title, listId, boardId))
         // onFetchCards: (listId) => dispatch(fetchCards(listId))
     };
 }

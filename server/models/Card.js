@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const cardSchema = new Schema({
     title: String,
-    list: {type: Schema.Types.ObjectId, ref: 'List'}
+    list: {type: Schema.Types.ObjectId, ref: 'List'},
+    board: {type: Schema.Types.ObjectId, ref: 'Board'}
 });
 
 cardSchema.methods.getPublicFields = function () {
