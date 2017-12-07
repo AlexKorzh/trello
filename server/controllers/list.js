@@ -1,4 +1,5 @@
 const List = require('../models/List');
+const Board = require('../models/Board');
 const mongoose = require('mongoose');
 
 const config = require('../config');
@@ -15,10 +16,15 @@ function create (req, res, next) {
     list.save(function (error) {
         if (error) return next(error);
 
-        send();
+        Board.findByIdAndUpdate(
+            boardId, 
+            {$push: {lists: list}},
+            {new: true, safe: true}, 
+            callback
+        );
     });
 
-    function send () {
+    function callback () {
         const response = list.getPublicFields();
 
         res.send({
@@ -32,11 +38,19 @@ function create (req, res, next) {
 function getBoardLists (req, res) {
     const boardId = req.body.boardId;
 
-    List.find({board: boardId}, sendResponse).select('_id, title');
+    Board.findOne({_id: boardId})
+    .populate('lists')
+    .then((board) => {
+        res.send({lists: board.lists});
+        done();
+    })
+    
 
-    function sendResponse (error, docs) {
-        res.send({lists: docs});
-    }
+    // List.find({board: boardId}, sendResponse).select('_id, title');
+
+    // function sendResponse (error, docs) {
+    //     res.send({lists: docs});
+    // }
 }
 
 exports.create = create;
