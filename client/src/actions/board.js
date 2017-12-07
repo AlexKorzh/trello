@@ -1,11 +1,11 @@
 import { getBoards } from '../actions';
-import getToken from '../utils/getToken';
+import token from '../utils/token';
 import currentHost from '../utils/host';
 import axios from 'axios';
 
 
 const getBoardsMiddleware = () => dispatch => {
-    let authorization = getToken();
+    let authorization = token.get();
 
     axios.post(
         `${currentHost}/getAllBoards`, null,

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import browserHistory from '../utils/history';
-import getToken from '../utils/getToken';
+import token from '../utils/token';
 import {
     GET_BOARDS,
     AUTH_USER, 
@@ -19,7 +19,7 @@ const ROOT_URL = "http://localhost:3090";
 
 
 
-
+//
 
 
 import currentHost from '../utils/host';
@@ -80,12 +80,14 @@ export const authError = error => {
     }
 }
 
+export const authUser = () => ({type: AUTH_USER});
+
 export const deleteBoardMiddleware = boardId => {
     return dispatch => {
         axios.post(
             `${currentHost}/deleteBoard`,
             {boardId},
-            {headers: { authorization: getToken() }}
+            {headers: { authorization: token.get() }}
         ).then(response => {
             dispatch(deleteBoard(response.data.board));
         });
@@ -97,7 +99,7 @@ export const createBoardMiddleware = title => {
         axios.post(
             `${currentHost}/createBoard`,
             {title},
-            {headers: { authorization: getToken() }}
+            {headers: { authorization: token.get() }}
         ).then(response => {
             dispatch(createBoard(response.data.board));
         });
@@ -109,7 +111,7 @@ export const createCardMiddleware = (title, listId) => {
         axios.post(
             `${currentHost}/createCard`,
             {title, listId},
-            {headers: { authorization: getToken() }}
+            {headers: { authorization: token.get() }}
         ).then(response => {
             dispatch(createCard(response.data.card));
         });
@@ -121,7 +123,7 @@ export const createListMiddleware = (title, boardId) => {
         axios.post(
             `${currentHost}/boards/createList`,
             {title, boardId},
-            {headers: { authorization: getToken() }}
+            {headers: { authorization: token.get() }}
         ).then(response => {
             dispatch(createList(response.data.list));
         });
@@ -131,41 +133,35 @@ export const createListMiddleware = (title, boardId) => {
 
 
 
+//
 
 
-export const signinUser = ({ email, password }) => {
+export const signinUser = (email, password) => {
     return dispatch => {
         axios.post(`${currentHost}/signin`, { email, password })
             .then(response => {
-
-
-                dispatch({ type: AUTH_USER });
-
-                localStorage.setItem('token', response.data.token);
-                // - redirect to the route `/feature`
-                console.log('Auth -->', response);
+                token.set(response.data.token);
+                dispatch(authUser());
                 browserHistory.push('/boards');
             })
-            .catch((error) => {
-                console.dir(error);
-                // If request it bad...
-                // - Show an error to the user
+            .catch(error => {
                 dispatch(authError('Bad Login Info'));
-            });    
-    } 
+            });
+    }
 }
 
-export function signupUser ({ email, password }) {
-    return function (dispatch) {
-        axios.post(`${ROOT_URL}/signup`, { email, password })
+export const signupUser = (email, password) => {
+    return dispatch => {
+        axios.post(`${currentHost}/signup`, { email, password })
             .then(response => {
-                dispatch({ type: AUTH_USER });
-                localStorage.setItem('token', response.data.token);
-
+                dispatch(authUser());
+                token.set(response.data.token);
                 browserHistory.push('/boards');
             })
-            .catch(serve => {
-                dispatch(authError(serve.response.data.error))
+            .catch(error => {
+                console.log(error);
+                debugger;
+                dispatch(authError())
             });
     }
 }
@@ -179,7 +175,7 @@ export function signoutUser () {
 export function fetchMessage () {
     return function (dispatch) {
         axios.get(ROOT_URL, { 
-            headers: { authorization: getToken() } 
+            headers: { authorization: token.get() } 
         })
             .then(response => {
                 dispatch({
