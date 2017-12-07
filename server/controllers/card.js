@@ -1,4 +1,5 @@
 const Card = require('../models/Card');
+const List = require('../models/List');
 const mongoose = require('mongoose');
 
 const config = require('../config');
@@ -15,10 +16,15 @@ function create (req, res, next) {
     card.save(function (error) {
         if (error) return next(error);
 
-        send();
+        List.findByIdAndUpdate(
+            listId, 
+            {$push: {lists: card}},
+            {new: true, safe: true}, 
+            callback
+        );
     });
 
-    function send () {
+    function callback () {
         const response = card.getPublicFields();
 
         res.send({

@@ -3,7 +3,10 @@ const Schema = mongoose.Schema;
 
 const listSchema = new Schema({
     title: String,
-    board: {type: Schema.Types.ObjectId, ref: 'Board'}
+    cards: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Card'
+    }]
 });
 
 listSchema.methods.getPublicFields = function () {
@@ -16,8 +19,12 @@ listSchema.methods.getPublicFields = function () {
 };
 
 listSchema.pre('remove', function (next) {
-    this.model('Card').remove({ list: this._id }, next);
+    const Card = mongoose.model('Card');
+
+    Card.remove({ _id: { $in: this.cards } })
+    .then(() => next());
 });
+
 
 const List = mongoose.model('List', listSchema);
 

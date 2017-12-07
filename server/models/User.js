@@ -4,13 +4,20 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     email: { type: String, unique: true, lowercase: true },
-    password: String
+    password: String,
+    boards: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Board'
+    }]
 });
 
 userSchema.pre('save', function (next) {
     // get access to the user model
     const user = this;
 
+    // only hash the password if it has been modified (or is new)
+    if (!user.isModified('password')) return next();
+    
     //generate a salt then run callback
     bcrypt.genSalt(10, function (err, salt) {
         if (err) {

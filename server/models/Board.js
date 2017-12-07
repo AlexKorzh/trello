@@ -3,7 +3,10 @@ const Schema = mongoose.Schema;
 
 const boardSchema = new Schema({
     title: String,
-    creator: {type: Schema.Types.ObjectId, ref: 'User'}
+    lists: [{
+        type: Schema.Types.ObjectId,
+        ref: 'List'
+    }]
 });
 
 boardSchema.methods.getPublicFields = function () {
@@ -15,8 +18,11 @@ boardSchema.methods.getPublicFields = function () {
     return fields;
 };
 
-boardSchema.pre('remove', function(next) {
-    this.model('List').remove({ board: this._id }, next);
+boardSchema.pre('remove', function (next) {
+    const List = mongoose.model('List');
+    
+    List.remove({ _id: { $in: this.lists } })
+        .then(() => next());
 });
 
 const Board = mongoose.model('Board', boardSchema);
