@@ -10,6 +10,12 @@ const passport = require('passport');
 const requireAuth = passport.authenticate('jwt', {session:false});
 const requireSignIn = passport.authenticate('local', {session: false});
 
+var board = {
+    get: function (request, response) {  
+        require('./controllers/board').get;
+    }
+}
+
 module.exports = function (app) {
     app.get('/', requireAuth, function (req, res) {
         res.send({ message: 'super secret code 123' });
@@ -22,7 +28,7 @@ module.exports = function (app) {
 
     // Boards
     app.post('/createBoard', requireAuth, Board.create);
-    app.get('/getAllBoards', requireAuth, Board.getAllBoards);
+    app.get('/board', requireAuth, Board.get);
     app.post('/deleteBoard', requireAuth, Board.deleteBoard);
 
     //Lists
@@ -32,5 +38,4 @@ module.exports = function (app) {
     //Cards
     app.post('/createCard', requireAuth, Card.create);
     app.post('/getAllCards', requireAuth, Card.getAllCards);
-  
 }

@@ -31,17 +31,19 @@ function create (req, res, next) {
     }
 }
 
-function getAllBoards (req, res) {
-    const user = req.user;
-    const userId = user.id;
-    
-    User.findOne({_id: userId})
+const get = (req, res) => {
+    const { user } = req;
+    const { id } = user;
+
+    User.findOne({_id: id})
         .populate('boards')
-        .then((user) => {
-            res.send({boards: user.boards});
-            done();
-        })
-}
+        .then(sendResponse);
+
+    function sendResponse (user) {
+        res.send({boards: user.boards});
+        done();
+    }
+};
 
 function deleteBoard (req, res, next) {
     const boardId = req.body.boardId;
@@ -56,5 +58,5 @@ function deleteBoard (req, res, next) {
 }
 
 exports.create = create;
-exports.getAllBoards = getAllBoards;
+exports.get = get;
 exports.deleteBoard = deleteBoard;

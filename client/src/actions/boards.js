@@ -44,7 +44,7 @@ export const getBoardsMiddleware = () => dispatch => {
     let authorization = token.get();
 
     axios.get(
-        `${currentHost}/getAllBoards`,
+        `${currentHost}/board`,
         {headers: {authorization}}
     ).then(function (response) {
         const boards = response.data.boards;
