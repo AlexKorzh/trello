@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createCardMiddleware } from '../../actions';
-import { getListCards } from '../../reducers/boardLists';
+import { createCardMiddleware } from '../../actions/cards';
+import { getCards } from '../../reducers/lists';
 import Card from '../Card/Card.jsx';
 import './list.scss';
 
@@ -38,10 +38,10 @@ class List extends Component {
 
     render () {
         const cards = this.props.cards;
-        console.log('T E S T -------------->' ,cards);
 
         let addCardBtnStatus = this.state.isAddCardOpen ? 'hide' : 'show',
             cardInfoBtnStatus = !this.state.isAddCardOpen ? 'hide' : 'show';
+
         return (
             <div className = "list-container">
                 <div className = "list-wrap">
@@ -94,14 +94,13 @@ class List extends Component {
 
 function mapStateToProps (state, ownProps) {
     return {
-        cards: getListCards(state.cards, ownProps.id)
+        cards: getCards(state.cards, ownProps.id)
     };
 }
 
 function mapDispatchToProps (dispatch) {
     return {
         saveCard: (title, listId, boardId) => dispatch(createCardMiddleware(title, listId, boardId))
-        // onFetchCards: (listId) => dispatch(fetchCards(listId))
     };
 }
 

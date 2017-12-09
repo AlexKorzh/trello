@@ -1,5 +1,7 @@
 import { 
-    GET_BOARDS, CREATE_BOARD, DELETE_BOARD
+    GET_BOARDS,
+    CREATE_BOARD, 
+    DELETE_BOARD
 } from '../constants/ActionTypes';
 
 export default function (state = [], action) {

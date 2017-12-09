@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './header.scss';
-import * as actions from '../../actions';
+import * as actions from '../../actions/users';
 import logo from '../../assets/images/logo.png';
 import { Link } from 'react-router-dom';
 

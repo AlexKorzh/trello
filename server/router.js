@@ -16,17 +16,21 @@ module.exports = function (app) {
     });
     // We have post request
     // requireSignIn - is a middleWare calls before Auth.sign controller function
+    // User
     app.post('/signin',requireSignIn, Auth.signin);
     app.post('/signup', Auth.signup);
+
+    // Boards
     app.post('/createBoard', requireAuth, Board.create);
-    app.post('/createCard', requireAuth, Card.create);
-
-    // It will be change
-    app.post('/boards/createList', requireAuth, List.create);
-    app.post('/getBoardLists', requireAuth, List.getBoardLists);
-    app.post('/getAllBoards', requireAuth, Board.getAllBoards);
-    app.post('/getAllCards', requireAuth, Card.getAllCards);
-
-    // DELETE
+    app.get('/getAllBoards', requireAuth, Board.getAllBoards);
     app.post('/deleteBoard', requireAuth, Board.deleteBoard);
+
+    //Lists
+    app.post('/boards/createList', requireAuth, List.create);
+    app.post('/getLists', requireAuth, List.getLists);
+
+    //Cards
+    app.post('/createCard', requireAuth, Card.create);
+    app.post('/getAllCards', requireAuth, Card.getAllCards);
+  
 }

@@ -35,7 +35,7 @@ function create (req, res, next) {
 
 }
 
-function getBoardLists (req, res) {
+function getLists (req, res) {
     const boardId = req.body.boardId;
 
     Board.findOne({_id: boardId})
@@ -43,15 +43,8 @@ function getBoardLists (req, res) {
     .then((board) => {
         res.send({lists: board.lists});
         done();
-    })
-    
-
-    // List.find({board: boardId}, sendResponse).select('_id, title');
-
-    // function sendResponse (error, docs) {
-    //     res.send({lists: docs});
-    // }
+    });
 }
 
 exports.create = create;
-exports.getBoardLists = getBoardLists;
+exports.getLists = getLists;

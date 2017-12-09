@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './addListButton.scss';
 import { connect } from 'react-redux';
-import { createListMiddleware } from '../../../actions';
+import { createListMiddleware } from '../../../actions/lists';
 import getBoardId from '../../../utils/getBoardId';
 
 class AddLisButton extends Component {
@@ -14,14 +14,16 @@ class AddLisButton extends Component {
     }
 
     handleSave () {
-        const title = this.refs.listTitle.value;
+        const title = this.listTitle.value;
+
         if (title != '') {
             const boardId = getBoardId();
             
             this.props.saveList(title, boardId);
             this.closeForm();
+            this.listTitle.value = '';
         } else {
-            this.refs.listTitle.placeholder = 'Введите название списка';
+            this.listTitle.placeholder = 'Введите название списка';
         }
     }
 
@@ -47,7 +49,7 @@ class AddLisButton extends Component {
                     <input
                         className = "add-list-form__input" 
                         type = "text"
-                        ref = "listTitle" 
+                        ref={(input) => { this.listTitle = input}} 
                         placeholder = "Добавить список..."/>
                     <div className = "list-controlls">
                         <button 

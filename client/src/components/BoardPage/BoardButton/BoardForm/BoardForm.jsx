@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import './boardForm.scss';
 
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { createBoardMiddleware } from '../../../../actions';
-
-import './boardForm.scss';
+import { createBoardMiddleware } from '../../../../actions/boards';
 
 class BoardForm extends Component {
     constructor () {
@@ -68,7 +67,6 @@ class BoardForm extends Component {
 
 BoardForm.propTypes = {
     onCreateBoard: PropTypes.func,
-    show: PropTypes.boolean,
     close: PropTypes.func
 };
 

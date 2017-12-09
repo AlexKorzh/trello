@@ -34,18 +34,13 @@ function create (req, res, next) {
 function getAllBoards (req, res) {
     const user = req.user;
     const userId = user.id;
-
-    // Board.find({creator: userId}, sendResponse).select('_id, title');
+    
     User.findOne({_id: userId})
         .populate('boards')
         .then((user) => {
             res.send({boards: user.boards});
             done();
         })
-
-    // function sendResponse (error, docs) {
-    //     res.send({boards: docs});
-    // }
 }
 
 function deleteBoard (req, res, next) {

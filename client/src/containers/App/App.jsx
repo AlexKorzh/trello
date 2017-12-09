@@ -9,7 +9,7 @@ import SignUp from './../../components/SignUp/SignUp.jsx';
 import SignOut from './../../components/SignOut/SignOut.jsx';
 import requireAuth from '../../components/Auth/require_auth';
 import BoardPage from '../../components/BoardPage/BoardPage.jsx';
-import ListPage from '../../containers/ListPage/ListPage.jsx';
+import ListPage from '../../components/ListPage/ListPage.jsx';
 
 import history from '../../utils/history';
 import { Router } from 'react-router-dom';
@@ -31,8 +31,6 @@ const store = createStoreWithMiddleware(
     && window.__REDUX_DEVTOOLS_EXTENSION__() 
 );
 
-console.log('((store))', store.getState());
-
 const token = localStorage.getItem('token');
 // If we have a token, consider the user to be signed in 
 if (token) {
@@ -41,9 +39,6 @@ if (token) {
 }
 
 class App extends Component {
-    test () {
-        
-    }
     render () {
         return(
             <MuiThemeProvider>

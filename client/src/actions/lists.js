@@ -1,22 +1,48 @@
-import { getBoardLists } from '../actions';
 import token from '../utils/token';
 import currentHost from '../utils/host';
 import axios from 'axios';
-import fetchCards from './fetchCards'
+import { fetchCards } from './cards';
+import {
+    CREATE_LIST,
+    GET_LISTS
+} from '../constants/ActionTypes';
 
-const fetchBoardLists = (boardId) => dispatch => {
+export const createList = payload => {
+    return {
+        type: CREATE_LIST,
+        payload
+    }
+}
+
+export const getLists = payload => {
+    return {
+        type: GET_LISTS,
+        payload
+    }
+}
+
+export const createListMiddleware = (title, boardId) => {
+    return dispatch => {
+        axios.post(
+            `${currentHost}/boards/createList`,
+            { title, boardId },
+            { headers: { authorization: token.get() } }
+        ).then(response => {
+            dispatch(createList(response.data.list));
+        });
+    }
+}
+
+export const fetchLists = (boardId) => dispatch => {
     axios.post(
-        `${currentHost}/getBoardLists`, 
-        {boardId},
-        {headers: {authorization: token.get()}}
+        `${currentHost}/getLists`,
+        { boardId },
+        { headers: { authorization: token.get() } }
     ).then(function (response) {
-        // debugger;
         const lists = response.data.lists;
-        dispatch(getBoardLists(lists));
+        dispatch(getLists(lists));
 
         let newlist = lists.map((list) => list._id);
         dispatch(fetchCards(newlist));
     })
-};
-
-export default fetchBoardLists;
+}

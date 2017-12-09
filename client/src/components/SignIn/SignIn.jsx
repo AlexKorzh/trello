@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field, Form } from 'redux-form';
-import * as actions from '../../actions';
+import * as actions from '../../actions/users';
 import './signin.scss';
 
 const inputField = field => {
@@ -20,12 +20,12 @@ class Signin extends Component {
     }
     
     handleFormSubmit ({ email, password }) {
-        debugger;
         this.props.signinUser(email, password);
     }
 
     renderAlert () {
         const { errorMessage } = this.props;
+        
         if (errorMessage) {
             return (
                 <div className="alert alert-danger">

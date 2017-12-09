@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field, Form } from 'redux-form';
-import * as actions from '../../actions';
+import * as actions from '../../actions/users';
 
 // if touched is true and if error is true and if error true 
 // return the last value  - div with error

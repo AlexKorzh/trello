@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createCardMiddleware } from '../../actions';
+import { createCardMiddleware } from '../../actions/cards';
 import './card.scss';
 
 class Card extends Component {

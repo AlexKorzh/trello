@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-
-import PropTypes from 'prop-types';
-import getBoardsMiddleware from '../../actions/board';
-import { deleteBoardMiddleware } from '../../actions';
-
 import './boardPage.scss';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Header from '../Header/Header.jsx';
 import BoardButton from './BoardButton/BoardButton.jsx';
 import BoardCard from './BoardCard/BoardCard.jsx';
-
 import List from '../List/List.jsx';
+
+import { getBoardsMiddleware } from '../../actions/boards';
+import { deleteBoardMiddleware } from '../../actions/boards';
 
 class BoardPage extends Component {
     componentDidMount () {
         this.props.onFetchBoards();
     }
-
     render () {
         const boards = this.props.boards;
 

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
 import auth from './authentication';
-import lists from './boardLists';
+import lists from './lists';
 import boards from './boardReducer';
 import cards from './cards';
 
