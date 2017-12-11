@@ -4,6 +4,7 @@ import auth from './authentication';
 import lists from './lists';
 import boards from './boardReducer';
 import cards from './cards';
+import fetching from './fetching';
 
 const rootReducer = combineReducers({
     // routing: routerReducer,
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
     auth,
     boards,
     lists,
-    cards
+    cards,
+    fetching
 });
 
 export default rootReducer;

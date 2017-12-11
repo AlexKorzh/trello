@@ -1,7 +1,8 @@
 import { 
     GET_BOARDS,
     CREATE_BOARD, 
-    DELETE_BOARD
+    DELETE_BOARD,
+    UPDATE_BOARD
 } from '../constants/ActionTypes';
 
 export default function (state = [], action) {
@@ -10,9 +11,12 @@ export default function (state = [], action) {
             return action.payload;
         case CREATE_BOARD:
             return [...state, action.payload];
+        case UPDATE_BOARD:
+            return [...state, action.payload]
         case DELETE_BOARD: 
             const id = action.payload;
-                return [...state.filter(board => board._id != id)]
+            
+            return [...state.filter(board => board._id != id)]
         default:
             return state;
     }
