@@ -9,6 +9,7 @@ import {
 } from '../constants/ActionTypes';
 
 import { startFetching, endFetching } from './fetching';
+import { updateTitle } from './title';
 
 export const createBoard = payload => {
     return {
@@ -52,14 +53,16 @@ export const createBoardMiddleware = title => {
 
 export const updateBoardMiddleware = (boardId, title) => {
     return dispatch => {
-        dispatch(startFetching());
+        // dispatch(startFetching());
         axios.post(
             `${currentHost}/updateBoard`,
             {boardId, title},
             {headers: { authorization: token.get() }}
-        ).then(response => {
+        ).then(response => {debugger;
+            const title = response.data.board.title;
             dispatch(updateBoard(response.data.board));
-            dispatch(endFetching());
+            // dispatch(endFetching());
+            dispatch(updateTitle(title))
         });
     }
 }

@@ -45,6 +45,18 @@ const get = (req, res) => {
     }
 };
 
+function getTitle (req, res) {
+    const boardId = req.query.boardId;
+
+    Board.findOne({_id:boardId})
+        .then(sendResponse);
+
+    function sendResponse (board) {
+        res.send({board: board});
+        done();
+    }
+}
+
 const update = (req, res) => {
     const boardId = req.body.boardId;
     const boardTitle = req.body.title;
@@ -78,3 +90,4 @@ exports.create = create;
 exports.update = update;
 exports.get = get;
 exports.deleteBoard = deleteBoard;
+exports.getTitle = getTitle;

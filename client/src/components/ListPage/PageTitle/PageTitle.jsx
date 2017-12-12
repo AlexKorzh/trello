@@ -3,6 +3,7 @@ import TitleForm from '../../TitleForm/TitleForm.jsx';
 import '../../TitleForm/titleForm.scss';
 import { connect } from 'react-redux';
 import { updateBoardMiddleware } from '../../../actions/boards';
+import { fetchTitleMiddleware } from '../../../actions/title';
 import getBoardId from '../../../utils/getBoardId';
 import browserHistory from '../../../utils/history';
 
@@ -10,7 +11,6 @@ class PageTitle extends Component {
     constructor () {
         super();
         this.state = {
-            title: '',
             isFormOpen: false
         };
         this.changeTitle = this.changeTitle.bind(this);
@@ -18,21 +18,12 @@ class PageTitle extends Component {
         this.openForm = this.openForm.bind(this);
         this.closeForm = this.closeForm.bind(this);
     }
-    componentWillReceiveProps (nextProps) {
-        const title = this.state.title;
-        const boardId = getBoardId();
-
-        if (!nextProps.isFetching) {
-            browserHistory.push(`/boards/${boardId}/${title}`);
-        }
-    }
     componentDidMount () {
-        const title = this.getTitle();
-
-        this.setState({title});
+        const boardId = getBoardId();
+        this.props.onFetchTitle(boardId);
     }
     changeTitle () {
-        const title = this.state.title;
+        const title = this.props.title;
         const currentValue = this.formInput.value;
 
         if (title === currentValue)  {
@@ -42,7 +33,6 @@ class PageTitle extends Component {
             const boardId = getBoardId();
             
             this.props.onUpdateBoardTitle(boardId, currentValue);
-            this.setState({title: currentValue});
             this.closeForm(); 
         }
     }
@@ -63,7 +53,7 @@ class PageTitle extends Component {
     }
     render () {
         const isOpen = this.state.isFormOpen;
-        const title = this.state.title;
+        const title = this.props.title;
         
         return (
             <div className = "list-page__title-wrap">
@@ -90,12 +80,21 @@ class PageTitle extends Component {
     }
 };
 
+const mapStateToProps = state => {
+    return {
+        title: state.title
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
         onUpdateBoardTitle: (boardId, title) => {
             dispatch(updateBoardMiddleware(boardId, title))
+        },
+        onFetchTitle: (boardId) => {
+            dispatch(fetchTitleMiddleware(boardId))
         }
     };
 };
 
-export default connect(null, mapDispatchToProps)(PageTitle);
+export default connect(mapStateToProps, mapDispatchToProps)(PageTitle);
