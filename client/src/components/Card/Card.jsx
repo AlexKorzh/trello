@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import './card.scss';
 
@@ -13,7 +14,7 @@ class Card extends Component {
     handleCardSelect () {
         const { id } = this.props;
 
-        this.props.onCardSelect(id);
+        console.log(id, this.props);
     }
 
     render () {
@@ -34,8 +35,8 @@ class Card extends Component {
 
 Card.propTypes = {
     title: PropTypes.string,
-    id: PropTypes.string.isRequired,
-    onCardSelect: PropTypes.function
+    id: PropTypes.string.isRequired
 };
 
-export default Card;
+export default connect(null, null)(Card);
+

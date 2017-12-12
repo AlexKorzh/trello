@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
+import './modal.scss';
+
 class Modal extends Component {
     constructor (props) {
         super(props);
@@ -57,6 +59,7 @@ class Modal extends Component {
     //     this.node = node;
     // }
     render () {
+        
         // const isOpen = this.state.modalIsOpen;
 
         // const Default = () => {
@@ -113,8 +116,7 @@ class Modal extends Component {
         // }
 
         return (
-            <p>text</p>
-            // this.props.next ? <Next /> : <Default />
+            <div className="modal-overlay">Modal</div>
         );
     }
 }

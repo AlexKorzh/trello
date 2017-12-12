@@ -9,6 +9,8 @@ import { fetchLists } from '../../actions/lists';
 import getBoardId from '../../utils/getBoardId';
 import { fetchCards } from '../../actions/cards';
 
+import Modal from '../../components/Modal';
+
 class ListPage extends Component {
     constructor (props) {
         super(props);
@@ -43,6 +45,7 @@ class ListPage extends Component {
                         </div>
                     </div>
                 </div>
+                {/* <Modal /> */}
             </div>
         );
     }
