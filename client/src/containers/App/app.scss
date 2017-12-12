@@ -170,6 +170,10 @@ body {
     }
 }
 
+.close-icon {
+    cursor: pointer;
+}
+
 @media screen and (max-width: 340px) {
     .btn-social-login {
         font-size: 18px;

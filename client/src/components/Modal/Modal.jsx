@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
+import CloseIcon from 'material-ui-icons/close';
+
+import styles from '../../assets/styles/material-styles';
 import './modal.scss';
 
 class Modal extends Component {
@@ -59,7 +62,6 @@ class Modal extends Component {
     //     this.node = node;
     // }
     render () {
-        
         // const isOpen = this.state.modalIsOpen;
 
         // const Default = () => {
@@ -116,7 +118,25 @@ class Modal extends Component {
         // }
 
         return (
-            <div className="modal-overlay">Modal</div>
+            <div className="modal-overlay">
+                <div className="modal-window">
+                    <CloseIcon
+                        className="close-icon"
+                        style={ styles.icons.close }
+                    />
+                    <p>vxcvxcvcxvcxvcxxx</p>
+                    <p>vxcvxcvcxvcxvcxxx</p>
+                    <p>vxcvxcvcxvcxvcxxxcvxcvxcvxcvzxczxczxczxczxczxczxczxczxczxczxczx</p>
+                    <p>vxcvxcvcxvcxvcxxxcvxcvxcvxcvzxczxczxczxczxczxczxczxczxczxczxczx</p>
+                    <p>vxcvxcvcxvcxvcxxxcvxcvxcvxcvzxczxczxczxczxczxczxczxczxczxczxczx</p>
+                    <p>vxcvxcvcxvcxvcxxxcvxcvxcvxcvzxczxczxczxczxczxczxczxczxczxczxczx</p>
+                    <p>vxcvxcvcxvcxvcxxxcvxcvxcvxcvzxczxczxczxczxczxczxczxczxczxczxczx</p>
+                    <p>vxcvxcvcxvcxvcxxxcvxcvxcvxcvzxczxczxczxczxczxczxczxczxczxczxczx</p>
+                    <p>vxcvxcvcxvcxvcxxxcvxcvxcvxcvzxczxczxczxczxczxczxczxczxczxczxczx</p>
+                    <p>vxcvxcvcxvcxvcxxxcvxcvxcvxcvzxczxczxczxczxczxczxczxczxczxczxczx</p>
+                    <p>vxcvxcvcxvcxvcxxxcvxcvxcvxcvzxczxczxczxczxczxczxczxczxczxczxczx</p>
+                </div>
+            </div>
         );
     }
 }
