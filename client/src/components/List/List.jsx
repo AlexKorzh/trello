@@ -54,7 +54,8 @@ class List extends Component {
                                 <Card 
                                     key = { index }
                                     title={ card.title }
-                                    id = { cards._id }
+                                    id = { card._id }
+                                    onCardSelect = { this.props.onCardSelect }
                                 />
                             );
                         })
