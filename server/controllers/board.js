@@ -45,6 +45,35 @@ const get = (req, res) => {
     }
 };
 
+function getTitle (req, res) {
+    const boardId = req.query.boardId;
+
+    Board.findOne({_id:boardId})
+        .then(sendResponse);
+
+    function sendResponse (board) {
+        res.send({board: board});
+        done();
+    }
+}
+
+const update = (req, res) => {
+    const boardId = req.body.boardId;
+    const boardTitle = req.body.title;
+
+    Board.findByIdAndUpdate(boardId, 
+        { $set: { title: boardTitle }}, 
+        { new: true }, 
+        function (err, board) {
+            if (err) return handleError(err);
+            console.log('B O A R D ----> ',board);
+            res.send({
+                message: 'Board was successfully updated',
+                board: board
+            });
+      });
+};
+
 function deleteBoard (req, res, next) {
     const boardId = req.body.boardId;
     
@@ -58,5 +87,7 @@ function deleteBoard (req, res, next) {
 }
 
 exports.create = create;
+exports.update = update;
 exports.get = get;
 exports.deleteBoard = deleteBoard;
+exports.getTitle = getTitle;

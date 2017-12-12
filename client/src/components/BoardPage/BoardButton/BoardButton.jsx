@@ -19,6 +19,8 @@ class BoardButton extends React.Component {
     }
 
     render () {
+        const isOpen = this.state.isModalOpen;
+
         return (
             <div className = "col-3">
                 <button
@@ -27,10 +29,17 @@ class BoardButton extends React.Component {
                 >
                     Создать новую доску…
                 </button>
-                <BoardForm 
-                    close = {this.closeModal} 
-                    show = {this.state.isModalOpen}
-                />
+                {
+                    isOpen ?
+                        <BoardForm 
+                            close = {this.closeModal} 
+                            show = {this.state.isModalOpen}
+                            title = 'Создание доски'
+                            placeholder = 'Например, «Издание календаря»…'
+                            buttonTitle = 'Создать'
+                        /> 
+                        : null
+                }
             </div>                
         );
     }

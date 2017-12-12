@@ -28,7 +28,9 @@ module.exports = function (app) {
 
     // Boards
     app.post('/createBoard', requireAuth, Board.create);
+    app.post('/updateBoard', requireAuth, Board.update);
     app.get('/board', requireAuth, Board.get);
+    app.get('/getBoardtitle', requireAuth, Board.getTitle);
     app.post('/deleteBoard', requireAuth, Board.deleteBoard);
 
     //Lists

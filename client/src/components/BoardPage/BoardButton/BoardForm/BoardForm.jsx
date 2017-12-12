@@ -39,7 +39,7 @@ class BoardForm extends Component {
         return (
             <div ref = "form" 
                 className = {`board-form card ${isOpen && 'open'}`}>
-                <h3 className = "title">Создание доски 
+                <h3 className = "title">{this.props.title} 
                     <span 
                         role = "button" 
                         onClick = {this.props.close} 
@@ -50,7 +50,7 @@ class BoardForm extends Component {
                 <input 
                     className = "board-name form-control" 
                     type = "text"
-                    placeholder = "Например, «Издание календаря»…"
+                    placeholder = {this.props.placeholder}
                     value = { this.state.title }
                     onChange = { this.handeTitleChange }
                 />
@@ -58,7 +58,7 @@ class BoardForm extends Component {
                     className = "btn btn-success"
                     onClick = { this.handleCreateBoard }
                 >
-                    Созадть
+                    {this.props.buttonTitle}
                 </button>
             </div>
         );

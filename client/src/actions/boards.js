@@ -4,8 +4,12 @@ import axios from 'axios';
 import {
     GET_BOARDS,
     CREATE_BOARD,
-    DELETE_BOARD
+    DELETE_BOARD,
+    UPDATE_BOARD
 } from '../constants/ActionTypes';
+
+import { startFetching, endFetching } from './fetching';
+import { updateTitle } from './title';
 
 export const createBoard = payload => {
     return {
@@ -18,6 +22,13 @@ export const getBoards = payload => {
     return {
         type: GET_BOARDS,
         payload
+    }
+}
+
+export const updateBoard = payload => {
+    return {
+        type: UPDATE_BOARD,
+        payload 
     }
 }
 
@@ -36,6 +47,22 @@ export const createBoardMiddleware = title => {
             {headers: { authorization: token.get() }}
         ).then(response => {
             dispatch(createBoard(response.data.board));
+        });
+    }
+}
+
+export const updateBoardMiddleware = (boardId, title) => {
+    return dispatch => {
+        // dispatch(startFetching());
+        axios.post(
+            `${currentHost}/updateBoard`,
+            {boardId, title},
+            {headers: { authorization: token.get() }}
+        ).then(response => {debugger;
+            const title = response.data.board.title;
+            dispatch(updateBoard(response.data.board));
+            // dispatch(endFetching());
+            dispatch(updateTitle(title))
         });
     }
 }

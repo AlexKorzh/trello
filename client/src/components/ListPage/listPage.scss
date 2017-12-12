@@ -1,10 +1,33 @@
 .list-page {
-    .list-page__container {
+    .list-page__wrapper {
+        padding: 10px 5px 5px 5px;
+    }
+    .list-page__title-wrap {
+        z-index: 2;
+        .list-page__title {
+            margin: 0px !important;
+            padding: 0 5px;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 30px;
+            border-radius: 4px;
+            display: inline-block;
+            &:hover {
+                background: rgba(0,0,0,.12);
+                cursor: pointer;
+            }
+        }
+    }
+    .list-page__form-wrap,
+    .list-page__container,
+    .list-page__title-wrap  {
         position: relative;
+    }
+    .list-page__container {
         height: calc(100vh - 50px);
     }
     .list-page__wrap {
-        padding-top: 30px; 
+        padding-top: 15px; 
         white-space: nowrap;
         overflow-x: auto;
         overflow-y: hidden;
@@ -16,8 +39,12 @@
         left: 0;
     }
 }
-.list-container, .add-list-container {
+.list-container, 
+.add-list-container, 
+.list-page__form-wrap  {
     width: 270px;
+}
+.list-container, .add-list-container {
     margin: 0 5px;
     height: 100%;
     box-sizing: border-box;
