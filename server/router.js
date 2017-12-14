@@ -40,4 +40,5 @@ module.exports = function (app) {
     //Cards
     app.post('/createCard', requireAuth, Card.create);
     app.post('/getAllCards', requireAuth, Card.getAllCards);
+    app.get('/cardDetails', requireAuth, Card.details)
 }

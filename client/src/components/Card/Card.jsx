@@ -2,35 +2,24 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { showCardDetailModal } from '../../actions/modal'
+
 import './card.scss';
 
-class Card extends Component {
-    constructor () {
-        super();
+const Card = props => {
+    const { id, title, onSelect } = props;
+    const showModal = onSelect.bind(null, id);
 
-        this.handleCardSelect = this.handleCardSelect.bind(this);
-    }
-
-    handleCardSelect () {
-        const { id } = this.props;
-
-        console.log(id, this.props);
-    }
-
-    render () {
-        const { title } = this.props;
-
-        return (
-            <div className = "card-info">
-                <div className = "card"
-                    role = "button"
-                    onClick = { this.handleCardSelect }
-                >
-                    <div className = "card_title">{ title }</div>
-                </div>
+    return (
+        <div className = "card-info">
+            <div className = "card"
+                role = "button"
+                onClick = { showModal }
+            >
+                <div className = "card_title">{ title }</div>
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 Card.propTypes = {
@@ -38,5 +27,11 @@ Card.propTypes = {
     id: PropTypes.string.isRequired
 };
 
-export default connect(null, null)(Card);
+const mapDispatchToProps = dispatch => {
+    return {
+        onSelect: id => dispatch(showCardDetailModal(id))
+    };
+};
+
+export default connect(null, mapDispatchToProps)(Card);
 

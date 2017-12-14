@@ -23,3 +23,11 @@ export const END_FETCHING = 'END_FETCHING';
 
 export const UPDATE_TITLE = 'UPDATE_TITLE';
 export const GET_TITLE = 'GET_TITLE';
+
+export const GET_CARD_DETAILS = 'GET_CARD_DETAILS';
+
+// Modal
+
+export const SHOW_MODAL = 'SHOW_MODAL';
+export const HIDE_MODAL = 'HIDE_MODAL';
+export const CARD_DETAIL_MODAL = 'CARD_DETAIL_MODAL';

@@ -21,7 +21,9 @@ class ListPage extends Component {
         this.props.onFetchLists(boardId);
     }
     render () {
-        const lists = this.props.lists;
+        const { lists, modal } = this.props;
+
+        const isModalOpen = modal.modalType;
     
         return (
             <div className = "list-page">
@@ -45,7 +47,7 @@ class ListPage extends Component {
                         </div>
                     </div>
                 </div>
-                {/* <Modal /> */}
+                { isModalOpen && <Modal /> }
             </div>
         );
     }
@@ -54,7 +56,8 @@ class ListPage extends Component {
 const mapStateToProps = state => {
     return {
         lists: state.lists,
-        fetching: state.fetching
+        fetching: state.fetching,
+        modal: state.modal
     };
 };
 
