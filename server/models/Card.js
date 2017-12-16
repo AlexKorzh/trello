@@ -5,6 +5,9 @@ const cardSchema = new Schema({
     title: String,
     list: {type: Schema.Types.ObjectId, ref: 'List'},
     board: {type: Schema.Types.ObjectId, ref: 'Board'}
+    //comments 
+    //attachments
+    
 });
 
 cardSchema.methods.getPublicFields = function () {

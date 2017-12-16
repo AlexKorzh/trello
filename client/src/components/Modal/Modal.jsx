@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import './modal.scss';
 
 import PropTypes from 'prop-types';
 
@@ -7,8 +8,6 @@ import { hideModal } from '../../actions/modal';
 import { CARD_DETAIL_MODAL } from '../../constants/ActionTypes';
 
 import CardDetailModal from './components/cardDetailModal';
-
-import './modal.scss';
 
 const MODAL_COMPONENTS = {
     CARD_DETAIL_MODAL: CardDetailModal
