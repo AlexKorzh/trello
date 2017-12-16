@@ -20,9 +20,9 @@ listSchema.methods.getPublicFields = function () {
 
 listSchema.pre('remove', function (next) {
     const Card = mongoose.model('Card');
-
-    Card.remove({ _id: { $in: this.cards } })
-    .then(() => next());
+    
+    Card.remove({ _id: { $in: this.cards } }).exec();
+    next();
 });
 
 

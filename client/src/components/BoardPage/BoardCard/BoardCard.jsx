@@ -38,7 +38,7 @@ class BoardCard extends Component {
         return (
             <div className="col-3">
                 <a
-                    className="card card-custom board-card text-white bg-card p-2"
+                    className="card-custom board-card text-white bg-card p-2"
                     role = "button"
                     onClick = { this.goTo }
                 >

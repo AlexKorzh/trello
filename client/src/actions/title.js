@@ -28,8 +28,8 @@ export const fetchTitleMiddleware = (boardId) => dispatch => {
         {
             headers: { authorization },
             params: {
-                boardId: boardId,  
-            },
+                boardId: boardId  
+            }
         }
     ).then(function (response) {
         const title = response.data.board.title;

@@ -35,6 +35,23 @@ function create (req, res, next) {
 
 }
 
+const update = (req, res) => {
+    const listId = req.body.listId;
+    const listTitle = req.body.title;
+
+    List.findByIdAndUpdate(listId, 
+        { $set: { title: listTitle }}, 
+        { new: true }, 
+        function (err, list) {
+            if (err) return handleError(err);
+            console.log('L I S T ----> ',list);
+            res.send({
+                message: 'List was successfully updated',
+                list: list
+            });
+      });
+};
+
 function getLists (req, res) {
     const boardId = req.body.boardId;
 
@@ -46,5 +63,17 @@ function getLists (req, res) {
     });
 }
 
+function deleteList (req, res, next) {
+    const listId = req.body.listId;
+    
+    List.findById({_id:listId}, function(err, list) {
+        list.remove(function(err) {
+            res.send({list: listId});
+        });
+    });
+}
+
 exports.create = create;
 exports.getLists = getLists;
+exports.update = update;
+exports.deleteList = deleteList;

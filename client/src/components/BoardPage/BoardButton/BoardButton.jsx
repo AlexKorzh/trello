@@ -24,7 +24,7 @@ class BoardButton extends React.Component {
         return (
             <div className = "col-3">
                 <button
-                    className = "card card-custom p-2 button-create"
+                    className = "card-custom p-2 button-create"
                     onClick = { this.openModal }
                 >
                     Создать новую доску…

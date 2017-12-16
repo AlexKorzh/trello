@@ -1,6 +1,7 @@
 import { 
     CREATE_CARD,
-    GET_CARDS
+    GET_CARDS,
+    UPDATE_CARD_TITLE
 } from '../constants/ActionTypes';
 
 export default function (state = [], action) {
@@ -8,7 +9,9 @@ export default function (state = [], action) {
         case GET_CARDS: 
             return action.payload;
         case CREATE_CARD: 
-            return [...state, action.payload]
+            return [...state, action.payload];
+        case UPDATE_CARD_TITLE:
+            return state.map(card => card._id === action.payload._id ? action.payload : card)
         default:
             return state;
     }

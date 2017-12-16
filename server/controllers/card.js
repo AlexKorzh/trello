@@ -5,9 +5,9 @@ const mongoose = require('mongoose');
 const config = require('../config');
 
 function create (req, res, next) {
-    const title = req.body.title;
-    const listId = req.body.listId;
-    const boardId = req.body.boardId;
+    const title = req.body.title,
+          listId = req.body.listId,
+          boardId = req.body.boardId;
 
     const card = new Card({
         title,
@@ -20,7 +20,7 @@ function create (req, res, next) {
 
         List.findByIdAndUpdate(
             listId, 
-            {$push: {lists: card}},
+            {$push: {cards: card}},
             {new: true, safe: true}, 
             callback
         );
@@ -36,6 +36,22 @@ function create (req, res, next) {
     }
 }
 
+const updateTitle = (req, res) => {
+    const cardId = req.body.cardId;
+    const cardTitle = req.body.title;
+
+    Card.findByIdAndUpdate(cardId, 
+        { $set: { title: cardTitle }}, 
+        { new: true }, 
+        function (err, card) {
+            if (err) return handleError(err);
+            res.send({
+                message: 'Card was successfully updated',
+                card: card
+            });
+      });
+};
+
 function getAllCards (req, res) {
     const lists = req.body.lists;
 
@@ -48,9 +64,9 @@ function getAllCards (req, res) {
 
     function callback (error, docs) {
         res.send({cards: docs});
-        console.log('R E S ------>', res.cards);
     }
 }
 
 exports.create = create;
 exports.getAllCards = getAllCards;
+exports.updateTitle = updateTitle;

@@ -58,11 +58,11 @@ export const updateBoardMiddleware = (boardId, title) => {
             `${currentHost}/updateBoard`,
             {boardId, title},
             {headers: { authorization: token.get() }}
-        ).then(response => {debugger;
-            const title = response.data.board.title;
+        ).then(response => {
+            let boardTitle = response.data.board.title;
             dispatch(updateBoard(response.data.board));
             // dispatch(endFetching());
-            dispatch(updateTitle(title))
+            dispatch(updateTitle(boardTitle))
         });
     }
 }

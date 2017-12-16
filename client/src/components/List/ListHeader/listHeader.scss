@@ -1,0 +1,50 @@
+.list-c__head-title {
+    text-indent: 6px;
+}
+.list-c__head {
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    .list-edit-area {
+        width: calc(100% - 30px);
+        position: relative;
+        .form-control {
+            font-size: 14px;
+            line-height: 9px;
+            @extend .list-c__head;
+            padding: 8px 15px 0px 5px;
+            resize: none;
+        }
+        .close {
+            margin: 0 2px;
+            font-size: 1.5rem;
+            position: absolute;
+            top: 0;
+            right: 0px;
+        }
+    }
+    .list-control {
+        height: 20px;
+        width: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        margin-top: -10px;
+        &:hover {
+            border-radius: 3px;
+            background: #cdd2d4;
+        }
+        .list-control__text {
+            margin-top: -5px;
+            display: block;
+            font-size: 12px;
+            line-height: 18px;
+            color: #999;
+        }
+    }
+}
+

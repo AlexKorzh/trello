@@ -3,7 +3,8 @@ import currentHost from '../utils/host';
 import axios from 'axios';
 import {
     CREATE_CARD,
-    GET_CARDS
+    GET_CARDS,
+    UPDATE_CARD_TITLE
 } from '../constants/ActionTypes';
 
 export const createCard = payload => {
@@ -20,6 +21,13 @@ export const getCards = payload => {
     }
 }
 
+export const updateCardTitle = payload => {
+    return {
+        type: UPDATE_CARD_TITLE,
+        payload
+    }
+}
+
 export const createCardMiddleware = (title, listId, boardId) => {
     return dispatch => {
         axios.post(
@@ -28,6 +36,18 @@ export const createCardMiddleware = (title, listId, boardId) => {
             {headers: { authorization: token.get() }}
         ).then(response => {
             dispatch(createCard(response.data.card));
+        });
+    }
+}
+
+export const updateCardTitleMiddleware = (cardId, title) => {
+    return dispatch => {
+        axios.post(
+            `${currentHost}/updateCardTitle`,
+            {cardId, title},
+            {headers: { authorization: token.get() }}
+        ).then(response => {
+            dispatch(updateCardTitle(response.data.card));
         });
     }
 }

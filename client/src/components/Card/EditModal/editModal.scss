@@ -1,0 +1,31 @@
+.edit-modal {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 20;
+    .edit-modal__inner-wrap {
+        width: 254px;
+        position: absolute;
+    }
+    .edit-modal__title {
+        padding: 8px;
+        min-height: 80px;
+        width: 100%;
+        font-size: 14px;
+        background: #fff;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-bottom: 6px;
+        position: relative;
+        resize: none;
+        outline: none;
+        z-index: 0;
+        box-shadow: 0px 1px 3px 0px rgba(50, 50, 50, 0.2);
+        transition: box-shadow 0.2s linear;
+        transition: background 0.2s linear;
+    }
+}

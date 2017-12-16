@@ -14,6 +14,16 @@
         color: darken($color-button-create, 15%);
     }
 }
+.card-custom {
+    margin-bottom: 10px;
+    min-height: 95px;
+    border: 0;
+    transition: 0.3s ease all;
+    cursor: pointer;
+    &:focus {
+        outline: none;
+    }
+}
 // .add-board-btn {
 //     padding: 60px 40px;
 //     z-index: 10;

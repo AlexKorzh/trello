@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { createCardMiddleware } from '../../actions/cards';
-import { getCards } from '../../reducers/lists';
-import Card from '../Card/Card.jsx';
 import './list.scss';
-
+import { connect } from 'react-redux';
+import ListHeader from './ListHeader/ListHeader.jsx';
+import Card from '../Card/Card.jsx';
+import { createCardMiddleware } from '../../actions/cards';
+import { updateCardTitleMiddleware } from '../../actions/cards';
+import { getCards } from '../../reducers/lists';
 import getBoardId from '../../utils/getBoardId';
 
 class List extends Component {
@@ -16,16 +17,20 @@ class List extends Component {
         this.openAddCardModal = this.openAddCardModal.bind(this);
         this.closeAddCardModal = this.closeAddCardModal.bind(this);
         this.onHandleAdd = this.onHandleAdd.bind(this);
+        this.handleListDelete = this.handleListDelete.bind(this);
     }
     openAddCardModal () {
         this.setState({isAddCardOpen:true});
     }
-
     closeAddCardModal () {
         this.cardTitle.value = '';
         this.setState({isAddCardOpen:false});
     }
+    handleListDelete () {
+        const listId = this.props.id;
 
+        this.props.delete(listId);
+    }
     onHandleAdd () {
         const listId = this.props.id;
         const title = this.cardTitle.value;
@@ -35,7 +40,6 @@ class List extends Component {
 
         this.closeAddCardModal();
     }
-
     render () {
         const cards = this.props.cards;
 
@@ -44,10 +48,13 @@ class List extends Component {
 
         return (
             <div className = "list-container">
+                <ListHeader 
+                    title = {this.props.title}
+                    update = {this.props.updateTitle}
+                    listId = {this.props.id}
+                    deleteList = {this.handleListDelete}
+                />
                 <div className = "list-wrap">
-                    <div className = "list-c__head">
-                        {this.props.title}
-                    </div>
                     {
                         cards && cards.map((card, index) => {
                             return (
@@ -56,17 +63,11 @@ class List extends Component {
                                     title={ card.title }
                                     id = { card._id }
                                     onCardSelect = { this.props.onCardSelect }
+                                    updateTitle = { this.props.onUpdateCardTitle }
                                 />
                             );
                         })
                     }
-                    <span 
-                        className = {`add-card-btn ${addCardBtnStatus}`}
-                        role = "button"
-                        onClick = {this.openAddCardModal}
-                    >
-                        Добавить карточку...
-                    </span>
                     <div className = {`card-info ${cardInfoBtnStatus}`}>
                         <textarea 
                             ref = {textarea => { this.cardTitle = textarea }}
@@ -88,6 +89,13 @@ class List extends Component {
                         </div>
                     </div>
                 </div>
+                <span 
+                    className = {`add-card-btn ${addCardBtnStatus}`}
+                    role = "button"
+                    onClick = {this.openAddCardModal}
+                >
+                    Добавить карточку...
+                </span>
             </div>
         );
     }
@@ -101,7 +109,8 @@ function mapStateToProps (state, ownProps) {
 
 function mapDispatchToProps (dispatch) {
     return {
-        saveCard: (title, listId, boardId) => dispatch(createCardMiddleware(title, listId, boardId))
+        saveCard: (title, listId, boardId) => dispatch(createCardMiddleware(title, listId, boardId)),
+        onUpdateCardTitle: (cardId, title) => dispatch(updateCardTitleMiddleware(cardId, title))
     };
 }
 

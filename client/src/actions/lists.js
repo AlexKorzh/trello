@@ -4,7 +4,9 @@ import axios from 'axios';
 import { fetchCards } from './cards';
 import {
     CREATE_LIST,
-    GET_LISTS
+    GET_LISTS,
+    UPDATE_LIST,
+    DELETE_LIST
 } from '../constants/ActionTypes';
 
 export const createList = payload => {
@@ -21,14 +23,52 @@ export const getLists = payload => {
     }
 }
 
+export const updateList = payload => {
+    return {
+        type: UPDATE_LIST,
+        payload
+    }
+}
+
+export const deleteList = payload => {
+    return {
+        type: DELETE_LIST,
+        payload
+    }
+}
+
 export const createListMiddleware = (title, boardId) => {
     return dispatch => {
         axios.post(
-            `${currentHost}/boards/createList`,
+            `${currentHost}/createList`,
             { title, boardId },
             { headers: { authorization: token.get() } }
         ).then(response => {
             dispatch(createList(response.data.list));
+        });
+    }
+}
+
+export const updateListMiddleware = (listId, title) => {
+    return dispatch => {
+        axios.post(
+            `${currentHost}/updateList`,
+            { listId, title },
+            { headers: { authorization: token.get() } }
+        ).then(response => {
+            dispatch(updateList(response.data.list));
+        });
+    }
+}
+
+export const deleteListMiddleware = listId => {
+    return dispatch => {
+        axios.post(
+            `${currentHost}/deleteList`,
+            {listId},
+            {headers: { authorization: token.get() }}
+        ).then(response => {
+            dispatch(deleteList(response.data.list));
         });
     }
 }

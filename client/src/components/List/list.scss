@@ -5,64 +5,36 @@
     display: none !important;
 }
 .list-container {
+    .card-info, 
+    .list-c__head {
+        border-radius: 3px 3px 0px 0px;
+        padding: 8px;
+        background: #E2E4E6;
+        box-sizing: border-box;
+    }
     .list-wrap {
         background: #E2E4E6;
-        border-radius: 3px;
         max-height: 100%;
         position: relative;
         white-space: normal;
+        overflow-y: auto;
     }
-    .card,
-    .card-info, 
-    .list-c__head {
-        padding: 8px;
-    }
-    .list-c__head {
-        font-size: 15px;
-        font-weight: 700;
-    }
-    .add-card-btn {
-        cursor: pointer;
-        display: block;
-        font-size: 14px;
-        border-radius: 0 0 3px 3px;
-        color: #838c91;
-        flex: 0 0 auto;
-        padding: 8px 10px;
-        position: relative;
-        text-decoration: none;
-        user-select: none;
-        &:hover {
-            background-color: #CDD2D4;
-            color: #4d4d4d;
-            text-decoration: underline;
-        }
-    }
-    .card, .card-info__title  {
-        min-height: 80px;
-        width: 100%;
-        font-size: 14px;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-        cursor: pointer;
-        margin-bottom: 6px;
-        position: relative;
-        resize: none;
-        outline: none;
-        z-index: 0;
-        box-shadow: 0px 1px 3px 0px rgba(50, 50, 50, 0.2);
-        transition: box-shadow 0.2s linear;
-        &:hover {
-            box-shadow: 0px 1px 4px 0px rgba(50, 50, 50, 0.4);
-        }
-    }
-    .card-info {
-        .card-info__title {
-            overflow: hidden;
-            padding: 6px 6px 2px 8px;
-            position: relative;
-            z-index: 10;
-        }
+}
+.add-card-btn {
+    cursor: pointer;
+    display: block;
+    font-size: 14px;
+    border-radius: 0 0 3px 3px;
+    color: #838c91;
+    background: #E2E4E6;
+    flex: 0 0 auto;
+    padding: 8px 10px;
+    position: relative;
+    text-decoration: none;
+    user-select: none;
+    &:hover {
+        background-color: #CDD2D4;
+        color: #4d4d4d;
+        text-decoration: underline;
     }
 }

@@ -6,8 +6,10 @@ import AddListButton from '../../components/List/AddListButton/AddListButton.jsx
 import List from '../../components/List/List.jsx';
 import PageTitle from './PageTitle/PageTitle.jsx';
 import { fetchLists } from '../../actions/lists';
-import getBoardId from '../../utils/getBoardId';
 import { fetchCards } from '../../actions/cards';
+import { updateListMiddleware } from '../../actions/lists';
+import { deleteListMiddleware } from '../../actions/lists';
+import getBoardId from '../../utils/getBoardId';
 
 class ListPage extends Component {
     constructor (props) {
@@ -25,7 +27,7 @@ class ListPage extends Component {
             <div className = "list-page">
                 <Header />
                 <div className = "list-page__wrapper">
-                    <PageTitle isFetching = {this.props.fetching}/>
+                    <PageTitle />
                     <div className = "list-page__container">
                         <div className = "list-page__wrap">
                             {
@@ -35,6 +37,8 @@ class ListPage extends Component {
                                             key = { index }
                                             title={ list.title }
                                             id = { list._id }
+                                            updateTitle = {this.props.onUpdateList}
+                                            delete = {this.props.onDeleteList}
                                         />
                                     );
                                 })
@@ -50,8 +54,7 @@ class ListPage extends Component {
 
 const mapStateToProps = state => {
     return {
-        lists: state.lists,
-        fetching: state.fetching
+        lists: state.lists
     };
 };
 
@@ -60,7 +63,9 @@ const mapDispatchToProps = dispatch => {
         onFetchLists: (boardId) => {
             dispatch(fetchLists(boardId))
         },
-        onFetchCards: (lists) => dispatch(fetchCards(lists))
+        onFetchCards: (lists) => dispatch(fetchCards(lists)),
+        onUpdateList: (listId, title) => dispatch(updateListMiddleware(listId, title)),
+        onDeleteList: (listId) => dispatch(deleteListMiddleware(listId))
     };
 };
 

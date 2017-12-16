@@ -34,10 +34,13 @@ module.exports = function (app) {
     app.post('/deleteBoard', requireAuth, Board.deleteBoard);
 
     //Lists
-    app.post('/boards/createList', requireAuth, List.create);
+    app.post('/createList', requireAuth, List.create);
+    app.post('/updateList', requireAuth, List.update);
+    app.post('/deleteList', requireAuth, List.deleteList);
     app.post('/getLists', requireAuth, List.getLists);
 
     //Cards
     app.post('/createCard', requireAuth, Card.create);
+    app.post('/updateCardTitle', requireAuth, Card.updateTitle);
     app.post('/getAllCards', requireAuth, Card.getAllCards);
 }
