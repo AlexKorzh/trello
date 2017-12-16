@@ -8,9 +8,7 @@ export const showCardDetailModal = payload => {
     return {
         type: SHOW_MODAL,
         modalType: CARD_DETAIL_MODAL,
-        modalProps: {
-            ...payload
-        }
+        modalProps: payload
     }
 }
 

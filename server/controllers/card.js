@@ -68,7 +68,7 @@ function getAllCards (req, res) {
 }
 
 function details (req, res) {
-    const id = req.body.id;
+    const id = req.query.id;
 
     res.send(id);
 
@@ -87,8 +87,5 @@ function details (req, res) {
 
 exports.create = create;
 exports.getAllCards = getAllCards;
-<<<<<<< HEAD
 exports.updateTitle = updateTitle;
-=======
 exports.details = details;
->>>>>>> f7056d595bea0bc907eeba6062c980a78d4c8ced

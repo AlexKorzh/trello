@@ -9,7 +9,9 @@ import './cardDetailModal.scss';
 
 class CardDetailModal extends Component {
     componentWillMount () {
-        this.props.fetchData();
+        const { id } = this.props;
+
+        this.props.fetchData(id);
     }
 
     render () {
@@ -25,11 +27,18 @@ CardDetailModal.propTypes = {
 
 };
 
+const mapStateToProps = state => {
+    return {
+        id: state.modal.modalProps
+    };
+};
+
+
 const mapDispatchToProps = dispatch => {
     return {
         fetchData: id => dispatch(getCardDetailsMiddleware(id))
     };
 };
 
-export default connect(null, mapDispatchToProps)(CardDetailModal);
+export default connect(mapStateToProps, mapDispatchToProps)(CardDetailModal);
 

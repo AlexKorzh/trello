@@ -59,13 +59,9 @@ class ListPage extends Component {
 
 const mapStateToProps = state => {
     return {
-<<<<<<< HEAD
-        lists: state.lists
-=======
         lists: state.lists,
         fetching: state.fetching,
         modal: state.modal
->>>>>>> f7056d595bea0bc907eeba6062c980a78d4c8ced
     };
 };
 

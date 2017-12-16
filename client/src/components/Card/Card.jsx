@@ -13,6 +13,7 @@ class Card extends Component {
         this.findCardPosition = this.findCardPosition.bind(this);
         this.handleEditModalClose = this.handleEditModalClose.bind(this);
         this.handleUpdateTitle = this.handleUpdateTitle.bind(this);
+        this.showModal = this.showModal.bind(this);
         this.state = {
             isEditModalOpen: false
         }
@@ -62,7 +63,7 @@ class Card extends Component {
         }
     }
 
-    showModal () {
+    showModal () {debugger;
         const { id, onSelect } = this.props;
 
         onSelect(id);

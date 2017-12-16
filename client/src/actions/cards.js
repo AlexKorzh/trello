@@ -4,11 +4,8 @@ import axios from 'axios';
 import {
     CREATE_CARD,
     GET_CARDS,
-<<<<<<< HEAD
-    UPDATE_CARD_TITLE
-=======
+    UPDATE_CARD_TITLE,
     GET_CARD_DETAILS
->>>>>>> f7056d595bea0bc907eeba6062c980a78d4c8ced
 } from '../constants/ActionTypes';
 
 export const createCard = payload => {
@@ -25,10 +22,16 @@ export const getCards = payload => {
     }
 }
 
-<<<<<<< HEAD
 export const updateCardTitle = payload => {
     return {
         type: UPDATE_CARD_TITLE,
+        payload
+    }
+}
+
+export const getCardDetails = payload => {
+    return {
+        type: GET_CARD_DETAILS,
         payload
     }
 }
@@ -42,12 +45,6 @@ export const createCardMiddleware = (title, listId, boardId) => {
         ).then(response => {
             dispatch(createCard(response.data.card));
         });
-=======
-export const getCardDetails = payload => {
-    return {
-        type: GET_CARD_DETAILS,
-        payload
->>>>>>> f7056d595bea0bc907eeba6062c980a78d4c8ced
     }
 }
 
@@ -76,19 +73,7 @@ export const fetchCards = (lists) => dispatch => {
     });
 }
 
-export const createCardMiddleware = (title, listId, boardId) => {
-    return dispatch => {
-        axios.post(
-            `${currentHost}/createCard`,
-            {title, listId, boardId},
-            {headers: { authorization: token.get() }}
-        ).then(response => {
-            dispatch(createCard(response.data.card));
-        });
-    }
-}
-
-export const getCardDetailsMiddleware = (id) => {
+export const getCardDetailsMiddleware = (id) => {debugger;
     return dispatch => {
         axios.get(
             `${currentHost}/cardDetails`,
