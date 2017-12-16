@@ -67,6 +67,28 @@ function getAllCards (req, res) {
     }
 }
 
+function details (req, res) {
+    const id = req.body.id;
+
+    res.send(id);
+
+    // // Find all cards belogns to one list, by listId 
+    // Card.find({list : {
+    //     $in: lists.map(function(item){
+    //          return mongoose.Types.ObjectId(item); 
+    //     })
+    //   }}, callback);
+
+    // function callback (error, docs) {
+    //     res.send({cards: docs});
+    //     console.log('R E S ------>', res.cards);
+    // }
+}
+
 exports.create = create;
 exports.getAllCards = getAllCards;
+<<<<<<< HEAD
 exports.updateTitle = updateTitle;
+=======
+exports.details = details;
+>>>>>>> f7056d595bea0bc907eeba6062c980a78d4c8ced

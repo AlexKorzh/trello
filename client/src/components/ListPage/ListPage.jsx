@@ -11,6 +11,8 @@ import { updateListMiddleware } from '../../actions/lists';
 import { deleteListMiddleware } from '../../actions/lists';
 import getBoardId from '../../utils/getBoardId';
 
+import Modal from '../../components/Modal';
+
 class ListPage extends Component {
     constructor (props) {
         super(props);
@@ -21,7 +23,9 @@ class ListPage extends Component {
         this.props.onFetchLists(boardId);
     }
     render () {
-        const lists = this.props.lists;
+        const { lists, modal } = this.props;
+
+        const isModalOpen = modal.modalType;
     
         return (
             <div className = "list-page">
@@ -47,6 +51,7 @@ class ListPage extends Component {
                         </div>
                     </div>
                 </div>
+                { isModalOpen && <Modal /> }
             </div>
         );
     }
@@ -54,7 +59,13 @@ class ListPage extends Component {
 
 const mapStateToProps = state => {
     return {
+<<<<<<< HEAD
         lists: state.lists
+=======
+        lists: state.lists,
+        fetching: state.fetching,
+        modal: state.modal
+>>>>>>> f7056d595bea0bc907eeba6062c980a78d4c8ced
     };
 };
 

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import './card.scss';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import EditIcon from 'material-ui-icons/edit';
 import EditModal from './EditModal/EditModal.jsx';
+import { showCardDetailModal } from '../../actions/modal';
 
 class Card extends Component {
     constructor () {
         super();
-        this.handleCardSelect = this.handleCardSelect.bind(this);
         this.handeEditInconClick = this.handeEditInconClick.bind(this);
         this.findCardPosition = this.findCardPosition.bind(this);
         this.handleEditModalClose = this.handleEditModalClose.bind(this);
@@ -61,6 +62,12 @@ class Card extends Component {
         }
     }
 
+    showModal () {
+        const { id, onSelect } = this.props;
+
+        onSelect(id);
+    }
+
     render () {
         const { title } = this.props;
         const isEditModalOpen = this.state.isEditModalOpen;
@@ -69,7 +76,7 @@ class Card extends Component {
             <div className = "card-info">
                 <div className = "card"
                     role = "button"
-                    onClick = { this.handleCardSelect }
+                    onClick = { this.showModal }
                 >
                     <div className = "card__wrap">
                         <div className = "card_title">
@@ -101,8 +108,15 @@ class Card extends Component {
 
 Card.propTypes = {
     title: PropTypes.string,
-    id: PropTypes.string.isRequired
-    // onCardSelect: PropTypes.function
+    id: PropTypes.string.isRequired,
+    onSelect: PropTypes.func
 };
 
-export default Card;
+const mapDispatchToProps = dispatch => {
+    return {
+        onSelect: id => dispatch(showCardDetailModal(id))
+    };
+};
+
+export default connect(null, mapDispatchToProps)(Card);
+

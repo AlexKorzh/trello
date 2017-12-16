@@ -62,8 +62,11 @@ class List extends Component {
                                     key = { index }
                                     title={ card.title }
                                     id = { card._id }
+<<<<<<< HEAD
                                     onCardSelect = { this.props.onCardSelect }
                                     updateTitle = { this.props.onUpdateCardTitle }
+=======
+>>>>>>> f7056d595bea0bc907eeba6062c980a78d4c8ced
                                 />
                             );
                         })

@@ -1,128 +1,119 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
 
+import { hideModal } from '../../actions/modal';
+import { CARD_DETAIL_MODAL } from '../../constants/ActionTypes';
+
+import CardDetailModal from './components/cardDetailModal';
+
+import './modal.scss';
+
+const MODAL_COMPONENTS = {
+    CARD_DETAIL_MODAL: CardDetailModal
+}
+
 class Modal extends Component {
-    constructor (props) {
-        super(props);
+    constructor () {
+        super();
 
-        this.state = {
-            isOpen: false
-        };
-
-        // this.setNode = this.setNode.bind(this);
-        // this.closeModal = this.closeModal.bind(this);
-        // this.closeModalEsc = this.closeModalEsc.bind(this);
-        // this.addEventHandler = this.addEventHandler.bind(this);
-        // this.removeEventHandler = this.removeEventHandler.bind(this);
+        this.setRef = this.setRef.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+        this.closeModalEsc = this.closeModalEsc.bind(this);
+        this.addEventHandlers = this.addEventHandlers.bind(this);
+        this.handleOutsideClick = this.handleOutsideClick.bind(this);
+        this.removeEventHandlers = this.removeEventHandlers.bind(this);
     }
 
-    // componentWillReceiveProps (nextProps) {
-    //     const isOpen = nextProps.isOpen;
+    componentDidMount () {
+        this.addEventHandlers();
+    }
+    
+    componentWillUnmount () {
+        this.removeEventHandlers();
+    }
 
-    //     this.setState({modalIsOpen: nextProps.isOpen});
-
-    //     isOpen ? this.addEventHandler() : this.removeEventHandler();
-    // }
-
-    addEventHandler () {
+    addEventHandlers () {
         document.addEventListener('keydown', this.closeModalEsc);
+        document.addEventListener('click', this.handleOutsideClick);
     }
 
-    removeEventHandler () {
+    removeEventHandlers () {
         document.removeEventListener('keydown', this.closeModalEsc);
+        document.removeEventListener('click', this.handleOutsideClick);
     }
 
-    // closeModal (e) {
-    //     const closeModal = this.props.close;
+    closeModal () {
+        const close = this.props.onClose;
 
-    //     this.setState({modalIsOpen: false});
-
-    //     closeModal();
-    // }
+        close();
+    }
 
     closeModalEsc (e) {
         const esc = e.which === 27;
 
-        // if (esc) {
-        //     const closeModal = this.props.close;
-
-        //     this.setState({modalIsOpen: false});
-
-        //     closeModal();
-        // }
+        if (esc) this.closeModal();
     }
 
-    // setNode (node) {
-    //     this.node = node;
-    // }
+    handleOutsideClick (e) {
+        const outsideClick = !this.node.contains(e.target);
+
+        if (outsideClick) this.closeModal();
+    }
+
+    setRef (node) {
+        return this.node = node;
+    }
+
     render () {
-        // const isOpen = this.state.modalIsOpen;
+        const { modalType, modalProps } = this.props.modal;
+        const SpecificModal = MODAL_COMPONENTS[modalType];
 
-        // const Default = () => {
-        //     return (
-        //         <div className={`modal-overlay ${!isOpen && "hidden"}`}>
-        //             {
-        //                 isOpen &&
-        //                 <div
-        //                     className="modal-wrapper" 
-        //                     ref={this.setNode}
-        //                 >
-        //                     <div className="close-icon_wrapper">
-        //                         <FontIcon
-        //                             className="material-icons close-icon"
-        //                             style = {iconStyleClose}
-        //                             onClick = {this.closeModal}
-        //                         >
-        //                             close
-        //                         </FontIcon>
-        //                     </div>
-        //                     {this.props.children}
-        //                 </div>
-        //             }
-        //         </div>
-        //     );
-        // }
-
-        // const Next = () => {
-        //     return (
-        //         <div className={`modal-overlay next ${!isOpen && "hidden"}`}>
-        //             {
-        //                 isOpen &&
-        //                 <div
-        //                     className="modal-wrapper" 
-        //                     ref={this.setNode}
-        //                 >
-        //                     <div className="modal-header">
-        //                         <h4 className="modal-header_headline">{ this.props.headline }</h4>
-        //                         <FontIcon
-        //                             className="material-icons close-icon"
-        //                             style = {iconStyle}
-        //                             onClick = {this.closeModal}
-        //                         >
-        //                             close
-        //                         </FontIcon>
-        //                     </div>
-        //                     <div className="modal-content">
-        //                         { this.props.children }
-        //                     </div>
-        //                 </div>
-        //             }
-        //         </div>
-        //     );
-        // }
+        const ModalWindow = () => {
+            return (
+                <div
+                    className="modal-window"
+                    ref={ this.setRef }
+                >
+                    <i
+                        className="material-icons icon-close modal-icon-close"
+                        role="button"
+                        onClick={ this.closeModal }
+                    >
+                        close
+                    </i>
+                    <SpecificModal {...modalProps} />
+                </div>
+            );
+        }
 
         return (
-            <p>text</p>
-            // this.props.next ? <Next /> : <Default />
+            <div className={`modal-overlay ${modalType ? 'hidden' : ''}`}>
+                { modalType ? <ModalWindow /> : null }
+            </div>
         );
     }
 }
 
-// Modal.propTypes = {
-//     isOpen: PropTypes.bool.isRequired,
-//     close: PropTypes.func,
-//     children: PropTypes.node
-// };
+Modal.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    modal: PropTypes.shape({
+        modalType: PropTypes.string,
+        modalProps: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number,
+            PropTypes.object
+        ])
+    })
+};
 
-export default Modal;
+const mapStateToProps = state => ({modal: state.modal})
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onClose: () => dispatch(hideModal())
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Modal);
