@@ -38,7 +38,7 @@ class BoardForm extends Component {
         
         return (
             <div ref = "form" 
-                className = {`board-form card ${isOpen && 'open'}`}>
+                className = {`board-form ${isOpen && 'open'}`}>
                 <h3 className = "title">{this.props.title} 
                     <span 
                         role = "button" 

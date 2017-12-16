@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import './listPage.scss';
 import { connect } from 'react-redux';
 import Header from '../../components/Header/Header.jsx';
@@ -18,9 +19,15 @@ class ListPage extends Component {
         super(props);
         this.title = '';
     }
+    componentWillMount () {
+        document.body.classList.add('list-page');
+    }
     componentDidMount () {
         const boardId = getBoardId();
         this.props.onFetchLists(boardId);
+    }
+    componentWillUnmount () {
+        document.body.classList.remove('list-page');
     }
     render () {
         const { lists, modal } = this.props;

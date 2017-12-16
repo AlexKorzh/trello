@@ -12,12 +12,22 @@
         background: #E2E4E6;
         box-sizing: border-box;
     }
-    .list-wrap {
-        background: #E2E4E6;
+    .list-content {
+        background: #e2e4e6;
+        border-radius: 3px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
         max-height: 100%;
         position: relative;
         white-space: normal;
+    }
+    .list-wrap {
+        background: #E2E4E6;
+        position: relative;
+        white-space: normal;
         overflow-y: auto;
+        overflow-x: hidden; 
     }
 }
 .add-card-btn {

@@ -12,7 +12,7 @@ class TitleForm extends Component {
         
         return (
             <div ref = "form" 
-                className = {`title-form card ${isOpen && 'open'}`}>
+                className = {`title-form ${isOpen && 'open'}`}>
                 <h3 className = "title">{this.props.formTitle} 
                     <span 
                         role = "button" 

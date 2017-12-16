@@ -48,54 +48,56 @@ class List extends Component {
 
         return (
             <div className = "list-container">
-                <ListHeader 
-                    title = {this.props.title}
-                    update = {this.props.updateTitle}
-                    listId = {this.props.id}
-                    deleteList = {this.handleListDelete}
-                />
-                <div className = "list-wrap">
-                    {
-                        cards && cards.map((card, index) => {
-                            return (
-                                <Card 
-                                    key = { index }
-                                    title={ card.title }
-                                    id = { card._id }
-                                    onCardSelect = { this.props.onCardSelect }
-                                    updateTitle = { this.props.onUpdateCardTitle }
-                                />
-                            );
-                        })
-                    }
-                    <div className = {`card-info ${cardInfoBtnStatus}`}>
-                        <textarea 
-                            ref = {textarea => { this.cardTitle = textarea }}
-                            className = "card-info__title"/>
+                <div className = "list-content">
+                    <ListHeader 
+                        title = {this.props.title}
+                        update = {this.props.updateTitle}
+                        listId = {this.props.id}
+                        deleteList = {this.handleListDelete}
+                    />
+                    <div className = "list-wrap">
+                        {
+                            cards && cards.map((card, index) => {
+                                return (
+                                    <Card 
+                                        key = { index }
+                                        title={ card.title }
+                                        id = { card._id }
+                                        onCardSelect = { this.props.onCardSelect }
+                                        updateTitle = { this.props.onUpdateCardTitle }
+                                    />
+                                );
+                            })
+                        }
+                        <div className = {`card-info ${cardInfoBtnStatus}`}>
+                            <textarea 
+                                ref = {textarea => { this.cardTitle = textarea }}
+                                className = "card-info__title"/>
 
-                        <div className = "card-info_controls">
-                            <button
-                                onClick = {this.onHandleAdd} 
-                                className = "btn btn-success">
-                                Добавить
-                            </button>
-                            <button 
-                                type = "button" 
-                                className = "close"
-                                onClick = {this.closeAddCardModal}
-                            >
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <div className = "card-info_controls">
+                                <button
+                                    onClick = {this.onHandleAdd} 
+                                    className = "btn btn-success">
+                                    Добавить
+                                </button>
+                                <button 
+                                    type = "button" 
+                                    className = "close"
+                                    onClick = {this.closeAddCardModal}
+                                >
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
+                    <span 
+                        className = {`add-card-btn ${addCardBtnStatus}`}
+                        role = "button"
+                        onClick = {this.openAddCardModal}
+                    >
+                        Добавить карточку...
+                    </span>
                 </div>
-                <span 
-                    className = {`add-card-btn ${addCardBtnStatus}`}
-                    role = "button"
-                    onClick = {this.openAddCardModal}
-                >
-                    Добавить карточку...
-                </span>
             </div>
         );
     }

@@ -1,8 +1,12 @@
+body.list-page {
+    overflow: hidden;
+}
 .list-page {
     .list-page__wrapper {
-        padding: 10px 5px 5px 5px;
+        padding: 0 5px;
     }
     .list-page__title-wrap {
+        padding: 10px 0;
         z-index: 2;
         .list-page__title {
             margin: 0px !important;
@@ -24,10 +28,9 @@
         position: relative;
     }
     .list-page__container {
-        height: calc(100vh - 100px);
+        height: calc(100vh - 98px);
     }
     .list-page__wrap {
-        padding-top: 15px; 
         white-space: nowrap;
         overflow-x: auto;
         overflow-y: hidden;
