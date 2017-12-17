@@ -49,7 +49,7 @@ class Card extends Component {
         }
     }
 
-    handeEditInconClick (event) {debugger;
+    handeEditInconClick (event) {
         this.findCardPosition(event);
         this.setState({isEditModalOpen: true});
     }
@@ -63,10 +63,10 @@ class Card extends Component {
         }
     }
 
-    showModal () {debugger;
-        const { id, onSelect } = this.props;
+    showModal () {
+        const { id, title, onSelect } = this.props;
 
-        onSelect(id);
+        onSelect({id, title});
     }
 
     render () {
@@ -115,7 +115,7 @@ Card.propTypes = {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSelect: id => dispatch(showCardDetailModal(id))
+        onSelect: data => dispatch(showCardDetailModal(data))
     };
 };
 
