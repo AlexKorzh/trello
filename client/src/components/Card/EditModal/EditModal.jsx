@@ -23,9 +23,8 @@ class EditModal extends Component {
                     <textarea 
                         className = "edit-modal__title" 
                         ref = {this.props.textareaRef}
-                    >
-                        {this.props.title}
-                    </textarea>
+                        defaultValue = {this.props.titile}
+                    />
                     <button 
                         className = "edit-modal__button btn btn-success"
                         onClick = {this.props.updateTitle}

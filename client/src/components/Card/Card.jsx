@@ -23,12 +23,6 @@ class Card extends Component {
         }
     }
 
-    handleCardSelect () {
-        const { id } = this.props;
-
-        // this.props.onCardSelect(id);
-    }
-
     handleUpdateTitle () {
         const cardId = this.props.id,
             title = this.props.title,
@@ -63,10 +57,16 @@ class Card extends Component {
         }
     }
 
-    showModal () {
-        const { id, title, onSelect } = this.props;
+    showModal (event) {
+        if (event.target.classList.contains('edit-icon')) {
+            this.handeEditInconClick(event);
+        } else if (event.target.parentElement.classList.contains('edit-icon')) {
+            this.handeEditInconClick(event);
+        } else {
+            const { id, title, onSelect } = this.props;
 
-        onSelect({id, title});
+            onSelect({id, title});
+        }
     }
 
     render () {
@@ -82,10 +82,11 @@ class Card extends Component {
                     <div className = "card__wrap">
                         <div className = "card_title">
                             { title }
-                            <EditIcon 
-                                onClick = {this.handeEditInconClick}
-                                className = "edit-icon"
-                            />
+                            <div className = "edit-icon__wrap">
+                                <EditIcon 
+                                    className = "edit-icon"
+                                />
+                            </div>
                         </div>
                     </div>
                     
