@@ -63,9 +63,9 @@ class Card extends Component {
         } else if (event.target.parentElement.classList.contains('edit-icon')) {
             this.handeEditInconClick(event);
         } else {
-            const { id, onSelect } = this.props;
-            
-            onSelect(id);
+            const { id, title, onSelect } = this.props;
+
+            onSelect({id, title});
         }
     }
 
@@ -116,7 +116,7 @@ Card.propTypes = {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSelect: id => dispatch(showCardDetailModal(id))
+        onSelect: data => dispatch(showCardDetailModal(data))
     };
 };
 

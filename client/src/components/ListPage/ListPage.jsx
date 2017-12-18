@@ -4,6 +4,7 @@ import './listPage.scss';
 import { connect } from 'react-redux';
 import Header from '../../components/Header/Header.jsx';
 import AddListButton from '../../components/List/AddListButton/AddListButton.jsx';
+import { withRouter } from 'react-router-dom';
 import List from '../../components/List/List.jsx';
 import PageTitle from './PageTitle/PageTitle.jsx';
 import { fetchLists } from '../../actions/lists';
@@ -21,10 +22,27 @@ class ListPage extends Component {
     }
     componentWillMount () {
         document.body.classList.add('list-page');
-    }
-    componentDidMount () {
-        const boardId = getBoardId();
-        this.props.onFetchLists(boardId);
+
+        const id = getBoardId(); // rename
+
+        const { onFetchLists } = this.props;
+
+        const { pathname } = this.props.location;
+        const routes = pathname.match(/([^\/]+)/);
+        const baseRoute = routes[0];
+
+        const routeStrategies = {
+            boards: {
+                type: 'boards',
+                id
+            },
+            modal: {
+                type: 'modal',
+                id
+            }
+        };
+
+        onFetchLists(routeStrategies[baseRoute]);
     }
     componentWillUnmount () {
         document.body.classList.remove('list-page');
@@ -83,4 +101,6 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListPage);
+export default withRouter(
+    connect(mapStateToProps, mapDispatchToProps)(ListPage)
+);

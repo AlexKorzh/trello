@@ -73,7 +73,7 @@ export const fetchCards = (lists) => dispatch => {
     });
 }
 
-export const getCardDetailsMiddleware = (id) => {debugger;
+export const getCardDetailsMiddleware = (id) => {
     return dispatch => {
         axios.get(
             `${currentHost}/cardDetails`,
