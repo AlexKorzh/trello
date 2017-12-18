@@ -12,6 +12,7 @@ import { fetchCards } from '../../actions/cards';
 import { updateListMiddleware } from '../../actions/lists';
 import { deleteListMiddleware } from '../../actions/lists';
 import getBoardId from '../../utils/getBoardId';
+import { showCardDetailModal } from '../../actions/modal';
 
 import Modal from '../../components/Modal';
 
@@ -32,19 +33,29 @@ class ListPage extends Component {
         const baseRoute = routes[0];
 
         const routeStrategies = {
-            boards: {
+            boards: () => ({
                 type: 'boards',
                 id
-            },
-            modal: {
-                type: 'modal',
-                id
+            }),
+            modal: () => {
+                console.log('props->', this.props);
+                const { id, title } = this.props.match.params;
+                const { onReloadPage } = this.props;
+
+                // onReloadPage({id, title});
+
+                return {
+                    type: 'modal',
+                    id
+                }
             }
         };
-
-        onFetchLists(routeStrategies[baseRoute]);
+debugger;
+    console.log('componentWillMount::ListPage');
+        onFetchLists(routeStrategies[baseRoute]());
     }
     componentWillUnmount () {
+        console.log('componentWillUnmount::ListPage');
         document.body.classList.remove('list-page');
     }
     render () {
@@ -97,7 +108,8 @@ const mapDispatchToProps = dispatch => {
         },
         onFetchCards: (lists) => dispatch(fetchCards(lists)),
         onUpdateList: (listId, title) => dispatch(updateListMiddleware(listId, title)),
-        onDeleteList: (listId) => dispatch(deleteListMiddleware(listId))
+        onDeleteList: (listId) => dispatch(deleteListMiddleware(listId)),
+        onReloadPage: data => dispatch(showCardDetailModal(data))
     };
 };
 

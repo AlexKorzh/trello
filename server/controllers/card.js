@@ -2,6 +2,8 @@ const Card = require('../models/Card');
 const List = require('../models/List');
 const mongoose = require('mongoose');
 
+const Hashids = require('hashids');
+
 const config = require('../config');
 
 function create (req, res, next) {

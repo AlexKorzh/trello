@@ -17,7 +17,10 @@ class CardDetailModal extends Component {
     }
     
     componentWillUnmount () {
-        this.props.history.goBack();
+        console.log('componentWillUnmount::child');
+        const { boardId } = this.props;
+
+        // this.props.history.push(`/boards/${boardId}/no-title`);
     }
 
     render () {
@@ -37,10 +40,15 @@ CardDetailModal.propTypes = {
 
 const mapStateToProps = state => {
     const { id, title } = state.modal.modalProps;
+    const boardId = state.cards.length && 
+        state.cards
+            .find(card => card._id === id && card.board)
+            .board;
 
     return {
         id,
-        title
+        title,
+        boardId
     };
 };
 

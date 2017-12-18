@@ -30,6 +30,7 @@ class Modal extends Component {
     }
     
     componentWillUnmount () {
+        console.log('componentWillUnmount::parent');
         this.removeEventHandlers();
     }
 

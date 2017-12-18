@@ -1,5 +1,6 @@
 const List = require('../models/List');
 const Board = require('../models/Board');
+const Card = require('../models/Card');
 const mongoose = require('mongoose');
 
 const config = require('../config');
@@ -57,22 +58,15 @@ function getLists (req, res) {
     const type = req.body.type;
 
     const types = {
-        'boards': findByBoardId,
-        'modal': findBoardByCardId
-    }
-
-    function findByBoardId () {
-        Board.findOne({_id: id})
-        .populate('lists')
-        .then((board) => {
-            res.send({lists: board.lists});
-            done();
-        });
-    }
-
-    function findBoardByCardId () {
-        res.send(';)');
-    }
+        'boards': function () {
+            findListsById(id, res);
+        },
+        'modal': function () {
+            Card
+            .findOne({_id: id})
+            .then((card) => findListsById(card.board, res));
+        }
+    };
 
     types[type]();
 }
@@ -84,6 +78,15 @@ function deleteList (req, res, next) {
         list.remove(function(err) {
             res.send({list: listId});
         });
+    });
+}
+
+function findListsById (id, res) {
+    Board.findOne({_id: id})
+    .populate('lists')
+    .then(board => {
+        res.send({lists: board.lists});
+        done();
     });
 }
 
