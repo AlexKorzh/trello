@@ -73,10 +73,10 @@ export const deleteListMiddleware = listId => {
     }
 }
 
-export const fetchLists = (boardId) => dispatch => {
+export const fetchLists = ({id, type}) => dispatch => {
     axios.post(
         `${currentHost}/getLists`,
-        { boardId },
+        { id, type },
         { headers: { authorization: token.get() } }
     ).then(function (response) {
         const lists = response.data.lists;

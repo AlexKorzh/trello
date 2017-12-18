@@ -22,9 +22,27 @@ class ListPage extends Component {
     }
     componentWillMount () {
         document.body.classList.add('list-page');
-        console.log('componentWillMount', this.props);
-        const boardId = getBoardId();
-        this.props.onFetchLists(boardId);
+
+        const id = getBoardId(); // rename
+
+        const { onFetchLists } = this.props;
+
+        const { pathname } = this.props.location;
+        const routes = pathname.match(/([^\/]+)/);
+        const baseRoute = routes[0];
+
+        const routeStrategies = {
+            boards: {
+                type: 'boards',
+                id
+            },
+            modal: {
+                type: 'modal',
+                id
+            }
+        };
+
+        onFetchLists(routeStrategies[baseRoute]);
     }
     componentWillUnmount () {
         document.body.classList.remove('list-page');
