@@ -53,14 +53,28 @@ const update = (req, res) => {
 };
 
 function getLists (req, res) {
-    const boardId = req.body.boardId;
+    const id = req.body.id;
+    const type = req.body.type;
 
-    Board.findOne({_id: boardId})
-    .populate('lists')
-    .then((board) => {
-        res.send({lists: board.lists});
-        done();
-    });
+    const types = {
+        'boards': findByBoardId,
+        'modal': findBoardByCardId
+    }
+
+    function findByBoardId () {
+        Board.findOne({_id: id})
+        .populate('lists')
+        .then((board) => {
+            res.send({lists: board.lists});
+            done();
+        });
+    }
+
+    function findBoardByCardId () {
+        res.send(';)');
+    }
+
+    types[type]();
 }
 
 function deleteList (req, res, next) {
