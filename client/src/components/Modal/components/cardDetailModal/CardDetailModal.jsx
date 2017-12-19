@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import history from '../../../../utils/history';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -12,15 +12,14 @@ class CardDetailModal extends Component {
     componentWillMount () {
         const { id, title } = this.props;
 
-        this.props.history.push(`/modal/${id}/${title}`);
+        history.push(`/boards/modal/${id}/${title}`);
         this.props.fetchData(id);
     }
     
     componentWillUnmount () {
-        console.log('componentWillUnmount::child');
         const { boardId } = this.props;
 
-        // this.props.history.push(`/boards/${boardId}/no-title`);
+        history.push(`/boards/${boardId}/no-title`);
     }
 
     render () {

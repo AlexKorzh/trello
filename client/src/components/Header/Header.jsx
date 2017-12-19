@@ -24,7 +24,6 @@ class Header extends Component {
     }
     render () {
         let btns = [];
-        console.log(this.props.authenticated);
 
         if (!this.props.authenticated) {
             btns.push(this.renderButtons({

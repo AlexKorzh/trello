@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 import DeleteIcon from 'material-ui-icons/delete';
 
@@ -10,15 +10,7 @@ class BoardCard extends Component {
     constructor () {
         super();
 
-        this.goTo = this.goTo.bind(this);
         this.handleBoardDelete = this.handleBoardDelete.bind(this);
-    }
-
-    goTo () {
-        const id = this.props.id;
-        const title = this.props.title;
-
-        this.props.history.push(`/boards/${id}/${title}`);
     }
 
     handleBoardDelete (e) {
@@ -34,21 +26,23 @@ class BoardCard extends Component {
             position: 'absolute',
             color: 'rgba(255, 255, 255, 1)'
         };
+        const id = this.props.id;
+        const title = this.props.title;
 
         return (
             <div className="col-3">
-                <a
-                    className="card-custom board-card text-white bg-card p-2"
-                    role = "button"
-                    onClick = { this.goTo }
-                >
-                    { this.props.title }
-                    <DeleteIcon 
-                        className="delete-icon"
-                        style={ styles }
-                        onClick = { this.handleBoardDelete }
-                    />
-                </a>
+                <Link to = {`/boardsadasda/${id}/${title}`}>
+                    <div 
+                        className="card-custom board-card text-white bg-card p-2"
+                    >
+                        { this.props.title }
+                        <DeleteIcon 
+                            className="delete-icon"
+                            style={ styles }
+                            onClick = { this.handleBoardDelete }
+                        />
+                    </div>
+                </Link>  
             </div>
         );
     }

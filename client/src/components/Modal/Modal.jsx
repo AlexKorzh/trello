@@ -25,6 +25,10 @@ class Modal extends Component {
         this.removeEventHandlers = this.removeEventHandlers.bind(this);
     }
 
+    componentWillReceiveProps (nextProps) {
+        console.log('nextProps MODAL', nextProps);
+    }
+
     componentDidMount () {
         this.addEventHandlers();
     }
@@ -37,11 +41,13 @@ class Modal extends Component {
     addEventHandlers () {
         document.addEventListener('keydown', this.closeModalEsc);
         document.addEventListener('click', this.handleOutsideClick);
+        window.addEventListener('popstate', this.closeModal);
     }
 
     removeEventHandlers () {
         document.removeEventListener('keydown', this.closeModalEsc);
         document.removeEventListener('click', this.handleOutsideClick);
+        window.addEventListener('popstate', this.closeModal);
     }
 
     closeModal () {
@@ -57,9 +63,9 @@ class Modal extends Component {
     }
 
     handleOutsideClick (e) {
-        const outsideClick = !this.node.contains(e.target);
+        // const outsideClick = !this.node.contains(e.target);
 
-        if (outsideClick) this.closeModal();
+        // if (outsideClick) this.closeModal();
     }
 
     setRef (node) {
@@ -72,26 +78,26 @@ class Modal extends Component {
 
         const ModalWindow = () => {
             return (
-                <div
-                    className="modal-window"
-                    ref={ this.setRef }
-                >
-                    <i
-                        className="material-icons icon-close modal-icon-close"
-                        role="button"
-                        onClick={ this.closeModal }
+                <div className = "modal-overlay">
+                    <div
+                        className="modal-window"
+                        ref={ this.setRef }
                     >
+                        <i
+                            className="material-icons icon-close modal-icon-close"
+                            role="button"
+                            onClick={ this.closeModal }
+                        >
                         close
-                    </i>
-                    <SpecificModal {...modalProps} />
+                        </i>
+                        <SpecificModal {...modalProps} />
+                    </div>
                 </div>
             );
         }
 
         return (
-            <div className={`modal-overlay ${modalType ? 'hidden' : ''}`}>
-                { modalType ? <ModalWindow /> : null }
-            </div>
+            <div className = "modal-window">{ modalType ? <ModalWindow /> : null }</div>
         );
     }
 }

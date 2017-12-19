@@ -66,7 +66,6 @@ const update = (req, res) => {
         { new: true }, 
         function (err, board) {
             if (err) return handleError(err);
-            console.log('B O A R D ----> ',board);
             res.send({
                 message: 'Board was successfully updated',
                 board: board

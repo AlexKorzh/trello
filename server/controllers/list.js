@@ -45,7 +45,6 @@ const update = (req, res) => {
         { new: true }, 
         function (err, list) {
             if (err) return handleError(err);
-            console.log('L I S T ----> ',list);
             res.send({
                 message: 'List was successfully updated',
                 list: list

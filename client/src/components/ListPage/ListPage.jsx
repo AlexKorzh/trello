@@ -22,12 +22,12 @@ class ListPage extends Component {
         this.title = '';
     }
     componentWillMount () {
+        console.log('componentWillMount LISTPAGE');
         document.body.classList.add('list-page');
 
         const id = getBoardId(); // rename
 
         const { onFetchLists } = this.props;
-
         const { pathname } = this.props.location;
         const routes = pathname.match(/([^\/]+)/);
         const baseRoute = routes[0];
@@ -38,11 +38,10 @@ class ListPage extends Component {
                 id
             }),
             modal: () => {
-                console.log('props->', this.props);
                 const { id, title } = this.props.match.params;
                 const { onReloadPage } = this.props;
 
-                // onReloadPage({id, title});
+                onReloadPage({id, title});
 
                 return {
                     type: 'modal',
@@ -50,18 +49,15 @@ class ListPage extends Component {
                 }
             }
         };
-debugger;
-    console.log('componentWillMount::ListPage');
+
         onFetchLists(routeStrategies[baseRoute]());
     }
     componentWillUnmount () {
-        console.log('componentWillUnmount::ListPage');
+        console.log('componentWillUnmount LISTPAGE');
         document.body.classList.remove('list-page');
     }
     render () {
-        const { lists, modal } = this.props;
-
-        const isModalOpen = modal.modalType;
+        const { lists } = this.props;
     
         return (
             <div className = "list-page">
@@ -87,7 +83,6 @@ debugger;
                         </div>
                     </div>
                 </div>
-                { isModalOpen && <Modal /> }
             </div>
         );
     }
@@ -96,8 +91,7 @@ debugger;
 const mapStateToProps = state => {
     return {
         lists: state.lists,
-        fetching: state.fetching,
-        modal: state.modal
+        fetching: state.fetching
     };
 };
 

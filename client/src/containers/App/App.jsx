@@ -10,10 +10,11 @@ import SignOut from './../../components/SignOut/SignOut.jsx';
 import requireAuth from '../../components/Auth/require_auth';
 import BoardPage from '../../components/BoardPage/BoardPage.jsx';
 import ListPage from '../../components/ListPage/ListPage.jsx';
+import Modal from '../../components/Modal';
 
 import history from '../../utils/history';
 import { Router } from 'react-router-dom';
-import { Route } from 'react-router'; 
+import { Route, Switch } from 'react-router'; 
 import reduxThunk from 'redux-thunk';
 // Provider to map React and redux
 // get access to data in redux STORE
@@ -39,6 +40,7 @@ if (token) {
 }
 
 class App extends Component {
+    test () {}
     render () {
         return(
             <MuiThemeProvider>
@@ -50,8 +52,11 @@ class App extends Component {
                             <Route path="/signup" component={SignUp}/>
                             <Route path="/signout" component={SignOut}/>
                             <Route exact path = "/boards" component = {requireAuth(BoardPage)}/>
-                            <Route path = "/boards/:id/:title" component = {requireAuth(ListPage)}/>
-                            <Route path = "/modal/:id/:title" component = {requireAuth(ListPage)}/>
+                            <Switch>
+                                <Route path = "/boards/:id/:title" component = {requireAuth(ListPage)}/>
+                                <Route path = "/boards/modal/:id/:title" component = {requireAuth(ListPage)}/>
+                            </Switch>
+                            <Modal />
                         </div>
                     </Router>
                 </Provider>
