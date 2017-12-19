@@ -20,11 +20,12 @@ class EditModal extends Component {
                 <div 
                     className = "edit-modal__inner-wrap" 
                     style = {{left: clientX + 'px',  top: clientY + 'px'}}>
-                    <textarea 
+                    <textarea
                         className = "edit-modal__title" 
                         ref = {this.props.textareaRef}
-                        defaultValue = {this.props.titile}
-                    />
+                    >
+                        {this.props.title}
+                    </textarea>
                     <button 
                         className = "edit-modal__button btn btn-success"
                         onClick = {this.props.updateTitle}
