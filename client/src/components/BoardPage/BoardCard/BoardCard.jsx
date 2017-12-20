@@ -31,7 +31,7 @@ class BoardCard extends Component {
 
         return (
             <div className="col-3">
-                <Link to = {`/boardsadasda/${id}/${title}`}>
+                <Link to = {`/boards/${id}/${title}`}>
                     <div 
                         className="card-custom board-card text-white bg-card p-2"
                     >
