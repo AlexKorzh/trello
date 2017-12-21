@@ -31,10 +31,10 @@ class BoardCard extends Component {
 
         return (
             <div className="col-3">
-                <Link to = {`/boardsadasda/${id}/${title}`}>
-                    <div 
-                        className="card-custom board-card text-white bg-card p-2"
-                    >
+                <Link
+                    className = "ard-custom board-card text-white bg-card p-2" 
+                    to = {`/boards/${id}/${title}`}>
+                    <div>
                         { this.props.title }
                         <DeleteIcon 
                             className="delete-icon"

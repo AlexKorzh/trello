@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import './modal.scss';
 
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
 import { hideModal } from '../../actions/modal';
 import { CARD_DETAIL_MODAL } from '../../constants/ActionTypes';
@@ -14,8 +16,8 @@ const MODAL_COMPONENTS = {
 }
 
 class Modal extends Component {
-    constructor () {
-        super();
+    constructor (props) {
+        super(props);
 
         this.setRef = this.setRef.bind(this);
         this.closeModal = this.closeModal.bind(this);
@@ -72,54 +74,70 @@ class Modal extends Component {
         return this.node = node;
     }
 
-    render () {
-        const { modalType, modalProps } = this.props.modal;
-        const SpecificModal = MODAL_COMPONENTS[modalType];
+    render () {debugger;
+        // const { modalType, modalProps } = this.props.modal;
 
-        const ModalWindow = () => {
-            return (
-                <div className = "modal-overlay">
-                    <div
-                        className="modal-window"
-                        ref={ this.setRef }
-                    >
-                        <i
-                            className="material-icons icon-close modal-icon-close"
-                            role="button"
-                            onClick={ this.closeModal }
-                        >
-                        close
-                        </i>
-                        <SpecificModal {...modalProps} />
-                    </div>
-                </div>
-            );
-        }
+        const { id, title } = this.props.match.params;
+       
+        // const modalProps = {
+        //     id,
+        //     title
+        // }
+        // const modalType = 'CARD_DETAIL_MODAL';
+
+        // const SpecificModal = MODAL_COMPONENTS[modalType];
+       
+        // const ModalWindow = () => {
+        //     return (
+        //         <div className = "modal-overlay">
+        //             <div
+        //                 className="modal-window"
+        //                 ref={ this.setRef }
+        //             >
+        //                 <i
+        //                     className="material-icons icon-close modal-icon-close"
+        //                     role="button"
+        //                     onClick={ this.closeModal }
+        //                 >
+        //                 close
+        //                 </i>
+        //                 <SpecificModal {...modalProps} />
+        //             </div>
+        //         </div>
+        //     );
+        // }
+
+        const component = id ? <div style = {{position: 'fixed', left: '0px', right: '0px', top: '0px', bottom: '0px', background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center'  }} 
+        className = "modal-window">
+        <div style = {{color: 'red'}}>MODAL WINDOW</div>
+        </div> : null;
 
         return (
-            <div className = "modal-window">{ modalType ? <ModalWindow /> : null }</div>
+            // <div className = "modal-window">{ modalType ? <ModalWindow /> : null }</div>
+            component
         );
     }
+    
 }
 
-Modal.propTypes = {
-    onClose: PropTypes.func.isRequired,
-    modal: PropTypes.shape({
-        modalType: PropTypes.string,
-        modalProps: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.number,
-            PropTypes.object
-        ])
-    })
-};
+// Modal.propTypes = {
+//     onClose: PropTypes.func.isRequired,
+//     modal: PropTypes.shape({
+//         modalType: PropTypes.string,
+//         modalProps: PropTypes.oneOfType([
+//             PropTypes.string,
+//             PropTypes.number,
+//             PropTypes.object
+//         ])
+//     })
+// };
 
-const mapStateToProps = state => ({modal: state.modal})
+// const mapStateToProps = state => ({modal: state.modal})
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onClose: () => dispatch(hideModal())
-    };
-};
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         onClose: () => dispatch(hideModal())
+//     };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Modal);
+export default withRouter(Modal);

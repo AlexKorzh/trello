@@ -14,7 +14,7 @@ import { deleteListMiddleware } from '../../actions/lists';
 import getBoardId from '../../utils/getBoardId';
 import { showCardDetailModal } from '../../actions/modal';
 
-import Modal from '../../components/Modal';
+// import Modal from '../../components/Modal';
 
 class ListPage extends Component {
     constructor (props) {

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import EditIcon from 'material-ui-icons/edit';
 import EditModal from './EditModal/EditModal.jsx';
 import { showCardDetailModal } from '../../actions/modal';
+import { Link } from 'react-router-dom';
 
 class Card extends Component {
     constructor () {
@@ -75,9 +76,11 @@ class Card extends Component {
 
         return (
             <div className = "card-info">
-                <div className = "card"
+                <Link
+                    to = {{ pathname: `/card/${this.props.id}/${title}`, state: { modal: true } }}  
+                    className = "card"
                     role = "button"
-                    onClick = { this.showModal }
+                    // onClick = { this.showModal }
                 >
                     <div className = "card__wrap">
                         <div className = "card_title">
@@ -90,7 +93,7 @@ class Card extends Component {
                         </div>
                     </div>
                     
-                </div>
+                </Link>
                 {
                     isEditModalOpen ?
                         <EditModal

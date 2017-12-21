@@ -9,17 +9,17 @@ import { getCardDetailsMiddleware } from '../../../../actions/cards';
 import './cardDetailModal.scss';
 
 class CardDetailModal extends Component {
-    componentWillMount () {
+    constructor (props) {
+        super();
+    }
+    componentWillMount () {debugger;
         const { id, title } = this.props;
 
-        history.push(`/boards/modal/${id}/${title}`);
         this.props.fetchData(id);
     }
     
     componentWillUnmount () {
         const { boardId } = this.props;
-
-        history.push(`/boards/${boardId}/no-title`);
     }
 
     render () {
@@ -37,19 +37,19 @@ CardDetailModal.propTypes = {
     fetchData: PropTypes.func
 };
 
-const mapStateToProps = state => {
-    const { id, title } = state.modal.modalProps;
-    const boardId = state.cards.length && 
-        state.cards
-            .find(card => card._id === id && card.board)
-            .board;
+// const mapStateToProps = state => {
+//     const { id, title } = state.modal.modalProps;
+//     const boardId = state.cards.length && 
+//         state.cards
+//             .find(card => card._id === id && card.board)
+//             .board;
 
-    return {
-        id,
-        title,
-        boardId
-    };
-};
+//     return {
+//         id,
+//         title,
+//         boardId
+//     };
+// };
 
 
 const mapDispatchToProps = dispatch => {
@@ -59,5 +59,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default withRouter(
-    connect(mapStateToProps, mapDispatchToProps)(CardDetailModal)
+    connect(null, mapDispatchToProps)(CardDetailModal)
 );
