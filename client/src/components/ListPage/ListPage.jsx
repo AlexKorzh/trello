@@ -33,11 +33,11 @@ class ListPage extends Component {
         const baseRoute = routes[0];
 
         const routeStrategies = {
-            boards: () => ({
+            b: () => ({
                 type: 'boards',
                 id
             }),
-            modal: () => {
+            c: () => {
                 const { id, title } = this.props.match.params;
                 const { onReloadPage } = this.props;
 

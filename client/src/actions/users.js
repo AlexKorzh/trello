@@ -26,7 +26,7 @@ export const signinUser = (email, password) => {
             .then(response => {
                 token.set(response.data.token);
                 dispatch(authUser());
-                browserHistory.push('/boards');
+                browserHistory.push('/');
             })
             .catch(error => {
                 dispatch(authError('Bad Login Info'));
@@ -40,7 +40,7 @@ export const signupUser = (email, password) => {
             .then(response => {
                 dispatch(authUser());
                 token.set(response.data.token);
-                browserHistory.push('/boards');
+                browserHistory.push('/');
             })
             .catch(error => {
                 dispatch(authError())

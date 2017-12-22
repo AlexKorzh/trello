@@ -77,10 +77,9 @@ class Card extends Component {
         return (
             <div className = "card-info">
                 <Link
-                    to = {{ pathname: `/card/${this.props.id}/${title}`, state: { modal: true } }}  
+                    to = {{ pathname: `/c/${this.props.id}/${title}`, state: { modal: true } }}  
                     className = "card"
                     role = "button"
-                    // onClick = { this.showModal }
                 >
                     <div className = "card__wrap">
                         <div className = "card_title">

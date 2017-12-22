@@ -11,11 +11,15 @@
     resize: none;
     outline: none;
     z-index: 0;
+    color: #4d4d4d;
+    text-decoration: none;
     box-shadow: 0px 1px 3px 0px rgba(50, 50, 50, 0.2);
     transition: box-shadow 0.2s linear;
     transition: background 0.2s linear;
     &:hover {
         background: #f3f4f5;
+        color: #4d4d4d;
+        text-decoration: none;
         box-shadow: 0px 1px 4px 0px rgba(50, 50, 50, 0.4);
         .edit-icon {
             display: block !important;
