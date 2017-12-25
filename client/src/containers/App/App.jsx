@@ -25,7 +25,7 @@ import createHistory from 'history/createBrowserHistory';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
-import ListPageGallery from '../../components/ListPage/ListPageGallery.jsx';
+import ListPageRouter from '../../components/ListPage/ListPageRouter.jsx';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(
@@ -54,7 +54,7 @@ class App extends Component {
                             <Route path="/signup" component={SignUp}/>
                             <Route path="/signout" component={SignOut}/>
                             <Route exact path = "/" component = {requireAuth(BoardPage)}/>
-                            <ListPageGallery />
+                            <Route component={ListPageRouter} />
                         </div>
                     </Router>
                 </Provider>

@@ -107,14 +107,37 @@ class Modal extends Component {
         //     );
         // }
 
-        const component = id ? <div style = {{position: 'fixed', left: '0px', right: '0px', top: '0px', bottom: '0px', background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center'  }} 
-        className = "modal-window">
-        <div style = {{color: 'red'}}>MODAL WINDOW</div>
-        </div> : null;
+        const ModalWindow = () => {
+            return (
+                <div className = "modal-overlay">
+                    <div
+                        className="modal-window"
+                        ref={ this.setRef }
+                    >
+                        <i
+                            className="material-icons icon-close modal-icon-close"
+                            role="button"
+                            onClick={ this.closeModal }
+                        >
+                        close
+                        </i>
+                        test
+                    </div>
+                </div>
+            );
+        }
+
+        // const component = id ? <div style = {{position: 'fixed', left: '0px', right: '0px', top: '0px', bottom: '0px', background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center'  }} 
+        // className = "modal-window">
+        // <div style = {{color: 'red'}}>MODAL WINDOW</div>
+        // </div> : null;
 
         return (
             // <div className = "modal-window">{ modalType ? <ModalWindow /> : null }</div>
-            component
+            <div className = "modal-window">
+                <ModalWindow />
+            </div>
+            // component
         );
     }
     

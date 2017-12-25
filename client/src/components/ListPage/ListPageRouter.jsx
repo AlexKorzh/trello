@@ -1,30 +1,21 @@
-import React from 'react'
-import { 
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from 'react-router-dom';
-import ListPage from '../../components/ListPage/ListPage.jsx';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Switch, Route } from 'react-router-dom';
 
-import Modal from '../../components/Modal';
+import ListPage from './ListPage.jsx';
+import Modal from '../Modal';
 
-class ModalSwitch extends React.Component {
-    constructor (props) {debugger;
+class ListPageRouter extends Component {
+    constructor (props) {
         super(props);
 
         this.previousLocation = this.props.location;
         this.action = this.props.history.action;
     }
 
-    componentWillMount () {
-        console.clear();
-        console.log('componentWillMount', this.action);
-    }
-  
-    componentWillUpdate (nextProps) {debugger;
-        const { location } = this.props
-        // set previousLocation if props.location is not modal
+    componentWillUpdate (nextProps) {
+        const { location } = this.props;
+console.log('componentWillUpdate::ListPageRouter', nextProps);
         if (nextProps.history.action !== 'POP' && (!location.state || !location.state.modal)) {
             this.previousLocation = this.props.location
         }
@@ -48,4 +39,12 @@ class ModalSwitch extends React.Component {
     }
 }
 
-export default ModalSwitch;
+ListPageRouter.propTypes = {
+    location: PropTypes.shape({}),
+    history: PropTypes.shape({
+        action: PropTypes.string
+    }),
+    fetchData: PropTypes.func
+};
+
+export default ListPageRouter;
