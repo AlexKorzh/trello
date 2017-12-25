@@ -34,3 +34,7 @@ export const GET_CARD_DETAILS = 'GET_CARD_DETAILS';
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 export const CARD_DETAIL_MODAL = 'CARD_DETAIL_MODAL';
+
+// Other
+
+export const SET_BOARD_ID = 'SET_BOARD_ID';

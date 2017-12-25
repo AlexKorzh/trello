@@ -57,10 +57,10 @@ function getLists (req, res) {
     const type = req.body.type;
 
     const types = {
-        'boards': function () {
+        'b': function () {
             findListsById(id, res);
         },
-        'modal': function () {
+        'c': function () {
             Card
             .findOne({_id: id})
             .then((card) => findListsById(card.board, res));
@@ -84,7 +84,7 @@ function findListsById (id, res) {
     Board.findOne({_id: id})
     .populate('lists')
     .then(board => {
-        res.send({lists: board.lists});
+        res.send({lists: board.lists, boardId: id});
         done();
     });
 }

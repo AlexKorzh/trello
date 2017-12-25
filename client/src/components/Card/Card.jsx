@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import EditIcon from 'material-ui-icons/edit';
 import EditModal from './EditModal/EditModal.jsx';
 import { showCardDetailModal } from '../../actions/modal';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import getRoute from '../../utils/getRoute';
 
 class Card extends Component {
     constructor () {
@@ -22,6 +23,15 @@ class Card extends Component {
             clientX: '',
             clientY: ''
         }
+    }
+
+    componentDidMount () {
+        const { id } = this.props.match.params;
+        const cardId = this.props.id;
+        const { title, onSelect } = this.props;
+        const { root } = getRoute();
+
+        if (cardId === id) onSelect({id, title});
     }
 
     handleUpdateTitle () {
@@ -78,6 +88,7 @@ class Card extends Component {
             <div className = "card-info">
                 <Link
                     to = {{ pathname: `/c/${this.props.id}/${title}`, state: { modal: true } }}  
+                    onClick={this.showModal}
                     className = "card"
                     role = "button"
                 >
@@ -122,5 +133,6 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(null, mapDispatchToProps)(Card);
-
+export default withRouter(
+    connect(null, mapDispatchToProps)(Card)
+);

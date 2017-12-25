@@ -12,7 +12,7 @@ class CardDetailModal extends Component {
     constructor (props) {
         super();
     }
-    componentWillMount () {debugger;
+    componentWillMount () {
         const { id, title } = this.props;
 
         this.props.fetchData(id);
@@ -25,7 +25,9 @@ class CardDetailModal extends Component {
     render () {
         return (
             <div>
-                CardDetailModal!!!
+                CardDetailModal!!!<br/>
+                Title: { this.props.title}<br/>
+                id: { this.props.id}
             </div>
         );
     }

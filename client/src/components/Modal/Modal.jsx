@@ -36,6 +36,7 @@ class Modal extends Component {
     }
     
     componentWillUnmount () {
+        if (this.props.modal.modalType) this.props.onClose();
         console.log('componentWillUnmount::parent');
         this.removeEventHandlers();
     }
@@ -43,13 +44,13 @@ class Modal extends Component {
     addEventHandlers () {
         document.addEventListener('keydown', this.closeModalEsc);
         document.addEventListener('click', this.handleOutsideClick);
-        window.addEventListener('popstate', this.closeModal);
+        // window.addEventListener('popstate', this.closeModal);
     }
 
     removeEventHandlers () {
         document.removeEventListener('keydown', this.closeModalEsc);
         document.removeEventListener('click', this.handleOutsideClick);
-        window.addEventListener('popstate', this.closeModal);
+        // window.addEventListener('popstate', this.closeModal);
     }
 
     closeModal () {
@@ -74,39 +75,19 @@ class Modal extends Component {
         return this.node = node;
     }
 
-    render () {debugger;
+    render () {
         // const { modalType, modalProps } = this.props.modal;
 
         const { id, title } = this.props.match.params;
        
-        // const modalProps = {
-        //     id,
-        //     title
-        // }
-        // const modalType = 'CARD_DETAIL_MODAL';
+        const modalProps = {
+            id,
+            title
+        }
+        const modalType = 'CARD_DETAIL_MODAL';
 
-        // const SpecificModal = MODAL_COMPONENTS[modalType];
+        const SpecificModal = MODAL_COMPONENTS[modalType];
        
-        // const ModalWindow = () => {
-        //     return (
-        //         <div className = "modal-overlay">
-        //             <div
-        //                 className="modal-window"
-        //                 ref={ this.setRef }
-        //             >
-        //                 <i
-        //                     className="material-icons icon-close modal-icon-close"
-        //                     role="button"
-        //                     onClick={ this.closeModal }
-        //                 >
-        //                 close
-        //                 </i>
-        //                 <SpecificModal {...modalProps} />
-        //             </div>
-        //         </div>
-        //     );
-        // }
-
         const ModalWindow = () => {
             return (
                 <div className = "modal-overlay">
@@ -121,23 +102,16 @@ class Modal extends Component {
                         >
                         close
                         </i>
-                        test
+                        <SpecificModal {...modalProps} />
                     </div>
                 </div>
             );
         }
 
-        // const component = id ? <div style = {{position: 'fixed', left: '0px', right: '0px', top: '0px', bottom: '0px', background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center'  }} 
-        // className = "modal-window">
-        // <div style = {{color: 'red'}}>MODAL WINDOW</div>
-        // </div> : null;
-
         return (
-            // <div className = "modal-window">{ modalType ? <ModalWindow /> : null }</div>
             <div className = "modal-window">
                 <ModalWindow />
             </div>
-            // component
         );
     }
     
@@ -155,12 +129,14 @@ class Modal extends Component {
 //     })
 // };
 
-// const mapStateToProps = state => ({modal: state.modal})
+const mapStateToProps = state => ({modal: state.modal})
 
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         onClose: () => dispatch(hideModal())
-//     };
-// };
+const mapDispatchToProps = dispatch => {
+    return {
+        onClose: () => dispatch(hideModal())
+    };
+};
 
-export default withRouter(Modal);
+export default withRouter(
+    connect(mapStateToProps, mapDispatchToProps)(Modal)
+);

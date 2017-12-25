@@ -6,7 +6,8 @@ import {
     CREATE_LIST,
     GET_LISTS,
     UPDATE_LIST,
-    DELETE_LIST
+    DELETE_LIST,
+    SET_BOARD_ID
 } from '../constants/ActionTypes';
 
 export const createList = payload => {
@@ -20,6 +21,13 @@ export const getLists = payload => {
     return {
         type: GET_LISTS,
         payload
+    }
+}
+
+export const setBoardId = id => {
+    return {
+        type: SET_BOARD_ID,
+        id
     }
 }
 
@@ -79,8 +87,9 @@ export const fetchLists = ({id, type}) => dispatch => {
         { id, type },
         { headers: { authorization: token.get() } }
     ).then(function (response) {
-        const lists = response.data.lists;
+        const { lists, boardId } = response.data;
         dispatch(getLists(lists));
+        dispatch(setBoardId(boardId));
 
         let newlist = lists.map((list) => list._id);
         dispatch(fetchCards(newlist));

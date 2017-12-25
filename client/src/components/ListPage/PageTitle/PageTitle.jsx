@@ -4,8 +4,6 @@ import '../../TitleForm/titleForm.scss';
 import { connect } from 'react-redux';
 import { updateBoardMiddleware } from '../../../actions/boards';
 import { fetchTitleMiddleware } from '../../../actions/title';
-import getBoardId from '../../../utils/getBoardId';
-import browserHistory from '../../../utils/history';
 
 class PageTitle extends Component {
     constructor () {
@@ -14,13 +12,13 @@ class PageTitle extends Component {
             isFormOpen: false
         };
         this.changeTitle = this.changeTitle.bind(this);
-        this.getTitle = this.getTitle.bind(this);
         this.openForm = this.openForm.bind(this);
         this.closeForm = this.closeForm.bind(this);
     }
-    componentDidMount () {
-        const boardId = getBoardId();
+    componentWillReceiveProps (nextProps) {
+        const { boardId } = nextProps;
         this.props.onFetchTitle(boardId);
+
     }
     changeTitle () {
         const title = this.props.title;
@@ -30,20 +28,11 @@ class PageTitle extends Component {
             this.formInput = ''; 
             this.closeForm();
         } else {
-            const boardId = getBoardId();
+            const boardId = this.props.boardId;
             
             this.props.onUpdateBoardTitle(boardId, currentValue);
             this.closeForm(); 
         }
-    }
-    getTitle () {
-        const URL = window.location.href;
-        let title = '',
-            url = URL.split('/');
-    
-        title = url[url.length - 1];
-        
-        return title;
     }
     openForm () {
         this.setState({isFormOpen: true});
@@ -82,7 +71,8 @@ class PageTitle extends Component {
 
 const mapStateToProps = state => {
     return {
-        title: state.title
+        title: state.title,
+        boardId: state.boardId
     }
 }
 

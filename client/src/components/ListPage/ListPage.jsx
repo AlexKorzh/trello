@@ -1,57 +1,60 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import './listPage.scss';
-import { connect } from 'react-redux';
-import Header from '../../components/Header/Header.jsx';
-import AddListButton from '../../components/List/AddListButton/AddListButton.jsx';
 import { withRouter } from 'react-router-dom';
-import List from '../../components/List/List.jsx';
-import PageTitle from './PageTitle/PageTitle.jsx';
-import { fetchLists } from '../../actions/lists';
-import { fetchCards } from '../../actions/cards';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+import './listPage.scss';
+
+import CreateListButton from '../List/CreateListButton';
+import PageTitle from './PageTitle';
+import Header from '../Header';
+import List from '../List';
+
 import { updateListMiddleware } from '../../actions/lists';
 import { deleteListMiddleware } from '../../actions/lists';
-import getBoardId from '../../utils/getBoardId';
+import { fetchLists } from '../../actions/lists';
+import { fetchCards } from '../../actions/cards';
+
+import getRoute from '../../utils/getRoute';
+
+
+
+
 import { showCardDetailModal } from '../../actions/modal';
 
-// import Modal from '../../components/Modal';
+import { hideModal } from '../../actions/modal';
 
 class ListPage extends Component {
     constructor (props) {
         super(props);
         this.title = '';
     }
+
+
+
     componentWillMount () {
-        console.log('componentWillMount LISTPAGE');
         document.body.classList.add('list-page');
 
-        const id = getBoardId(); // rename
-
+        const { id } = this.props.match.params;
         const { onFetchLists } = this.props;
-        const { pathname } = this.props.location;
-        const routes = pathname.match(/([^\/]+)/);
-        const baseRoute = routes[0];
+        const { root } = getRoute();
 
-        const routeStrategies = {
-            b: () => ({
-                type: 'boards',
-                id
-            }),
-            c: () => {
-                const { id, title } = this.props.match.params;
-                const { onReloadPage } = this.props;
+        onFetchLists({ type: root, id });
 
-                onReloadPage({id, title});
-
-                return {
-                    type: 'modal',
-                    id
-                }
-            }
-        };
-
-        onFetchLists(routeStrategies[baseRoute]());
+        console.log('componentWillMount::ListPage');
     }
+
+
+
+
+    componentWillUpdate (nextProps) {
+        const { id, title } = this.props.match.params;
+        const { modalType } = this.props.modal;
+        const { root } = getRoute();
+
+        if (root === 'c' && !modalType) this.props.onReloadPage({id, title});
+    }
+
     componentWillUnmount () {
         console.log('componentWillUnmount LISTPAGE');
         document.body.classList.remove('list-page');
@@ -79,7 +82,7 @@ class ListPage extends Component {
                                     );
                                 })
                             }
-                            <AddListButton />
+                            <CreateListButton />
                         </div>
                     </div>
                 </div>
@@ -88,15 +91,27 @@ class ListPage extends Component {
     }
 };
 
+ListPage.propTypes = {
+    onFetchLists: PropTypes.func.isRequired,
+    match: PropTypes.shape({
+        params: PropTypes.shape({
+            id: PropTypes.string,
+            title: PropTypes.string
+        })
+    })
+};
+
 const mapStateToProps = state => {
     return {
         lists: state.lists,
-        fetching: state.fetching
+        fetching: state.fetching,
+        modal: state.modal
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        onClose: () => dispatch(hideModal()),
         onFetchLists: (boardId) => {
             dispatch(fetchLists(boardId))
         },
