@@ -16,10 +16,11 @@ class PageTitle extends Component {
         this.closeForm = this.closeForm.bind(this);
     }
     componentWillReceiveProps (nextProps) {
-        const { boardId } = nextProps;
-        this.props.onFetchTitle(boardId);
+        const { boardId, title } = nextProps;
 
+        if (!title) this.props.onFetchTitle(boardId);
     }
+
     changeTitle () {
         const title = this.props.title;
         const currentValue = this.formInput.value;

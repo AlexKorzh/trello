@@ -14,16 +14,12 @@ class ListPageRouter extends Component {
         this.action = this.props.history.action;
     }
 
-    componentWillMount () {
-        console.log('componentWillMount::ListPageRouter', this.location);
-    }
-
     componentWillUpdate (nextProps) {
         const { location } = this.props;
 
-        console.log('componentWillUpdate::ListPageRouter->location', this.location); //??
-        console.log('componentWillUpdate::ListPageRouter', nextProps);
-        console.log('componentWillUpdate::ListPageRouter->previousLocation', this.previousLocation);
+        // console.log('componentWillUpdate::ListPageRouter->location', this.location); //??
+        console.log('componentWillUpdate::ListPageRouter', this.props, nextProps);
+        // console.log('componentWillUpdate::ListPageRouter->previousLocation', this.previousLocation);
 
         if (nextProps.history.action !== 'POP' && !this.props.modal.modalType) {
             this.previousLocation = this.props.location
@@ -34,11 +30,9 @@ class ListPageRouter extends Component {
     }
   
     render () {
-
         console.log('listPageRouter->props', this.props);
-        console.log('listPageRouter->previousLocation', this.previousLocation);
         const { location } = this.props;
-        const _isModal = (() => {
+        const isModal = (() => {
             let isModalOpen = false;
 
             const isSameLocation = this.previousLocation === location;
@@ -46,20 +40,16 @@ class ListPageRouter extends Component {
 
             if (modalType) isModalOpen = !isModalOpen;
 
-
             return isModalOpen;
         })();
 
-        const isModal = !!(this.props.modal.modalType && this.previousLocation !== location);
-        console.log('listPageRouter->isModal', isModal); 
-        console.log('((((listPageRouter->_isModal))))', _isModal); 
         return (
             <div>
-                <Switch location={_isModal ? this.previousLocation : location}>
+                <Switch location={isModal ? this.previousLocation : location}>
                     <Route path='/b/:id/:title' component={ListPage}/>
                     <Route path='/c/:id/:title' component={ListPage}/>
                 </Switch>
-                {_isModal ? <Route path='/c/:id/:title' component={Modal} /> : null}
+                {isModal ? <Route path='/c/:id/:title' component={Modal} /> : null}
             </div>
         );
     }
@@ -75,10 +65,4 @@ ListPageRouter.propTypes = {
 
 const mapStateToProps = state => ({modal: state.modal});
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onClose: () => dispatch(hideModal())
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ListPageRouter);
+export default connect(mapStateToProps, null)(ListPageRouter);

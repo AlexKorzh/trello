@@ -14,11 +14,12 @@ class CardDetailModal extends Component {
     }
     componentWillMount () {
         const { id, title } = this.props;
-
+        console.log('componentWillMount::CardDetailModal');
         this.props.fetchData(id);
     }
     
     componentWillUnmount () {
+        console.log('componentWillUnmount::CardDetailModal');
         const { boardId } = this.props;
     }
 
