@@ -17,12 +17,7 @@ import { fetchCards } from '../../actions/cards';
 
 import getRoute from '../../utils/getRoute';
 
-
-
-
 import { showCardDetailModal } from '../../actions/modal';
-
-import { hideModal } from '../../actions/modal';
 
 class ListPage extends Component {
     constructor (props) {
@@ -44,15 +39,27 @@ class ListPage extends Component {
         console.log('componentWillMount::ListPage');
     }
 
-
+    // componentWillReceiveProps (nextProps) {
+    //     const { id, title } = nextProps.match.params;
+    //     const { modalType } = nextProps.modal;
+    //     const { root } = getRoute();
+        
+    //     if (root === 'c' && !modalType && nextProps.history.action === 'POP') {
+    //         this.props.onReloadPage({id, title});
+    //         console.log('SHOW_MODAL::ON_RELOAD', nextProps);
+    //     }
+    // }
 
 
     componentWillUpdate (nextProps) {
-        const { id, title } = this.props.match.params;
-        const { modalType } = this.props.modal;
-        const { root } = getRoute();
-
-        if (root === 'c' && !modalType) this.props.onReloadPage({id, title});
+        // const { id, title } = nextProps.match.params;
+        // const { modalType } = nextProps.modal;
+        // const { root } = getRoute();
+        
+        // if (root === 'c' && !modalType && nextProps.history.action === 'POP') {
+        //     this.props.onReloadPage({id, title});
+        //     console.log('SHOW_MODAL::ON_RELOAD', nextProps);
+        // }
     }
 
     componentWillUnmount () {
@@ -111,7 +118,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onClose: () => dispatch(hideModal()),
         onFetchLists: (boardId) => {
             dispatch(fetchLists(boardId))
         },

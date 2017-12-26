@@ -27,9 +27,9 @@ class Modal extends Component {
         this.removeEventHandlers = this.removeEventHandlers.bind(this);
     }
 
-    componentWillReceiveProps (nextProps) {
-        console.log('nextProps MODAL', nextProps);
-    }
+    // componentWillReceiveProps (nextProps) {
+    //     console.log('nextProps MODAL', nextProps);
+    // }
 
     componentDidMount () {
         this.addEventHandlers();

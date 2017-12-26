@@ -31,7 +31,22 @@ class Card extends Component {
         const { title, onSelect } = this.props;
         const { root } = getRoute();
 
-        if (cardId === id) onSelect({id, title});
+        if (cardId === id) {
+            onSelect({id, title});
+            console.log('SHOW_MODAL::ON_SELECT', this.props)
+        }
+    }
+
+    componentWillReceiveProps (nextProps) {
+        console.log('componentWillReceiveProps::Card', nextProps);
+        // const { id, title } = nextProps.match.params;
+        // const { modalType } = nextProps.modal;
+        // const { root } = getRoute();
+        
+        // if (root === 'c' && !modalType && nextProps.history.action === 'POP') {
+        //     this.props.onSelect({id, title});
+        //     console.log('SHOW_MODAL::ON_RELOAD');
+        // }
     }
 
     handleUpdateTitle () {
@@ -69,6 +84,7 @@ class Card extends Component {
     }
 
     showModal (event) {
+        console.log('showModal->click');
         if (event.target.classList.contains('edit-icon')) {
             this.handeEditInconClick(event);
         } else if (event.target.parentElement.classList.contains('edit-icon')) {
@@ -87,10 +103,9 @@ class Card extends Component {
         return (
             <div className = "card-info">
                 <Link
-                    to = {{ pathname: `/c/${this.props.id}/${title}` }}  
+                    to = {`/c/${this.props.id}/${title}`}
                     onClick={this.showModal}
                     className = "card"
-                    role = "button"
                 >
                     <div className = "card__wrap">
                         <div className = "card_title">
@@ -126,6 +141,8 @@ Card.propTypes = {
     id: PropTypes.string.isRequired,
     onSelect: PropTypes.func
 };
+
+// const mapStateToProps = state => ({modal: state.modal})
 
 const mapDispatchToProps = dispatch => {
     return {
