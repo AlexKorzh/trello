@@ -25,17 +25,17 @@ class Card extends Component {
         }
     }
 
-    componentDidMount () {
-        const { id } = this.props.match.params;
-        const cardId = this.props.id;
-        const { title, onSelect } = this.props;
-        const { root } = getRoute();
+    // componentDidMount () {
+    //     const { id } = this.props.match.params;
+    //     const cardId = this.props.id;
+    //     const { title, onSelect } = this.props;
+    //     const { root } = getRoute();
 
-        if (cardId === id) {
-            onSelect({id, title});
-            console.log('SHOW_MODAL::ON_SELECT', this.props)
-        }
-    }
+    //     if (cardId === id) {
+    //         onSelect({id, title});
+    //         console.log('SHOW_MODAL::ON_SELECT', this.props)
+    //     }
+    // }
 
     componentWillReceiveProps (nextProps) {
         console.log('componentWillReceiveProps::Card', nextProps);
@@ -84,7 +84,6 @@ class Card extends Component {
     }
 
     showModal (event) {
-        console.log('showModal->click');
         if (event.target.classList.contains('edit-icon')) {
             this.handeEditInconClick(event);
         } else if (event.target.parentElement.classList.contains('edit-icon')) {
@@ -150,6 +149,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default withRouter(
-    connect(null, mapDispatchToProps)(Card)
-);
+export default connect(null, mapDispatchToProps)(Card);

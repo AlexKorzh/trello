@@ -25,8 +25,6 @@ class ListPage extends Component {
         this.title = '';
     }
 
-
-
     componentWillMount () {
         document.body.classList.add('list-page');
 
@@ -35,37 +33,45 @@ class ListPage extends Component {
         const { root } = getRoute();
 
         onFetchLists({ type: root, id });
-
-        console.log('componentWillMount::ListPage');
+        console.log('componentWillMount::ListPage')
     }
 
-    // componentWillReceiveProps (nextProps) {
-    //     const { id, title } = nextProps.match.params;
-    //     const { modalType } = nextProps.modal;
+    componentWillReceiveProps (nextProps) {
+        const { id, title } = nextProps.match.params;
+        const { modalType } = nextProps.modal;
+        const { root } = getRoute();
+        
+        if (root === 'c' && !modalType && nextProps.history.action === 'POP' && nextProps.cards.length) {
+            this.props.onReloadPage({id, title});
+            console.log('SHOW_MODAL::componentDidUpdate::ON_RELOAD', nextProps);
+        }
+    }
+
+    // shouldComponentUpdate (nextProps) {
+    //     if (!nextProps.modal.modalType) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    //     console.log('SHOW_MODAL::shouldComponentUpdate', nextProps);
+        
+    // }
+
+    // componentDidUpdate (prevProps) {
+    //     const { id, title } = prevProps.match.params;
+    //     const { modalType } = prevProps.modal;
     //     const { root } = getRoute();
         
-    //     if (root === 'c' && !modalType && nextProps.history.action === 'POP') {
+    //     if (root === 'c' && !modalType && prevProps.history.action === 'POP') {
     //         this.props.onReloadPage({id, title});
-    //         console.log('SHOW_MODAL::ON_RELOAD', nextProps);
+    //         console.log('SHOW_MODAL::componentDidUpdate::ON_RELOAD', prevProps);
     //     }
     // }
 
-
-    componentWillUpdate (nextProps) {
-        // const { id, title } = nextProps.match.params;
-        // const { modalType } = nextProps.modal;
-        // const { root } = getRoute();
-        
-        // if (root === 'c' && !modalType && nextProps.history.action === 'POP') {
-        //     this.props.onReloadPage({id, title});
-        //     console.log('SHOW_MODAL::ON_RELOAD', nextProps);
-        // }
-    }
-
     componentWillUnmount () {
-        console.log('componentWillUnmount LISTPAGE');
         document.body.classList.remove('list-page');
     }
+
     render () {
         const { lists } = this.props;
     
@@ -79,7 +85,7 @@ class ListPage extends Component {
                             {
                                 lists && lists.map((list, index) => {
                                     return (
-                                        <List 
+                                        <List
                                             key = { index }
                                             title={ list.title }
                                             id = { list._id }
@@ -112,7 +118,8 @@ const mapStateToProps = state => {
     return {
         lists: state.lists,
         fetching: state.fetching,
-        modal: state.modal
+        modal: state.modal,
+        cards: state.cards
     };
 };
 

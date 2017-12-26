@@ -13,14 +13,17 @@ class ListPageRouter extends Component {
         const { location } = this.props
         console.log('componentWillUpdate::ListPageRouter', {
             'this.props': this.props,
-            'nextProps': nextProps
+            'nextProps': nextProps,
+            'previousLocation': this.previousLocation,
+            'currentLocation': this.props.location,
+            'nextPropsLocation': nextProps.location
         })
         if (nextProps.history.action !== 'POP' &&
             !this.props.modal.modalType) {
 
             this.previousLocation = this.props.location
-        } else if (nextProps.history.action === 'POP' && !nextProps.modal.modalType) {
-            console.log('<!-(^^)-!>')
+        } else if (nextProps.history.action === 'POP' && !nextProps.modal.modalType && (this.props.location.key === nextProps.location.key)) {
+            console.log('is same location: ', '<!-(^^)-!>')
         }
     }
 
@@ -68,7 +71,7 @@ class ListPageRouter extends Component {
     // }
   
     render () {
-        console.log('ListPageRouter::render()->previousLocation', this.previousLocation);
+        console.log('render::ListPageRouter');
         const { location } = this.props;
 
         const isModal = (() => {
