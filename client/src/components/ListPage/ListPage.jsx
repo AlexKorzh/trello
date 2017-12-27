@@ -14,15 +14,17 @@ import { updateListMiddleware } from '../../actions/lists';
 import { deleteListMiddleware } from '../../actions/lists';
 import { fetchLists } from '../../actions/lists';
 import { fetchCards } from '../../actions/cards';
-
 import getRoute from '../../utils/getRoute';
+import history from '../../utils/history';
 
 import { showCardDetailModal } from '../../actions/modal';
+import { hideModal } from '../../actions/modal';
 
 class ListPage extends Component {
     constructor (props) {
         super(props);
         this.title = '';
+        this.isPageReloaded = true;
     }
 
     componentWillMount () {
@@ -33,7 +35,6 @@ class ListPage extends Component {
         const { root } = getRoute();
 
         onFetchLists({ type: root, id });
-        console.log('componentWillMount::ListPage')
     }
 
     componentWillReceiveProps (nextProps) {
@@ -41,32 +42,16 @@ class ListPage extends Component {
         const { modalType } = nextProps.modal;
         const { root } = getRoute();
         
-        if (root === 'c' && !modalType && nextProps.history.action === 'POP' && nextProps.cards.length && !nextProps.modal.flag) {
+        if (root === 'c' && !modalType && nextProps.history.action === 'POP' && nextProps.cards.length) {
             this.props.onReloadPage({id, title});
-            console.log('SHOW_MODAL::componentDidUpdate::ON_RELOAD', nextProps);
-        }
+        } else if (nextProps.history.action === 'POP' &&
+            nextProps.modal.modalType && root === 'b') {
+            this.props.onHideModal();
+        } else if (root === 'c' && !modalType && nextProps.history.action === 'PUSH') {
+            console.log('TEMA THE BEST AND ALEX!!! :) ');
+            history.push(`/b/${this.props.boardId}/${this.props.title}`);
+        } 
     }
-
-    // shouldComponentUpdate (nextProps) {
-    //     if (!nextProps.modal.modalType) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    //     console.log('SHOW_MODAL::shouldComponentUpdate', nextProps);
-        
-    // }
-
-    // componentDidUpdate (prevProps) {
-    //     const { id, title } = prevProps.match.params;
-    //     const { modalType } = prevProps.modal;
-    //     const { root } = getRoute();
-        
-    //     if (root === 'c' && !modalType && prevProps.history.action === 'POP') {
-    //         this.props.onReloadPage({id, title});
-    //         console.log('SHOW_MODAL::componentDidUpdate::ON_RELOAD', prevProps);
-    //     }
-    // }
 
     componentWillUnmount () {
         document.body.classList.remove('list-page');
@@ -119,7 +104,9 @@ const mapStateToProps = state => {
         lists: state.lists,
         fetching: state.fetching,
         modal: state.modal,
-        cards: state.cards
+        cards: state.cards,
+        boardId: state.boardId,
+        title: state.title
     };
 };
 
@@ -131,7 +118,8 @@ const mapDispatchToProps = dispatch => {
         onFetchCards: (lists) => dispatch(fetchCards(lists)),
         onUpdateList: (listId, title) => dispatch(updateListMiddleware(listId, title)),
         onDeleteList: (listId) => dispatch(deleteListMiddleware(listId)),
-        onReloadPage: data => dispatch(showCardDetailModal(data))
+        onReloadPage: data => dispatch(showCardDetailModal(data)),
+        onHideModal: () => dispatch(hideModal())
     };
 };
 

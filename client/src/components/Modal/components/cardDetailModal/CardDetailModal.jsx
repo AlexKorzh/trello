@@ -10,7 +10,7 @@ import './cardDetailModal.scss';
 
 class CardDetailModal extends Component {
     constructor (props) {
-        super();
+        super(props);
     }
     componentWillMount () {
         const { id, title } = this.props;

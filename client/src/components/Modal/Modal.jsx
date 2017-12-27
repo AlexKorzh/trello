@@ -43,7 +43,7 @@ class Modal extends Component {
     }
     
     componentWillUnmount () {
-        if (this.props.modal.modalType) this.props.onClose();
+        // if (this.props.modal.modalType) this.props.onClose();
         console.log('componentWillUnmount::parent');
         this.removeEventHandlers();
             modalRoot.removeChild(this.el);
@@ -62,9 +62,7 @@ class Modal extends Component {
     }
 
     closeModal () {
-        const close = this.props.onClose;
-
-        close();
+        this.props.onClose();
     }
 
     closeModalEsc (e) {
@@ -86,7 +84,7 @@ class Modal extends Component {
     render () {
         // const { modalType, modalProps } = this.props.modal;
 
-        const { id, title } = this.props.match.params;
+        const { id, title } = this.props.modal.modalProps;
        
         const modalProps = {
             id,
@@ -115,14 +113,13 @@ class Modal extends Component {
                 </div>
             );
         }
-        console.log('this.props.modal.modalType', this.props.modal.modalType);
+        // console.log('this.props.modal.modalType', this.props.modal.modalType);
         return ReactDOM.createPortal(
             this.props.modal.modalType ? 
                 <div className = "modal-window">
                     <ModalWindow />
-                </div>
-                : null,
-            this.el,
+                </div> : null,
+            this.el
         );
     }
     
