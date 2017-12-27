@@ -20,7 +20,6 @@ const webpackConfig = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
-        //Resolve Problem React-router v4 - cannot GET *url*
         publicPath: '/'
     },
     resolve: {
@@ -69,7 +68,6 @@ const webpackConfig = {
     },
     devServer: {
         contentBase: './dist',
-        //Resolve Problem React-router v4 - cannot GET *url*
         historyApiFallback: true,
         hot: true
     },
