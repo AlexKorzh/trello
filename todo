@@ -1,0 +1,5 @@
+-- Client
+
+1. Remove bootstrap from the project as well as from the package.json
+2. Remove font-awesome from the project as well as from the package.json
+3. Replace svg icons with font one. Remove material-ui from the package.json
