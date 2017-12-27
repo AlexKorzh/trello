@@ -2,29 +2,63 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
-
+import history from '../../utils/history';
 import ListPage from './ListPage.jsx';
 import Modal from '../Modal';
+
+import getRoute from '../../utils/getRoute';
+
+import { hideModal } from '../../actions/modal';
 
 class ListPageRouter extends Component {
     previousLocation = this.props.location;
 
+    // componentWillUpdate (nextProps) {
+    //     const { location } = this.props
+    //     console.log('componentWillUpdate::ListPageRouter', {
+    //         'this.props': this.props,
+    //         'nextProps': nextProps,
+    //         'previousLocation': this.previousLocation,
+    //         'currentLocation': this.props.location,
+    //         'nextPropsLocation': nextProps.location
+    //     })
+    //     if (nextProps.history.action !== 'POP' &&
+    //         !this.props.modal.modalType && nextProps.modal.flag != 'click') {
+
+    //         this.previousLocation = this.props.location
+    //     } else if (nextProps.history.action === 'POP' && !nextProps.modal.modalType && nextProps.modal.flag === 'click') {
+    //         // this.previousLocation = {
+    //         //     pathname: `/b/${this.props.board.id}/${this.props.board.title}`
+    //         // }
+
+    //         history.push(`/b/${this.props.board.id}/${this.props.board.title}`)
+
+    //         // this.goBack = !this.goBack;
+    //     }
+    // }
+
     componentWillUpdate (nextProps) {
-        const { location } = this.props
-        console.log('componentWillUpdate::ListPageRouter', {
-            'this.props': this.props,
-            'nextProps': nextProps,
-            'previousLocation': this.previousLocation,
-            'currentLocation': this.props.location,
-            'nextPropsLocation': nextProps.location
-        })
         if (nextProps.history.action !== 'POP' &&
             !this.props.modal.modalType) {
-
             this.previousLocation = this.props.location
-        } else if (nextProps.history.action === 'POP' && !nextProps.modal.modalType && (this.props.location.key === nextProps.location.key)) {
-            console.log('is same location: ', '<!-(^^)-!>')
         }
+        console.log('componentWillUpdate::ListPageRouter', {
+            'previousLocation': this.previousLocation,
+            'nextProps': nextProps.location,
+            'history': nextProps.history,
+            'MODAL_STATUS': nextProps.modal
+        })
+        if (nextProps.history.action === 'POP' &&
+        this.props.modal.modalType) {
+            this.props.closeModal();
+        }
+
+        const { root } = getRoute();
+
+        // if (root === 'c' && nextProps.history.action != 'POP' &&
+        // !this.props.modal.modalType) {
+        //     history.push('/asdasdad')
+        // }
     }
 
     // componentWillUpdate (nextProps, nextState) {
@@ -60,18 +94,9 @@ class ListPageRouter extends Component {
     //                 });
     //             }
     // }
-
-    // shouldComponentUpdate (nextProps) {
-    //     // let ret = true;
-    //     // if (nextProps.location.pathname === this.previousLocation.pathname && this.props.modal.modalType) {
-    //     //     ret = false;
-    //     // }
-    //     // console.log('shouldComponentUpdate', nextProps.location.pathname, this.previousLocation);
-    //     // return ret;
-    // }
   
     render () {
-        console.log('render::ListPageRouter');
+        // console.log('render::ListPageRouter');
         const { location } = this.props;
 
         const isModal = (() => {
@@ -84,21 +109,37 @@ class ListPageRouter extends Component {
             return isModalOpen;
         })();
 
-        const currentLocation = (() => {
+        // const currentLocation = (() => {
+        //     let path = {};
 
-        })();
+        //     if (isModal && !this.goBack) {
+        //         path = this.previousLocation;
+        //     } else if (!isModal && !this.goBack) {
+        //         path = location;
+        //     } else if (!isModal && this.goBack) {
+        //         path = this.previousLocation;
+        //     }
 
+        //     return path;
+        // })();
+        // console.log('T=E=S=T', {
+        //     'isModal': isModal,
+        //     'this.previousLocation': this.previousLocation,
+        //     'location': location,
+        //     'currentLocation': currentLocation,
+        //     'LOCATION': document.location
+        // })
         return (
             <div>
                 <Switch
-                    location={isModal ? this.previousLocation : location}
+
                 >
                     <Route path='/b/:id/:title' component={ListPage}/>
                     <Route path='/c/:id/:title' component={ListPage}/>
                 </Switch>
                 {
-                    isModal ?
-                        <Route path='/c/:id/:title' component={Modal} /> : null
+                    // isModal ?
+                    //     <Route path='/c/:id/:title' component={Modal} /> : null
                 }
             </div>
         );
@@ -116,6 +157,18 @@ ListPageRouter.propTypes = {
     fetchData: PropTypes.func
 };
 
-const mapStateToProps = state => ({modal: state.modal});
+const mapStateToProps = state => ({
+    modal: state.modal,
+    board: {
+        id: state.boardId,
+        title: state.title
+    }
+});
 
-export default connect(mapStateToProps, null)(ListPageRouter);
+const mapDispatchToProps = dispatch => {
+    return {
+        closeModal: () => dispatch(hideModal())
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListPageRouter);

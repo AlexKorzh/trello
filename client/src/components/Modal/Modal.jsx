@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+    import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import './modal.scss';
 
@@ -15,9 +15,14 @@ const MODAL_COMPONENTS = {
     CARD_DETAIL_MODAL: CardDetailModal
 }
 
+        const modalRoot = document.getElementById('modal-root');
+
 class Modal extends Component {
     constructor (props) {
         super(props);
+
+            this.el = document.createElement('div');
+
 
         this.setRef = this.setRef.bind(this);
         this.closeModal = this.closeModal.bind(this);
@@ -33,12 +38,15 @@ class Modal extends Component {
 
     componentDidMount () {
         this.addEventHandlers();
+
+            modalRoot.appendChild(this.el);
     }
     
     componentWillUnmount () {
         if (this.props.modal.modalType) this.props.onClose();
         console.log('componentWillUnmount::parent');
         this.removeEventHandlers();
+            modalRoot.removeChild(this.el);
     }
 
     addEventHandlers () {
@@ -107,11 +115,14 @@ class Modal extends Component {
                 </div>
             );
         }
-
-        return (
-            <div className = "modal-window">
-                <ModalWindow />
-            </div>
+        console.log('this.props.modal.modalType', this.props.modal.modalType);
+        return ReactDOM.createPortal(
+            this.props.modal.modalType ? 
+                <div className = "modal-window">
+                    <ModalWindow />
+                </div>
+                : null,
+            this.el,
         );
     }
     

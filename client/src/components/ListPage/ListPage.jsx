@@ -41,7 +41,7 @@ class ListPage extends Component {
         const { modalType } = nextProps.modal;
         const { root } = getRoute();
         
-        if (root === 'c' && !modalType && nextProps.history.action === 'POP' && nextProps.cards.length) {
+        if (root === 'c' && !modalType && nextProps.history.action === 'POP' && nextProps.cards.length && !nextProps.modal.flag) {
             this.props.onReloadPage({id, title});
             console.log('SHOW_MODAL::componentDidUpdate::ON_RELOAD', nextProps);
         }
