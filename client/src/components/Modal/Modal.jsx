@@ -7,6 +7,8 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
 import { hideModal } from '../../actions/modal';
+import { hideModalManual } from '../../actions/modal';
+
 import { CARD_DETAIL_MODAL } from '../../constants/ActionTypes';
 
 import CardDetailModal from './components/cardDetailModal';
@@ -26,6 +28,7 @@ class Modal extends Component {
 
         this.setRef = this.setRef.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        this.closeModalManual = this.closeModalManual.bind(this);
         this.closeModalEsc = this.closeModalEsc.bind(this);
         this.addEventHandlers = this.addEventHandlers.bind(this);
         this.handleOutsideClick = this.handleOutsideClick.bind(this);
@@ -63,6 +66,10 @@ class Modal extends Component {
 
     closeModal () {
         this.props.onClose();
+    }
+
+    closeModalManual () {
+        this.props.onCloseManual();
     }
 
     closeModalEsc (e) {
@@ -104,7 +111,7 @@ class Modal extends Component {
                         <i
                             className="material-icons icon-close modal-icon-close"
                             role="button"
-                            onClick={ this.closeModal }
+                            onClick={ this.closeModalManual }
                         >
                         close
                         </i>
@@ -141,7 +148,8 @@ const mapStateToProps = state => ({modal: state.modal})
 
 const mapDispatchToProps = dispatch => {
     return {
-        onClose: () => dispatch(hideModal())
+        onClose: () => dispatch(hideModal()),
+        onCloseManual: () => dispatch(hideModalManual())
     };
 };
 

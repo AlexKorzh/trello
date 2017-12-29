@@ -24,7 +24,6 @@ class ListPage extends Component {
     constructor (props) {
         super(props);
         this.title = '';
-        this.isPageReloaded = true;
     }
 
     componentWillMount () {
@@ -41,16 +40,30 @@ class ListPage extends Component {
         const { id, title } = nextProps.match.params;
         const { modalType } = nextProps.modal;
         const { root } = getRoute();
-        
-        if (root === 'c' && !modalType && nextProps.history.action === 'POP' && nextProps.cards.length) {
+        const C = root === 'c';
+        const B = root === 'b';
+        const POP = nextProps.history.action === 'POP';
+        const PUSH = nextProps.history.action === 'PUSH';
+        const isHideManual = nextProps.modal.modalProps.type === 'HIDE_MODAL_MANUAL';
+        const isHide = nextProps.modal.modalProps.type === 'HIDE_MODAL';
+        const currentModalType = this.props.modal.modalType;
+        const nextModalType = nextProps.modal.modalType;
+        const cardsLength = nextProps.cards.length;
+
+        // При клике на карточку
+        if (C && !currentModalType && nextModalType && cardsLength && PUSH && this.props.history.action !== 'PUSH') {
             this.props.onReloadPage({id, title});
-        } else if (nextProps.history.action === 'POP' &&
-            nextProps.modal.modalType && root === 'b') {
-            this.props.onHideModal();
-        } else if (root === 'c' && !modalType && nextProps.history.action === 'PUSH') {
-            console.log('TEMA THE BEST AND ALEX!!! :) ');
-            history.push(`/b/${this.props.boardId}/${this.props.title}`);
+        }
+        // Когда мы жмем назад а потом вперед
+        if (C && !currentModalType && !nextModalType && cardsLength && POP) {
+            this.props.onReloadPage({id, title});
         } 
+        if (C && currentModalType && !nextModalType) {
+            history.push(`/b/${this.props.boardId}/${this.props.title}`);
+        }
+        if (B && currentModalType && nextModalType) {
+            this.props.onHideModal();
+        }
     }
 
     componentWillUnmount () {
