@@ -8,6 +8,8 @@ import {
     GET_CARD_DETAILS
 } from '../constants/ActionTypes';
 
+import { startFetching, endFetching } from './fetching';
+
 export const createCard = payload => {
     return {
         type: CREATE_CARD,
@@ -36,13 +38,35 @@ export const getCardDetails = payload => {
     }
 }
 
-export const createCardMiddleware = (title, listId, boardId) => {
+export const createCardsOnDropMiddleware = cards => {
+    return dispatch => {
+        dispatch(startFetching());
+
+        const isSingle = cards.length === 1;
+        const card = isSingle && cards[0];
+
+        isSingle ? dispatch(createCard(card)) : null;
+
+        axios.post(
+            `${currentHost}/createCard`,
+            {title: card.title, listId: card.list, boardId: card.board},
+            {headers: { authorization: token.get() }}
+        ).then(response => {
+            dispatch(createCard(response.data.card));
+        });
+    }
+}
+
+export const createCardMiddleware = payload => {
+    const { title, list, board } = payload;
+    debugger;
     return dispatch => {
         axios.post(
             `${currentHost}/createCard`,
-            {title, listId, boardId},
+            {title, list, board},
             {headers: { authorization: token.get() }}
         ).then(response => {
+            debugger;
             dispatch(createCard(response.data.card));
         });
     }

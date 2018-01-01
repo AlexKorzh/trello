@@ -48,3 +48,11 @@
         text-decoration: underline;
     }
 }
+
+.dropzone-container {
+    height: 100%;
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+    margin: 0 5px;
+}

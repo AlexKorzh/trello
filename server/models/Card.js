@@ -12,9 +12,10 @@ const cardSchema = new Schema({
 
 cardSchema.methods.getPublicFields = function () {
     var fields = {
-        title: this.title,
         _id: this._id,
-        list: this.list
+        title: this.title,
+        list: this.list,
+        board: this.board
     };
 
     return fields;

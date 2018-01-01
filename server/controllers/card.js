@@ -5,20 +5,20 @@ const config = require('../config');
 
 function create (req, res, next) {
     const title = req.body.title,
-          listId = req.body.listId,
-          boardId = req.body.boardId;
+          list = req.body.list,
+          board = req.body.board;
 
     const card = new Card({
         title,
-        list: listId,
-        board: boardId
+        list,
+        board
     });
 
     card.save(function (error) {
         if (error) return next(error);
 
         List.findByIdAndUpdate(
-            listId, 
+            list, 
             {$push: {cards: card}},
             {new: true, safe: true}, 
             callback
