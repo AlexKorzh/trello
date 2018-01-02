@@ -39,6 +39,14 @@ module.exports = function (app) {
     app.post('/deleteList', requireAuth, List.deleteList);
     app.post('/getLists', requireAuth, List.getLists);
 
+    app.post('/uploadFile', requireAuth, function(req, res) {
+        console.log(req.body, req.files);
+      
+        // console.log(file.name);
+        // console.log(file.type);
+        res.status(200).send('OK');
+    });
+
     //Cards
     app.post('/createCard', requireAuth, Card.create);
     app.post('/updateCardTitle', requireAuth, Card.updateTitle);

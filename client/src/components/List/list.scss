@@ -5,12 +5,18 @@
     display: none !important;
 }
 .list-container {
-    .card-info, 
+    .card-info,
     .list-c__head {
         border-radius: 3px 3px 0px 0px;
-        padding: 8px;
         background: #E2E4E6;
         box-sizing: border-box;
+    }
+    .card-info {
+        padding: 0 8px;
+        margin-bottom: 8px;
+    }
+    .list-c__head {
+        padding: 8px;
     }
     .list-content {
         background: #e2e4e6;

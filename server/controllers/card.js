@@ -7,6 +7,7 @@ function create (req, res, next) {
     const title = req.body.title,
           list = req.body.list,
           board = req.body.board;
+          file = req.files;
 
     const card = new Card({
         title,

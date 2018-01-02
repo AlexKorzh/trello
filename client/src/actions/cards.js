@@ -5,7 +5,9 @@ import {
     CREATE_CARD,
     GET_CARDS,
     UPDATE_CARD_TITLE,
-    GET_CARD_DETAILS
+    GET_CARD_DETAILS,
+    START_FILE_UPLOADING,
+    END_FILE_UPLOADING
 } from '../constants/ActionTypes';
 
 import { startFetching, endFetching } from './fetching';
@@ -13,6 +15,20 @@ import { startFetching, endFetching } from './fetching';
 export const createCard = payload => {
     return {
         type: CREATE_CARD,
+        payload
+    }
+}
+
+export const startFileUploading = payload => {
+    return {
+        type: START_FILE_UPLOADING,
+        payload
+    }
+}
+
+export const endFileUploading = payload => {
+    return {
+        type: END_FILE_UPLOADING,
         payload
     }
 }
@@ -58,18 +74,51 @@ export const createCardsOnDropMiddleware = cards => {
 }
 
 export const createCardMiddleware = payload => {
-    const { title, list, board } = payload;
-    debugger;
-    return dispatch => {
-        axios.post(
-            `${currentHost}/createCard`,
-            {title, list, board},
-            {headers: { authorization: token.get() }}
-        ).then(response => {
-            debugger;
-            dispatch(createCard(response.data.card));
-        });
+    const { title, list, board, file } = payload;
+    const authorization = token.get();
+    const url = `${currentHost}/createCard`;
+
+    const strategies = {
+        'onDrop': dispatch => {
+            const data = { title, list, board };
+            const formData = new FormData();
+
+            formData.append('uploads', file, file.name);
+
+            dispatch(startFileUploading(data));
+
+            axios.post(
+                `${currentHost}/uploadFile`,
+                formData,
+                {headers: {
+                    authorization,
+                    'content-type': 'multipart/form-data'
+                }}
+            ).then(response => {
+                const { card } = response.data;
+
+                dispatch(endFileUploading(card));
+            });
+        },
+        'default': dispatch => {
+            axios.post(
+                url,
+                {title, list, board},
+                {headers: { authorization }}
+            ).then(response => {
+                const { card } = response.data;
+
+                dispatch(createCard(card));
+            });
+        }
     }
+
+    const strategy = dispatch => {
+        return file ?
+            strategies['onDrop'](dispatch) : strategies['default'](dispatch);
+    }
+
+    return dispatch => strategy(dispatch);
 }
 
 export const updateCardTitleMiddleware = (cardId, title) => {

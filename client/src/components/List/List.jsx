@@ -35,7 +35,7 @@ class List extends Component {
     onDrop (acceptedFiles) {
         const file = acceptedFiles[0];
         const { id: list, boardId: board } = this.props;
-        const card = { list, board, title: file.name };
+        const card = { list, board, title: file.name, file };
 
         this.props.createCard(card);
         // const fileNames = acceptedFiles.map(file => file.name);
