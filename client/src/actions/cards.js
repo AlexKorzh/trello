@@ -83,12 +83,15 @@ export const createCardMiddleware = payload => {
             const data = { title, list, board };
             const formData = new FormData();
 
-            formData.append('uploads', file, file.name);
+            formData.append('board', board);
+            formData.append('title', title);
+            formData.append('list', list);
+            formData.append('file', file, file.name);
 
             dispatch(startFileUploading(data));
 
             axios.post(
-                `${currentHost}/uploadFile`,
+                url,
                 formData,
                 {headers: {
                     authorization,
