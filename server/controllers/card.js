@@ -17,7 +17,7 @@ function create (req, res, next) {
     const filePath = file && file.path;
     const serverPath = getFullPath(req);
 
-    var resolvedPath = path.parse(filePath);
+    // var resolvedPath = path.parse(filePath);
 
     const fields = file ?
         {title, list, board, attachments: {
