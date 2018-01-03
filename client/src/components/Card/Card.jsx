@@ -141,8 +141,6 @@ Card.propTypes = {
     onSelect: PropTypes.func
 };
 
-// const mapStateToProps = state => ({modal: state.modal})
-
 const mapDispatchToProps = dispatch => {
     return {
         onSelect: data => dispatch(showCardDetailModal(data))

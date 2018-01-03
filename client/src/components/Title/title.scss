@@ -1,0 +1,40 @@
+.edit-area {
+    width: 100%;
+    position: relative;
+    &.no-editing {
+        .textarea {
+            cursor: pointer;
+        }
+        .close {
+            display: none;
+        }
+    } 
+    &.editing {
+        .textarea {
+            background-color: hsla(0,0%,100%,.9);
+            border: 1px solid lightblue;
+        }
+    }
+    
+    .textarea {
+        margin: 0;
+        padding: 0 15px 0 0;
+        width: 100%;
+        font-size: 20px;
+        line-height: 24px;
+        height: 26px;
+        min-height: 24px;
+        box-sizing: border-box;
+        resize: none;
+        background: transparent;
+        border-radius: 3px;
+        border: 1px solid transparent;
+        &:focus {
+            outline: none !important;
+        }
+    }
+    .close {
+        position: absolute;
+        right: 0px;
+    }
+}

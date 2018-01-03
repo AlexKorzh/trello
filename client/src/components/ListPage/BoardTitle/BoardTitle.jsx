@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import TitleForm from '../../TitleForm/TitleForm.jsx';
 import '../../TitleForm/titleForm.scss';
 import { connect } from 'react-redux';
-import { updateBoardMiddleware } from '../../../actions/boards';
 import { fetchTitleMiddleware } from '../../../actions/title';
+import { updateBoardMiddleware } from '../../../actions/boards';
 
-class PageTitle extends Component {
+class BoardTitle extends Component {
     constructor () {
         super();
         this.state = {
@@ -15,10 +15,11 @@ class PageTitle extends Component {
         this.openForm = this.openForm.bind(this);
         this.closeForm = this.closeForm.bind(this);
     }
-    componentWillReceiveProps (nextProps) {
-        const { boardId, title } = nextProps;
 
-        if (!title) this.props.onFetchTitle(boardId);
+    componentWillReceiveProps (nextProps) {
+        const { boardId } = nextProps;
+
+        this.props.onFetchBoardTitle(boardId);
     }
 
     changeTitle () {
@@ -35,12 +36,15 @@ class PageTitle extends Component {
             this.closeForm(); 
         }
     }
+
     openForm () {
         this.setState({isFormOpen: true});
     }
+
     closeForm () {
         this.setState({isFormOpen: false});
     }
+
     render () {
         const isOpen = this.state.isFormOpen;
         const title = this.props.title;
@@ -72,20 +76,16 @@ class PageTitle extends Component {
 
 const mapStateToProps = state => {
     return {
-        title: state.title,
+        title: state.boardTitle,
         boardId: state.boardId
-    }
+    };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onUpdateBoardTitle: (boardId, title) => {
-            dispatch(updateBoardMiddleware(boardId, title))
-        },
-        onFetchTitle: (boardId) => {
-            dispatch(fetchTitleMiddleware(boardId))
-        }
+        onFetchBoardTitle: (boardId) => dispatch(fetchTitleMiddleware(boardId)),
+        onUpdateBoardTitle: (boardId, title) => dispatch(updateBoardMiddleware(boardId, title))
     };
-};
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(PageTitle);
+export default connect(mapStateToProps, mapDispatchToProps)(BoardTitle);

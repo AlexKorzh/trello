@@ -8,6 +8,8 @@ import {
     GET_CARD_DETAILS
 } from '../constants/ActionTypes';
 
+import { updateModalTitle } from './modal';
+
 export const createCard = payload => {
     return {
         type: CREATE_CARD,
@@ -82,7 +84,7 @@ export const getCardDetailsMiddleware = (id) => {
                 params: { id }
             }
         ).then(response => {
-            console.log('Response: ', response);
+            console.log('CARD DETAILS --->', response);
         });
     }
 }

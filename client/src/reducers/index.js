@@ -7,7 +7,7 @@ import boardId from './boardId';
 import boards from './boardReducer';
 import cards from './cards';
 import fetching from './fetching';
-import title from './title';
+import boardTitle from './boardTitle';
 
 const rootReducer = combineReducers({
     // routing: routerReducer,
@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
     lists,
     cards,
     fetching,
-    title
+    boardTitle
 });
 
 export default rootReducer;

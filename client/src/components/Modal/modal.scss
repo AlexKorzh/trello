@@ -15,17 +15,18 @@ $bg-window: #edeff0;
     z-index: 20;
     .modal-window {
         position: relative;
-        padding: 15px;
+        padding: 20px;
         margin: 54px 0 0;
-        min-width: 360px;
+        min-width: 760px;
         background: $bg-window;
+        border-radius: 2px;
         border-radius: 2px;
         overflow: hidden;
         z-index: 20;
         .modal-icon-close {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 3px;
+            right: 3px;
         }
     }
 }

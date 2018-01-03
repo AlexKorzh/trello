@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-    import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import './modal.scss';
 
@@ -17,13 +17,13 @@ const MODAL_COMPONENTS = {
     CARD_DETAIL_MODAL: CardDetailModal
 }
 
-        const modalRoot = document.getElementById('modal-root');
+const modalRoot = document.getElementById('modal-root');
 
 class Modal extends Component {
     constructor (props) {
         super(props);
 
-            this.el = document.createElement('div');
+        this.el = document.createElement('div');
 
 
         this.setRef = this.setRef.bind(this);
@@ -42,14 +42,14 @@ class Modal extends Component {
     componentDidMount () {
         this.addEventHandlers();
 
-            modalRoot.appendChild(this.el);
+        modalRoot.appendChild(this.el);
     }
     
     componentWillUnmount () {
         // if (this.props.modal.modalType) this.props.onClose();
         console.log('componentWillUnmount::parent');
         this.removeEventHandlers();
-            modalRoot.removeChild(this.el);
+        modalRoot.removeChild(this.el);
     }
 
     addEventHandlers () {
@@ -89,8 +89,6 @@ class Modal extends Component {
     }
 
     render () {
-        // const { modalType, modalProps } = this.props.modal;
-
         const { id, title } = this.props.modal.modalProps;
        
         const modalProps = {
@@ -120,7 +118,7 @@ class Modal extends Component {
                 </div>
             );
         }
-        // console.log('this.props.modal.modalType', this.props.modal.modalType);
+        
         return ReactDOM.createPortal(
             this.props.modal.modalType ? 
                 <div className = "modal-window">
@@ -144,7 +142,9 @@ class Modal extends Component {
 //     })
 // };
 
-const mapStateToProps = state => ({modal: state.modal})
+const mapStateToProps = state => ({
+    modal: state.modal
+})
 
 const mapDispatchToProps = dispatch => {
     return {

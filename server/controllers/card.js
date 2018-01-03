@@ -69,19 +69,13 @@ function getAllCards (req, res) {
 function details (req, res) {
     const id = req.query.id;
 
-    res.send(id);
-
-    // // Find all cards belogns to one list, by listId 
-    // Card.find({list : {
-    //     $in: lists.map(function(item){
-    //          return mongoose.Types.ObjectId(item); 
-    //     })
-    //   }}, callback);
-
-    // function callback (error, docs) {
-    //     res.send({cards: docs});
-    //     console.log('R E S ------>', res.cards);
-    // }
+    Card.findById(id, 
+        function (err, card) {
+            if (err) return handleError(err);
+            res.send({
+                card: card
+            });
+      });
 }
 
 exports.create = create;

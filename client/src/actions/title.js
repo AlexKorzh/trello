@@ -20,7 +20,7 @@ export const getTitle = payload => {
     }
 }
 
-export const fetchTitleMiddleware = (boardId) => dispatch => {
+export const fetchTitleMiddleware = (boardId) => dispatch => {debugger;
     let authorization = token.get();
 
     axios.get(
@@ -31,7 +31,7 @@ export const fetchTitleMiddleware = (boardId) => dispatch => {
                 boardId: boardId  
             }
         }
-    ).then(function (response) {
+    ).then(function (response) {debugger;
         const title = response.data.board.title;
 
         dispatch(getTitle(title));
