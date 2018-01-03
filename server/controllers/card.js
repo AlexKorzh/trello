@@ -2,23 +2,37 @@ const Card = require('../models/Card');
 const List = require('../models/List');
 const mongoose = require('mongoose');
 const config = require('../config');
+const getFullPath = require('../utils/getFullPath');
+const path = require('path');
 
 function create (req, res, next) {
-    const title = req.body.title,
-          listId = req.body.listId,
-          boardId = req.body.boardId;
+    const board = req.body.board;
+    const title = req.body.title;
+    const list = req.body.list;
+    const file = req.file;
 
-    const card = new Card({
-        title,
-        list: listId,
-        board: boardId
-    });
+    console.log('req.protocol ----------------------------->', req.protocol, req.get('host'));
+
+    const fileName = file && file.filename;
+    const filePath = file && file.path;
+    const serverPath = getFullPath(req);
+
+    var resolvedPath = path.parse(filePath);
+
+    const fields = file ?
+        {title, list, board, attachments: {
+            name: fileName,
+            url: filePath
+        }} :
+        {title, list, board};
+
+    const card = new Card(fields);
 
     card.save(function (error) {
         if (error) return next(error);
 
         List.findByIdAndUpdate(
-            listId, 
+            list, 
             {$push: {cards: card}},
             {new: true, safe: true}, 
             callback

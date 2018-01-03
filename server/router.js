@@ -16,10 +16,31 @@ var board = {
     }
 }
 
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './files/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+
+const upload = multer({ storage });
+
+// const upload = multer({ dest: 'files/' }) // rename to Uploads
+
 module.exports = function (app) {
     app.get('/', requireAuth, function (req, res) {
         res.send({ message: 'super secret code 123' });
     });
+
+    // app.get('/files/:file', requireAuth, function (req, res) {
+    //     const file = req.params.file;
+    //     res.send('/files/' + file);
+    // });
+
     // We have post request
     // requireSignIn - is a middleWare calls before Auth.sign controller function
     // User
@@ -39,8 +60,31 @@ module.exports = function (app) {
     app.post('/deleteList', requireAuth, List.deleteList);
     app.post('/getLists', requireAuth, List.getLists);
 
+
+    // var storage = multer.diskStorage({
+    //     destination: function (req, file, cb) {
+    //       cb(null, '/files')
+    //     },
+    //     filename: function (req, file, cb) {
+    //       cb(null, file.originalname)
+    //     }
+    //   })
+      
+    //   var upload = multer({ storage: storage })
+
+
+    // app.post('/uploadFile', requireAuth, upload.single('file'), function(req, res) {
+    //     // app.use(upload.any());
+    //     console.log('req body -->> ', req.body);
+    //     console.log('req files -->> ', req.file);
+
+    //     // // console.log(file.name);
+    //     // // console.log(file.type);
+    //     // res.status(200).send('OK');
+    // });
+
     //Cards
-    app.post('/createCard', requireAuth, Card.create);
+    app.post('/createCard', requireAuth, upload.single('file'), Card.create);
     app.post('/updateCardTitle', requireAuth, Card.updateTitle);
     app.post('/getAllCards', requireAuth, Card.getAllCards);
     app.get('/cardDetails', requireAuth, Card.details)

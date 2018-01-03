@@ -84,6 +84,10 @@ class Card extends Component {
     }
 
     showModal (event) {
+        const { id } = this.props;
+
+        !id && event.preventDefault();
+
         if (event.target.classList.contains('edit-icon')) {
             this.handeEditInconClick(event);
         } else if (event.target.parentElement.classList.contains('edit-icon')) {
@@ -96,13 +100,13 @@ class Card extends Component {
     }
 
     render () {
-        const { title } = this.props;
+        const { id, title } = this.props;
         const isEditModalOpen = this.state.isEditModalOpen;
 
         return (
             <div className = "card-info">
                 <Link
-                    to = {`/c/${this.props.id}/${title}`}
+                    to = {`/c/${id}/${title}`}
                     onClick={this.showModal}
                     className = "card"
                 >
@@ -137,9 +141,11 @@ class Card extends Component {
 
 Card.propTypes = {
     title: PropTypes.string,
-    id: PropTypes.string.isRequired,
+    id: PropTypes.string,
     onSelect: PropTypes.func
 };
+
+// const mapStateToProps = state => ({fetching: state.fetching})
 
 const mapDispatchToProps = dispatch => {
     return {

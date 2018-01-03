@@ -4,17 +4,22 @@ const Schema = mongoose.Schema;
 const cardSchema = new Schema({
     title: String,
     list: {type: Schema.Types.ObjectId, ref: 'List'},
-    board: {type: Schema.Types.ObjectId, ref: 'Board'}
-    //comments 
-    //attachments
-    
+    board: {type: Schema.Types.ObjectId, ref: 'Board'},
+    attachments: [{
+        name: String,
+        url: String
+    }]
+
+    //comments
 });
 
 cardSchema.methods.getPublicFields = function () {
     var fields = {
-        title: this.title,
         _id: this._id,
-        list: this.list
+        title: this.title,
+        list: this.list,
+        board: this.board,
+        attachments: this.attachments
     };
 
     return fields;

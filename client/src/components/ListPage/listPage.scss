@@ -47,12 +47,13 @@ body.list-page {
 .list-page__form-wrap  {
     width: 270px;
 }
-.list-container, .add-list-container {
-    margin: 0 5px;
+.list-container {
     height: 100%;
     box-sizing: border-box;
-    display: inline-block;
-    vertical-align: top;
+    white-space: nowrap;
+}
+.add-list-container {
+    box-sizing: border-box;
     white-space: nowrap;
 }
 .list-container, .list-controlls {
