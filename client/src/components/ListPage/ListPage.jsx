@@ -6,24 +6,23 @@ import PropTypes from 'prop-types';
 import './listPage.scss';
 
 import CreateListButton from '../List/CreateListButton';
-import PageTitle from './PageTitle';
+import BoardTitle from './BoardTitle';
 import Header from '../Header';
 import List from '../List';
-
+//middleware
 import { updateListMiddleware } from '../../actions/lists';
 import { deleteListMiddleware } from '../../actions/lists';
+
 import { fetchLists } from '../../actions/lists';
 import { fetchCards } from '../../actions/cards';
 import getRoute from '../../utils/getRoute';
 import history from '../../utils/history';
-
 import { showCardDetailModal } from '../../actions/modal';
 import { hideModal } from '../../actions/modal';
 
 class ListPage extends Component {
     constructor (props) {
         super(props);
-        this.title = '';
     }
 
     componentWillMount () {
@@ -56,7 +55,13 @@ class ListPage extends Component {
         }
         // Когда мы жмем назад а потом вперед
         if (C && !currentModalType && !nextModalType && cardsLength && POP) {
-            this.props.onReloadPage({id, title});
+            const card = nextProps.cards.find((item) => item._id === id);
+
+            if (card.title === title) {
+                this.props.onReloadPage({id, title});
+            } else {
+                this.props.onReloadPage({ id, title: card.title });
+            }
         } 
         if (C && currentModalType && !nextModalType) {
             history.push(`/b/${this.props.boardId}/${this.props.title}`);
@@ -72,12 +77,12 @@ class ListPage extends Component {
 
     render () {
         const { lists } = this.props;
-    
+
         return (
             <div className = "list-page">
                 <Header />
                 <div className = "list-page__wrapper">
-                    <PageTitle />
+                    <BoardTitle />
                     <div className = "list-page__container">
                         <div className = "list-page__wrap">
                             {
@@ -119,7 +124,7 @@ const mapStateToProps = state => {
         modal: state.modal,
         cards: state.cards,
         boardId: state.boardId,
-        title: state.title
+        title: state.boardTitle
     };
 };
 

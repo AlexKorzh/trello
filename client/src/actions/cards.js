@@ -10,6 +10,7 @@ import {
     END_FILE_UPLOADING
 } from '../constants/ActionTypes';
 
+import { updateModalTitle } from './modal';
 import { startFetching, endFetching } from './fetching';
 
 export const createCard = payload => {
@@ -158,7 +159,7 @@ export const getCardDetailsMiddleware = (id) => {
                 params: { id }
             }
         ).then(response => {
-            console.log('Response: ', response);
+            console.log('CARD DETAILS --->', response);
         });
     }
 }

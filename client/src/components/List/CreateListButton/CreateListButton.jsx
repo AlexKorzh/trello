@@ -36,7 +36,6 @@ class AddLisButton extends Component {
     }
 
     render () {
-        console.log(this.props);
         let formStaus = !this.state.isOpen ? 'hide' : 'show';
 
         return (

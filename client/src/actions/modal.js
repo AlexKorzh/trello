@@ -2,7 +2,8 @@ import {
     SHOW_MODAL,
     HIDE_MODAL,
     HIDE_MODAL_MANUAL,
-    CARD_DETAIL_MODAL
+    CARD_DETAIL_MODAL,
+    UPDATE_MODAL_TITLE
 } from '../constants/ActionTypes';
 
 export const showCardDetailModal = payload => {

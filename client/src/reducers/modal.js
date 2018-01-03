@@ -1,7 +1,8 @@
 import { 
     SHOW_MODAL, 
     HIDE_MODAL, 
-    HIDE_MODAL_MANUAL 
+    HIDE_MODAL_MANUAL,
+    UPDATE_MODAL_TITLE 
 } from '../constants/ActionTypes';
 
 const initialState = {
@@ -14,11 +15,9 @@ const initialState = {
 const modal = (state = initialState, action) => {
     switch (action.type) {
         case SHOW_MODAL:
-            const { modalType, modalProps } = action;
-
             return {
-                modalType,
-                modalProps
+                modalType: action.modalType,
+                modalProps: action.modalProps
             };
         case HIDE_MODAL:
             return initialState;
