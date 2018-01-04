@@ -82,6 +82,7 @@ class List extends Component {
                                         <Card 
                                             key = { index }
                                             title={ card.title }
+                                            attachments = { card.attachments }
                                             id = { card._id }
                                             updateTitle = { this.props.onUpdateCardTitle }
                                         />

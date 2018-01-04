@@ -10,19 +10,20 @@ function create (req, res, next) {
     const title = req.body.title;
     const list = req.body.list;
     const file = req.file;
-
-    console.log('req.protocol ----------------------------->', req.protocol, req.get('host'));
+    const mimetype = file.mimetype;
 
     const fileName = file && file.filename;
-    const filePath = file && file.path;
-    const serverPath = getFullPath(req);
-
-    // var resolvedPath = path.parse(filePath);
+    const fileDestination = file && file.destination;
+    const fullPath = getFullPath(req);
+    const url = (() => {
+        return `${fullPath}${fileDestination}${fileName}`;
+    })();
 
     const fields = file ?
         {title, list, board, attachments: {
             name: fileName,
-            url: filePath
+            mimetype,
+            url
         }} :
         {title, list, board};
 

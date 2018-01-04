@@ -7,6 +7,8 @@ import EditModal from './EditModal/EditModal.jsx';
 import { showCardDetailModal } from '../../actions/modal';
 import { Link, withRouter } from 'react-router-dom';
 import getRoute from '../../utils/getRoute';
+import normalize from '../../utils/normalize';
+import CardPreview from './components/CardPreview';
 
 class Card extends Component {
     constructor () {
@@ -100,17 +102,20 @@ class Card extends Component {
     }
 
     render () {
-        const { id, title } = this.props;
+        const { id, title, attachments } = this.props;
         const isEditModalOpen = this.state.isEditModalOpen;
 
         return (
             <div className = "card-info">
                 <Link
-                    to = {`/c/${id}/${title}`}
+                    to = {`/c/${id}/${normalize(title)}`}
                     onClick={this.showModal}
                     className = "card"
                 >
                     <div className = "card__wrap">
+                        <CardPreview
+                            attachments={ attachments }
+                        />
                         <div className = "card_title">
                             { title }
                             <div className = "edit-icon__wrap">

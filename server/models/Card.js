@@ -7,6 +7,7 @@ const cardSchema = new Schema({
     board: {type: Schema.Types.ObjectId, ref: 'Board'},
     attachments: [{
         name: String,
+        mimetype: String,
         url: String
     }]
 
