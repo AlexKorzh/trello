@@ -113,9 +113,12 @@ class Card extends Component {
                     className = "card"
                 >
                     <div className = "card__wrap">
-                        <CardPreview
-                            attachments={ attachments }
-                        />
+                        {
+                            attachments && attachments.length ?
+                                <CardPreview
+                                    attachments={ attachments }
+                                /> : null
+                        }
                         <div className = "card_title">
                             { title }
                             <div className = "edit-icon__wrap">

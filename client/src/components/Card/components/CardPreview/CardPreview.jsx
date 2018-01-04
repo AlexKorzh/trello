@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-// import './editModal.scss';
+import PropTypes from 'prop-types';
+
+import './cardPreview.scss';
 
 const mimetypes = {
     'image': [
@@ -14,7 +16,19 @@ class CardPreview extends Component {
     constructor () {
         super();
 
+        this.state = {
+            offsetWidth: 0
+        }
+
         this.findCover = this.findCover.bind(this);
+        this.calcHeight = this.calcHeight.bind(this);
+        this.setRef = this.setRef.bind(this);
+    }
+
+    componentDidMount () {
+        const { offsetWidth } = this.el.offsetWidth;
+
+        this.setState({ offsetWidth });
     }
 
     findCover (attachments) {
@@ -25,18 +39,39 @@ class CardPreview extends Component {
         );
     }
 
+    calcHeight (dimensions) {
+        const { height } = dimensions;
+        const { offsetWidth } = this.state;
+
+        return offsetWidth;
+    }
+
+    setRef (el) {
+        this.el = el;
+    }
+
     render () {
         const { attachments } = this.props;
-        // const cover = this.findCover(attachments).url;
-
+        const cover = this.findCover(attachments);
+        const styles = cover && {
+            backgroundImage: `url('${cover.url}')`,
+            height: `${this.calcHeight(cover.preview)}px`
+        };
+debugger;
         return (
-            <div>
-                {
-                    // cover ? <img src={cover}/> : null
-                }
-            </div>
+            <div 
+                className="card__preview"
+                style={ cover && styles }
+                ref={ this.setRef }
+            />
         );
     }
 }
+
+CardPreview.propTypes = {
+    attachments: PropTypes.arrayOf(
+        PropTypes.shape({})
+    )
+};
 
 export default CardPreview;

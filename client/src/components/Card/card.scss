@@ -25,8 +25,10 @@ $color-border: #ccc;
         }
     }
     .card__wrap {
-        padding: 8px;
         box-sizing: border-box;
+        .card_title {
+            padding: 8px;
+        }
     }
     .edit-icon {
         color: rgb(110, 110, 110) !important;
