@@ -8,7 +8,11 @@ const cardSchema = new Schema({
     attachments: [{
         name: String,
         mimetype: String,
-        url: String
+        url: String,
+        preview: {
+            height: Number,
+            width: Number
+        }
     }]
 
     //comments

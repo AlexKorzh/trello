@@ -3,27 +3,41 @@ const List = require('../models/List');
 const mongoose = require('mongoose');
 const config = require('../config');
 const getFullPath = require('../utils/getFullPath');
+const sizeOf = require('image-size');
 const path = require('path');
+const mimetypes = require('../bin/mimetypes');
 
 function create (req, res, next) {
     const board = req.body.board;
     const title = req.body.title;
     const list = req.body.list;
     const file = req.file;
-    const mimetype = file.mimetype;
 
     const fileName = file && file.filename;
+    const fileMimetype = file && file.mimetype;
     const fileDestination = file && file.destination;
     const fullPath = getFullPath(req);
     const url = (() => {
         return `${fullPath}${fileDestination}${fileName}`;
     })();
 
+    const isImage = mimetypes.image.some(
+        mimetype => mimetype === fileMimetype
+    );
+
+    const imageSize = isImage && sizeOf(file.path);
+
     const fields = file ?
         {title, list, board, attachments: {
             name: fileName,
-            mimetype,
-            url
+            mimetype: fileMimetype,
+            url,
+            preview: {
+                ...isImage && {
+                    width: imageSize.width,
+                    height: imageSize.height
+                }
+            }
         }} :
         {title, list, board};
 
@@ -33,7 +47,7 @@ function create (req, res, next) {
         if (error) return next(error);
 
         List.findByIdAndUpdate(
-            list, 
+            list,
             {$push: {cards: card}},
             {new: true, safe: true}, 
             callback
