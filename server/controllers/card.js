@@ -28,12 +28,7 @@ function create (req, res, next) {
         mimetype => mimetype === fileMimetype
     );
 
-    color(file.path, function(err, color){
-        // hex color by default 
-        console.log('color -> ', color) // '5b6c6e' 
-      })
-
-    const test = Vibrant.from(file.path).getPalette((err, palette) => {
+    const test = isImage && Vibrant.from(file.path).getPalette((err, palette) => {
         const a = palette;
 
     
