@@ -25,7 +25,6 @@ class Modal extends Component {
 
         this.el = document.createElement('div');
 
-
         this.setRef = this.setRef.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.closeModalManual = this.closeModalManual.bind(this);
@@ -35,33 +34,29 @@ class Modal extends Component {
         this.removeEventHandlers = this.removeEventHandlers.bind(this);
     }
 
-    // componentWillReceiveProps (nextProps) {
-    //     console.log('nextProps MODAL', nextProps);
-    // }
-
     componentDidMount () {
-        this.addEventHandlers();
-
         modalRoot.appendChild(this.el);
     }
     
     componentWillUnmount () {
-        // if (this.props.modal.modalType) this.props.onClose();
-        console.log('componentWillUnmount::parent');
-        this.removeEventHandlers();
         modalRoot.removeChild(this.el);
+    }
+
+    componentWillReceiveProps (nextProps) {
+        const { modalType } = nextProps.modal;
+
+        modalType ? this.addEventHandlers() : this.removeEventHandlers();
+        console.log('componentWillReceiveProps::modal', nextProps);
     }
 
     addEventHandlers () {
         document.addEventListener('keydown', this.closeModalEsc);
         document.addEventListener('click', this.handleOutsideClick);
-        // window.addEventListener('popstate', this.closeModal);
     }
 
     removeEventHandlers () {
         document.removeEventListener('keydown', this.closeModalEsc);
         document.removeEventListener('click', this.handleOutsideClick);
-        // window.addEventListener('popstate', this.closeModal);
     }
 
     closeModal () {
@@ -79,9 +74,10 @@ class Modal extends Component {
     }
 
     handleOutsideClick (e) {
-        // const outsideClick = !this.node.contains(e.target);
+        console.log('handleOutsideClick', e);
+        const outsideClick = !this.node.contains(e.target);
 
-        // if (outsideClick) this.closeModal();
+        if (outsideClick) this.closeModal();
     }
 
     setRef (node) {

@@ -6,6 +6,9 @@ const getFullPath = require('../utils/getFullPath');
 const sizeOf = require('image-size');
 const path = require('path');
 const mimetypes = require('../bin/mimetypes');
+const Vibrant = require('node-vibrant');
+
+const color = require('dominant-color');
 
 function create (req, res, next) {
     const board = req.body.board;
@@ -25,6 +28,19 @@ function create (req, res, next) {
         mimetype => mimetype === fileMimetype
     );
 
+    color(file.path, function(err, color){
+        // hex color by default 
+        console.log('color -> ', color) // '5b6c6e' 
+      })
+
+    const test = Vibrant.from(file.path).getPalette((err, palette) => {
+        const a = palette;
+
+    
+        console.log('palette ->', palette.Vibrant.getHex());
+
+    });
+
     const imageSize = isImage && sizeOf(file.path);
 
     const fields = file ?
@@ -32,11 +48,9 @@ function create (req, res, next) {
             name: fileName,
             mimetype: fileMimetype,
             url,
-            preview: {
-                ...isImage && {
-                    width: imageSize.width,
-                    height: imageSize.height
-                }
+            preview: isImage && {
+                width: imageSize.width,
+                height: imageSize.height
             }
         }} :
         {title, list, board};

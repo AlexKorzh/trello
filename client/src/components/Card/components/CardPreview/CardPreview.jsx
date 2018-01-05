@@ -26,7 +26,7 @@ class CardPreview extends Component {
     }
 
     componentDidMount () {
-        const { offsetWidth } = this.el.offsetWidth;
+        const { offsetWidth } = this.el;
 
         this.setState({ offsetWidth });
     }
@@ -40,10 +40,11 @@ class CardPreview extends Component {
     }
 
     calcHeight (dimensions) {
-        const { height } = dimensions;
+        const { height, width } = dimensions;
         const { offsetWidth } = this.state;
+        const cardHeight = (height * offsetWidth) / width;
 
-        return offsetWidth;
+        return cardHeight;
     }
 
     setRef (el) {
@@ -57,7 +58,7 @@ class CardPreview extends Component {
             backgroundImage: `url('${cover.url}')`,
             height: `${this.calcHeight(cover.preview)}px`
         };
-debugger;
+
         return (
             <div 
                 className="card__preview"
