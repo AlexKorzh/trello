@@ -11,6 +11,8 @@ import { updateCardTitleMiddleware } from '../../../../actions/cards';
 
 import './cardDetailModal.scss';
 
+import CommentPage from '../../components/../../CommentPage/CommentPage.jsx';
+
 class CardDetailModal extends Component {
     constructor (props) {
         super(props);
@@ -42,6 +44,8 @@ class CardDetailModal extends Component {
                 CardDetailModal!!!<br/>
                 Title: {title}<br/>
                 id: { this.props.id}
+
+                <CommentPage />
             </div>
         );
     }

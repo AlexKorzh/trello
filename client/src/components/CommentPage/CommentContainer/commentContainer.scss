@@ -1,0 +1,71 @@
+//Variables
+$white-bg: #fff;
+$gray-color: #838c91;
+
+.comment-container {
+    &.editing {
+        .comment__text-wrap {
+            display: none;
+        }
+        .comment {
+            display: block;
+        }
+    }
+    &.no-editing {
+        .comment__text-wrap {
+            display: block;
+        }
+        .comment {
+            display: none;
+        }
+    }
+    .comment__text-wrap {
+        margin: 10px 0px;
+        box-sizing: border-box;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #e2e4e6;
+    }
+    .comment__text {
+        display: inline-block;
+        padding: 9px 11px;
+        border-radius: 3px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.23);
+        p {
+            margin: 0px;
+        }
+    }
+    .comment-controls {
+        margin: 5px 0px;
+        .date {
+            .date-field {
+                &:hover {
+                    color: #4d4d4d;
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+            }
+        }
+        .comment-controls__text {
+            color: $gray-color;
+            font-size: 12px;
+            margin: 0 2px;
+        }
+        .buttons {
+            .buttons__edit, 
+            .buttons__delete {
+                text-decoration: underline;
+                cursor: pointer;
+                &:hover {
+                    color: #4d4d4d;
+                }
+            }
+        }
+    }
+}
+.comment__text, 
+    .comment__textarea, 
+    .comment__editarea  {
+        font-size: 14px;
+        background: $white-bg;
+}
+

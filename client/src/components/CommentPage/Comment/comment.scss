@@ -1,0 +1,29 @@
+.comment {
+    margin: 10px 0;
+    .comment-frame {
+        border-radius: 3px;
+        overflow: hidden;
+        box-shadow: 0 1px 2px rgba(0,0,0,.23);
+    }
+    .comment__textarea {
+        background: none;
+        margin: 0;
+        min-height: 75px;
+        padding: 9px 11px;
+        padding-bottom: 0;
+        font-size: 14px;
+        width: 100%;
+        resize: none;
+        border: none;
+        outline: none;
+        display: block;
+    }
+    .comment__button-controls {
+        display: flex;
+        align-items: center;
+        margin-top: 15px;
+        .comment__button-close {
+            margin-left: 10px;
+        }
+    }
+}

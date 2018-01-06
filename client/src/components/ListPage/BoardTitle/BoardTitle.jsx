@@ -17,9 +17,13 @@ class BoardTitle extends Component {
     }
 
     componentWillReceiveProps (nextProps) {
-        const { boardId } = nextProps;
+        const { boardId, title } = nextProps;
 
-        this.props.onFetchBoardTitle(boardId);
+        if (!title) {
+            this.props.onFetchBoardTitle(boardId);
+        } else if (nextProps.title === this.props.title) {
+            this.props.onFetchBoardTitle(boardId);
+        }
     }
 
     changeTitle () {
