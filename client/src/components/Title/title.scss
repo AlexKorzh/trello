@@ -1,3 +1,5 @@
+@import '../../assets/styles/variables.scss';
+
 .edit-area {
     width: 100%;
     position: relative;
@@ -21,6 +23,8 @@
         padding: 0 15px 0 0;
         width: 100%;
         font-size: 20px;
+        font-weight: bold;
+        color: $color-primary;
         line-height: 24px;
         height: 26px;
         min-height: 24px;

@@ -2,15 +2,22 @@ import React, { Component } from 'react';
 import './card.scss';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import EditIcon from 'material-ui-icons/edit';
+// import EditIcon from 'material-ui-icons/edit';
+import Icon from '../Icon';
+
 import EditModal from './EditModal/EditModal.jsx';
 import { showCardDetailModal } from '../../actions/modal';
 import { Link, withRouter } from 'react-router-dom';
 import getRoute from '../../utils/getRoute';
+import normalize from '../../utils/normalize';
+
+import CardPreview from './components/CardPreview';
+import Badges from './components/Badges';
 
 class Card extends Component {
     constructor () {
         super();
+
         this.handeEditInconClick = this.handeEditInconClick.bind(this);
         this.findCardPosition = this.findCardPosition.bind(this);
         this.handleEditModalClose = this.handleEditModalClose.bind(this);
@@ -23,30 +30,6 @@ class Card extends Component {
             clientX: '',
             clientY: ''
         }
-    }
-
-    // componentDidMount () {
-    //     const { id } = this.props.match.params;
-    //     const cardId = this.props.id;
-    //     const { title, onSelect } = this.props;
-    //     const { root } = getRoute();
-
-    //     if (cardId === id) {
-    //         onSelect({id, title});
-    //         console.log('SHOW_MODAL::ON_SELECT', this.props)
-    //     }
-    // }
-
-    componentWillReceiveProps (nextProps) {
-        console.log('componentWillReceiveProps::Card', nextProps);
-        // const { id, title } = nextProps.match.params;
-        // const { modalType } = nextProps.modal;
-        // const { root } = getRoute();
-        
-        // if (root === 'c' && !modalType && nextProps.history.action === 'POP') {
-        //     this.props.onSelect({id, title});
-        //     console.log('SHOW_MODAL::ON_RELOAD');
-        // }
     }
 
     handleUpdateTitle () {
@@ -88,13 +71,7 @@ class Card extends Component {
 
         !id && event.preventDefault();
 
-        if (event.target.classList.contains('edit-icon')) {
-            event.preventDefault();
-
-            this.handeEditInconClick(event);
-        } else if (event.target.parentElement.classList.contains('edit-icon')) {
-            event.preventDefault();
-            
+        if (event.target.classList.contains('edit-icon__card')) {
             this.handeEditInconClick(event);
         } else {
             const { id, title, onSelect } = this.props;
@@ -104,24 +81,38 @@ class Card extends Component {
     }
 
     render () {
-        const { id, title } = this.props;
+        const { id, title, attachments } = this.props;
         const isEditModalOpen = this.state.isEditModalOpen;
+        const isAttachments = attachments && attachments.length;
 
         return (
             <div className = "card-info">
                 <Link
-                    to = {`/c/${id}/${title}`}
+                    to = {`/c/${id}/${normalize(title)}`}
                     onClick={this.showModal}
                     className = "card"
                 >
                     <div className = "card__wrap">
+                        {
+                            isAttachments ?
+                                <CardPreview
+                                    attachments={ attachments }
+                                /> : null
+                        }
                         <div className = "card_title">
                             { title }
-                            <div className = "edit-icon__wrap">
-                                <EditIcon 
-                                    className = "edit-icon"
-                                />
-                            </div>
+                            <Icon
+                                name='edit'
+                                className='edit-icon__card'
+                                role='button'
+                                onClick={ this.handeEditInconClick }
+                            />
+                            {
+                                isAttachments ?
+                                    <Badges
+                                        items={attachments.length}
+                                    /> : null
+                            }
                         </div>
                     </div>
                     

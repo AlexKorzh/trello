@@ -7,7 +7,12 @@ const cardSchema = new Schema({
     board: {type: Schema.Types.ObjectId, ref: 'Board'},
     attachments: [{
         name: String,
-        url: String
+        mimetype: String,
+        url: String,
+        preview: {
+            height: Number,
+            width: Number
+        }
     }]
 
     //comments

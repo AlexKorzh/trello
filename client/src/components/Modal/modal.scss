@@ -6,7 +6,7 @@ $bg-window: #edeff0;
     top: 0;
     left: 0;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     height: 100%;
     width: 100%;
@@ -16,7 +16,6 @@ $bg-window: #edeff0;
     .modal-window {
         position: relative;
         padding: 20px;
-        margin: 54px 0 0;
         min-width: 760px;
         background: $bg-window;
         border-radius: 2px;

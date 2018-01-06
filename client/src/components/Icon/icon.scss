@@ -1,0 +1,16 @@
+$icon-edit: #edeff0;
+$icon-edit-active: #4d4d4d;
+
+$icon-attachment: #9da6ab;
+
+.icon {
+    &-edit {
+        color: $icon-edit;
+        &:hover {
+            color: $icon-edit-active;
+        }
+    }
+    &-attachment {
+        color: $icon-attachment;
+    }
+}

@@ -3,7 +3,12 @@ const List = require('../models/List');
 const mongoose = require('mongoose');
 const config = require('../config');
 const getFullPath = require('../utils/getFullPath');
+const sizeOf = require('image-size');
 const path = require('path');
+const mimetypes = require('../bin/mimetypes');
+const Vibrant = require('node-vibrant');
+
+const color = require('dominant-color');
 
 function create (req, res, next) {
     const board = req.body.board;
@@ -11,18 +16,37 @@ function create (req, res, next) {
     const list = req.body.list;
     const file = req.file;
 
-    console.log('req.protocol ----------------------------->', req.protocol, req.get('host'));
-
     const fileName = file && file.filename;
-    const filePath = file && file.path;
-    const serverPath = getFullPath(req);
+    const fileMimetype = file && file.mimetype;
+    const fileDestination = file && file.destination;
+    const fullPath = getFullPath(req);
+    const url = (() => {
+        return `${fullPath}${fileDestination}${fileName}`;
+    })();
 
-    var resolvedPath = path.parse(filePath);
+    const isImage = mimetypes.image.some(
+        mimetype => mimetype === fileMimetype
+    );
+
+    const test = isImage && Vibrant.from(file.path).getPalette((err, palette) => {
+        const a = palette;
+
+    
+        console.log('palette ->', palette.Vibrant.getHex());
+
+    });
+
+    const imageSize = isImage && sizeOf(file.path);
 
     const fields = file ?
         {title, list, board, attachments: {
             name: fileName,
-            url: filePath
+            mimetype: fileMimetype,
+            url,
+            preview: isImage && {
+                width: imageSize.width,
+                height: imageSize.height
+            }
         }} :
         {title, list, board};
 
@@ -32,7 +56,7 @@ function create (req, res, next) {
         if (error) return next(error);
 
         List.findByIdAndUpdate(
-            list, 
+            list,
             {$push: {cards: card}},
             {new: true, safe: true}, 
             callback
