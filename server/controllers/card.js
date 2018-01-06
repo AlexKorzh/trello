@@ -8,8 +8,6 @@ const path = require('path');
 const mimetypes = require('../bin/mimetypes');
 const Vibrant = require('node-vibrant');
 
-const color = require('dominant-color');
-
 function create (req, res, next) {
     const board = req.body.board;
     const title = req.body.title;
@@ -28,13 +26,13 @@ function create (req, res, next) {
         mimetype => mimetype === fileMimetype
     );
 
-    const test = isImage && Vibrant.from(file.path).getPalette((err, palette) => {
-        const a = palette;
+        // const test = isImage && Vibrant.from(file.path).getPalette((err, palette) => {
+        //     const a = palette;
 
-    
-        console.log('palette ->', palette.Vibrant.getHex());
+        
+        //     console.log('palette ->', palette.Vibrant.getHex());
 
-    });
+        // });
 
     const imageSize = isImage && sizeOf(file.path);
 
