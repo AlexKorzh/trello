@@ -8,6 +8,8 @@ import BoardButton from './BoardButton/BoardButton.jsx';
 import BoardCard from './BoardCard/BoardCard.jsx';
 import List from '../List/List.jsx';
 
+import Icon from '../Icon';
+
 import { getBoardsMiddleware } from '../../actions/boards';
 import { deleteBoardMiddleware } from '../../actions/boards';
 
@@ -23,6 +25,15 @@ class BoardPage extends Component {
                 <Header />
                 <div className = "board-wrap container">
                     <div className = "list-wrap">
+                        <div className="list-title__wrapper">
+                            <Icon
+                                name="person_outline"
+                                className="list-title__icon"
+                            />
+                            <div className="list-title">
+                                Personal Boards
+                            </div>
+                        </div>
                         <div className="row">
                             {
                                 boards.map((board, index) => {

@@ -3,3 +3,7 @@
 1. Remove bootstrap from the project as well as from the package.json
 2. Remove font-awesome from the project as well as from the package.json
 3. Replace svg icons with font one. Remove material-ui from the package.json
+4. Create font mixin if needed
+5. Detect light or dark color and add corresponding class to the close icon in the cover component
+6. Think about hover in cover
+7. Prevent card pulling from the list.

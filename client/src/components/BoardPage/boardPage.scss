@@ -1,6 +1,27 @@
 .board-page {
     .board-wrap {
         padding: 30px 0px;
+        .list-title__wrapper {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            .list-title__icon {
+                font-size: 29px;
+                margin: 0 10px;
+            }
+            .list-title {
+                line-height: 24px;
+                margin: 3px 0 0;
+                font-size: 16px;
+                font-weight: 700;
+            }
+        }
+        .row {
+            margin: 0;
+        }
+        .col-3 {
+            padding: 0 8px;
+        }
         .add-board {
             position: relative;
             cursor: pointer;

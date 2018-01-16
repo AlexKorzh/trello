@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import './cardPreview.scss';
+import findCover from '../../../../utils/findCover';
 
-const mimetypes = {
-    'image': [
-        'image/gif',
-        'image/jpeg',
-        'image/png',
-        'image/svg+xml'
-    ]
-}
+import './cardPreview.scss';
 
 class CardPreview extends Component {
     constructor () {
@@ -20,7 +13,6 @@ class CardPreview extends Component {
             offsetWidth: 0
         }
 
-        this.findCover = this.findCover.bind(this);
         this.calcHeight = this.calcHeight.bind(this);
         this.setRef = this.setRef.bind(this);
     }
@@ -29,14 +21,6 @@ class CardPreview extends Component {
         const { offsetWidth } = this.el;
 
         this.setState({ offsetWidth });
-    }
-
-    findCover (attachments) {
-        return attachments.find(
-            attachment => mimetypes.image.some(
-                mimetype => mimetype === attachment.mimetype
-            )
-        );
     }
 
     calcHeight (dimensions) {
@@ -53,7 +37,7 @@ class CardPreview extends Component {
 
     render () {
         const { attachments } = this.props;
-        const cover = this.findCover(attachments);
+        const cover = findCover(attachments);
         const styles = cover && {
             backgroundImage: `url('${cover.url}')`,
             height: `${this.calcHeight(cover.preview)}px`

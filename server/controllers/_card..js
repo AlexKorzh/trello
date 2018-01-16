@@ -13,7 +13,7 @@ function create (req, res, next) {
     const title = req.body.title;
     const list = req.body.list;
     const file = req.file;
-    console.log('========== TWO, HANDLE REQUEST ========');
+
     const fileName = file && file.filename;
     const fileMimetype = file && file.mimetype;
     const fileDestination = file && file.destination;

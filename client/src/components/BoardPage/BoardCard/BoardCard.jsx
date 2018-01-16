@@ -32,7 +32,7 @@ class BoardCard extends Component {
         return (
             <div className="col-3">
                 <Link
-                    className = "ard-custom board-card text-white bg-card p-2" 
+                    className = "card-custom board-card text-white bg-card p-2" 
                     to = {`/b/${id}/${title}`}>
                     <div>
                         { this.props.title }

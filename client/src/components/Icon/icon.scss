@@ -1,8 +1,11 @@
 $icon-edit: #edeff0;
 $icon-edit-active: #4d4d4d;
-$icon-attachment: #9da6ab;
+$icon-attachment: #999999;
 
 .icon {
+    &-close {
+        z-index: 5;
+    }
     &-edit {
         color: $icon-edit;
         &:hover {
@@ -10,6 +13,9 @@ $icon-attachment: #9da6ab;
         }
     }
     &-attachment {
+        color: $icon-attachment;
+    }
+    &-person_outline {
         color: $icon-attachment;
     }
 }

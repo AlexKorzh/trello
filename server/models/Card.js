@@ -10,6 +10,7 @@ const cardSchema = new Schema({
         mimetype: String,
         url: String,
         preview: {
+            color: String,
             height: Number,
             width: Number
         }

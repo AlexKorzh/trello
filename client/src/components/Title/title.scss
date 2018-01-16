@@ -1,20 +1,25 @@
 @import '../../assets/styles/variables.scss';
 
+$border-color-active: #0079bf;
+$box-shadow: #0284c6;
+
+@mixin textarea-styles () {
+    border: 1px solid $border-color-active;
+    box-shadow: 0 0 2px 0 $box-shadow;
+    background: rgba(255, 255, 255, 0.9);
+}
+
 .edit-area {
-    width: 100%;
+    width: calc(100% - 30px);
     position: relative;
     &.no-editing {
-        .textarea {
-            cursor: pointer;
-        }
         .close {
             display: none;
         }
     } 
     &.editing {
         .textarea {
-            background-color: hsla(0,0%,100%,.9);
-            border: 1px solid lightblue;
+            @include textarea-styles();
         }
     }
     
@@ -33,7 +38,11 @@
         background: transparent;
         border-radius: 3px;
         border: 1px solid transparent;
+        overflow: hidden;
+        cursor: text;
+        transition: background 85ms ease-in, border-color 85ms ease-in;
         &:focus {
+            @include textarea-styles();
             outline: none !important;
         }
     }

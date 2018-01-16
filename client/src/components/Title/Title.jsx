@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import Icon from '../Icon';
+
 import './title.scss';
 
 class Title extends Component {
@@ -52,13 +55,19 @@ class Title extends Component {
                     onClick = {this.handleTitleClick}
                     onKeyPress = {this.handeKeyPress}
                 />
-                <button
+                <Icon
+                    className="close"
+                    type="button"
+                    name="close"
+                    onClick={ this.handleCloseClick }
+                />
+                {/* <button
                     onClick={this.handleCloseClick}
                     type="button"
                     className="close"
                     aria-label="Close">
                     <span aria-hidden="true">&times;</span>
-                </button>
+                </button> */}
             </div>
         );
     }

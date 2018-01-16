@@ -21,6 +21,19 @@ $fa-font-path: "~font-awesome/fonts";
          url('../../assets/fonts/MaterialIcons-Regular.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url('../../assets/fonts/HelveticaNeue.eot');
+    src: url('../../assets/fonts/HelveticaNeue.eot?#iefix') format('embedded-opentype'),
+        url('../../assets/fonts/HelveticaNeue.woff2') format('woff2'),
+        url('../../assets/fonts/HelveticaNeue.woff') format('woff'),
+        url('../../assets/fonts/HelveticaNeue.ttf') format('truetype'),
+        url('../../assets/fonts/HelveticaNeue.svg#HelveticaNeue') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 * {
     margin: 0px;
     padding: 0px;
@@ -30,6 +43,11 @@ html,
 body {
     width: 100%;
     height: 100%;
+}
+
+body {
+    font: 14px Arial, Helvetica, sans-serif;
+    line-height: 18px;
 }
 
 #app {
@@ -207,7 +225,7 @@ body {
     }
 }
 
-.icon-close {
+.icon-close { /// move to icons
     color: $icon-dark;
     transition: color 0.15s linear;
     cursor: pointer;

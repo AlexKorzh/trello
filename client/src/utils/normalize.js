@@ -1,12 +1,13 @@
 const normalize = (text) => {
     const patterns = {
-        'whitespace': / /g,
+        'whitespaces': /[\s-]+/g,
         'dot': /\./g
     };
 
     return text
-        .replace(patterns.whitespace, '-')
-        .replace(patterns.dot, '');
+        .replace(patterns.whitespaces, '-')
+        .replace(patterns.dot, '')
+        .toLowerCase();
 }
 
 export default normalize;

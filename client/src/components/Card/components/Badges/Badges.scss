@@ -1,9 +1,10 @@
-$items-color: #9da6ab;
+$items-color: #444444;
 
 .badges {
     display: flex;
     align-items: center;
     padding: 0 3px;
+    margin-top: 5px;
     .badges__items {
         font-size: 12px;
         margin-left: 3px;
