@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Icon from '../../../Icon';
 
-import './Badge.scss';
+import './badge.scss';
 
 const Badge = props => {
     const { items, className, name } = props;

@@ -86,6 +86,7 @@ class Card extends Component {
         !id && event.preventDefault();
 
         if (event.target.classList.contains('edit-icon__card')) {
+            event.preventDefault();
             this.handeEditInconClick(event);
         } else {
             const { title, onSelect } = this.props;

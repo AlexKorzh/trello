@@ -54,7 +54,6 @@ class Header extends Component {
         return (
             <header className="header">
                 <Link to = "/" className = "logo-wrap logo-text">
-                    {/* <img className = "logo" src = {logo} alt = "logo"/> */}
                     Kanban
                 </Link>
                 <ul className = "nav nav-pills">

@@ -17,6 +17,8 @@ const MODAL_COMPONENTS = {
     CARD_DETAIL_MODAL: CardDetailModal
 }
 
+import Icon from '../Icon';
+
 const modalRoot = document.getElementById('modal-root');
 
 class Modal extends Component {
@@ -103,13 +105,12 @@ class Modal extends Component {
                         className="modal-window"
                         ref={ this.setRef }
                     >
-                        <i
-                            className="material-icons icon-close modal-icon-close"
+                        <Icon
+                            className="modal-icon-close"
+                            name="close"
                             role="button"
                             onClick={ this.closeModalManual }
-                        >
-                        close
-                        </i>
+                        />
                         <SpecificModal {...modalProps} />
                     </div>
                 </div>

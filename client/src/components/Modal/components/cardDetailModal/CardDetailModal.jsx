@@ -9,8 +9,11 @@ import Title from '../../../Title/Title.jsx';
 import { getCardDetailsMiddleware } from '../../../../actions/cards';
 import { updateCardTitleMiddleware } from '../../../../actions/cards';
 
+import findCover from '../../../../utils/findCover';
+
 import './cardDetailModal.scss';
 
+import Cover from './components/Cover';
 import CommentPage from '../../components/../../CommentPage/CommentPage.jsx';
 import SidebarContainer from '../../../SidebarContainer/SidebarContainer.jsx';
 
@@ -33,22 +36,31 @@ class CardDetailModal extends Component {
     }
 
     render () {
-        const title = this.props.card.title;
+        const { card } = this.props;
+        const { title, attachments } = card;
+        const itemWithCover = attachments.length && findCover(attachments);
 
-        return (
-            <div>
-                <Title 
-                    title = {title}
-                    updateTitle = {this.props.onUpdateCardTitle}
-                    id = {this.props.id} 
-                />
-                CardDetailModal!!!<br/>
-                Title: {title}<br/>
-                id: {this.props.id}
-                <div className = "modal-wrap">
-                    <CommentPage card = {this.props.card}/>
+        return (  
+            <div className="card-detail__wrapper">
+                { itemWithCover ?
+                    <Cover
+                        cover = { itemWithCover }
+                    /> : null
+                }
+                <div className="card-detail__content">
+                    <Title 
+                        title = {title}
+                        updateTitle = {this.props.onUpdateCardTitle}
+                        id = {this.props.id} 
+                    />
+                    CardDetailModal!!!<br/>
+                    Title: {title}<br/>
+                    id: { this.props.id}
+                    <div className = "modal-wrap">
+                        <CommentPage card = {this.props.card}/>
+                    </div>
+                    <SidebarContainer card = {this.props.card}/>
                 </div>
-                <SidebarContainer card = {this.props.card}/>
             </div>
         );
     }

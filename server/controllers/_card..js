@@ -13,7 +13,7 @@ function create (req, res, next) {
     const title = req.body.title;
     const list = req.body.list;
     const file = req.file;
-    console.log('========== TWO, HANDLE REQUEST ========');
+
     const fileName = file && file.filename;
     const fileMimetype = file && file.mimetype;
     const fileDestination = file && file.destination;
@@ -96,16 +96,6 @@ const updateTitle = (req, res) => {
       });
 };
 
-function deleteCard (req, res, next) {
-    const id = req.body.id;
-    
-    Card.findById({_id:id}, function(err, card) {
-        card.remove(function (err) {
-            res.send({card: id});
-        });
-    });
-}
-
 function getAllCards (req, res) {
     const lists = req.body.lists;
 
@@ -133,91 +123,7 @@ function details (req, res) {
       });
 }
 
-function addComment (req, res) {
-    const id = req.body.id;
-    const comment = {
-        body: req.body.text,
-        date: req.body.date
-    }
-
-    Card.findByIdAndUpdate(
-        id, 
-        {$push: {comments: comment}},
-        {new: true, safe: true}, 
-        callback
-    );
-
-    function callback (err, card) {
-        if (err) return handleError(err);
-        
-        const response = card.getPublicFields();
-
-        res.send({
-            message: 'New comment successfully added',
-            card: response
-        });
-    }
-}
-
-function updateComment (req, res) {
-    const id = req.body.id;
-    const commentId = req.body.commentId;
-    const comment = {
-        body: req.body.text,
-        date: req.body.date
-    }
-
-    Card.findOneAndUpdate(      
-        { "_id": id, "comments._id": commentId },
-        { 
-            "$set": {
-                "comments.$.body": comment.body,
-                "comments.$.date": comment.date
-            }
-        },
-        {new: true, safe: true},
-        callback
-    );
-
-    function callback (err, card) {
-        if (err) return err;
-        const response = card.getPublicFields();
-
-        res.send({
-            message: 'New comment successfully updated',
-            card: response
-        });
-    }    
-}
-
-function deleteComment (req, res) {
-    const id = req.body.id;
-    const commentId = req.body.commentId;
-
-    Card.findByIdAndUpdate(
-        id, 
-        {$pull: {comments: { _id: commentId } }},
-        {new: true, safe: true, multi: true}, 
-        callback
-    );
-
-    function callback (err, card) {
-        if (err) return handleError(err);
-        
-        const response = card.getPublicFields();
-
-        res.send({
-            message: 'New comment successfully removed',
-            card: response
-        });
-    }
-}
-
 exports.create = create;
 exports.getAllCards = getAllCards;
 exports.updateTitle = updateTitle;
 exports.details = details;
-exports.addComment = addComment;
-exports.updateComment = updateComment;
-exports.deleteComment = deleteComment;
-exports.deleteCard = deleteCard;

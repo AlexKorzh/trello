@@ -1,13 +1,13 @@
-$items-color: #9da6ab;
+$items-color: #444444;
 
 .badge {
     display: flex;
     align-items: center;
     padding: 0 3px;
     .badge__items {
+        margin-left: 3px;
         font-size: 12px;
         font-weight: 300;
-        margin-left: 3px;
         color: $items-color;
     }
 }

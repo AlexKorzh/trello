@@ -1,18 +1,20 @@
 $icon-edit: #edeff0;
 $icon-edit-active: #4d4d4d;
-$icon-attachment: #9da6ab;
+$icon-attachment: #999999;
 
 .icon {
+    &-close {
+        z-index: 5;
+    }
     &-edit {
         color: $icon-edit;
         &:hover {
             color: $icon-edit-active;
         }
     }
-    &-attachment {
-        color: $icon-attachment;
-    }
-    &-chat_bubble_outline {
+    &-attachment,
+    &-chat_bubble_outline,
+    &-person_outline {
         color: $icon-attachment;
     }
 }
