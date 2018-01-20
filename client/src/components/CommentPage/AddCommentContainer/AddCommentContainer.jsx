@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import Comment from '../Comment/Comment.jsx';
 
 class AddCommentContainer extends Component {
-    constructor () {
-        super();
+    constructor (props) {
+        super(props);
         this.state = {
             isCommentExits: false
         }
         this.handleChange = this.handleChange.bind(this);
+        this.handleCreateComment = this.handleCreateComment.bind(this);
+        this.resetState = this.resetState.bind(this);
     }
 
     handleChange () {
@@ -18,6 +20,22 @@ class AddCommentContainer extends Component {
         }
     }
     
+    handleCreateComment () {
+        const comment = {
+            text: this.commentEditArea.value,
+            cardId: this.props.cardId,
+            date: new Date()
+        };
+    
+        this.props.addComment(comment);
+        this.resetState();
+    }
+
+    resetState () {
+        this.commentEditArea.value = '';
+        this.setState({isCommentExits: false});
+    }
+
     render () {
         const commentBtnStatus = this.state.isCommentExits;
 
@@ -29,6 +47,7 @@ class AddCommentContainer extends Component {
                     placeholder = "Напишите комментарий..."
                     textAreaRef = {el => this.commentEditArea = el}
                     handleChange = {this.handleChange} 
+                    handleClick = {this.handleCreateComment}
                     btnStatus = {commentBtnStatus}
                 />
             </div>

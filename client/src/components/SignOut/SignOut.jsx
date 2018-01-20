@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './signOut.scss';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/users';
 import Header from '../../components/Header/Header.jsx';
@@ -16,7 +17,7 @@ class SignOut extends Component {
         return (
             <div className = "signout-page">
                 <Header />
-                <div>Sorry to see you go...</div>
+                <div className = "signout-page__text">Sorry to see you go... :(</div>
             </div>
         );
     }

@@ -36,18 +36,20 @@ class Modal extends Component {
 
     componentDidMount () {
         modalRoot.appendChild(this.el);
+        this.addEventHandlers(); 
     }
     
     componentWillUnmount () {
         modalRoot.removeChild(this.el);
+        this.removeEventHandlers();
     }
 
-    componentWillReceiveProps (nextProps) {
-        const { modalType } = nextProps.modal;
+    // componentWillReceiveProps (nextProps) {
+    //     const { modalType } = nextProps.modal;
 
-        modalType ? this.addEventHandlers() : this.removeEventHandlers();
-        console.log('componentWillReceiveProps::modal', nextProps);
-    }
+    //     modalType ? this.addEventHandlers() : this.removeEventHandlers();
+    //     console.log('componentWillReceiveProps::modal', nextProps);
+    // }
 
     addEventHandlers () {
         document.addEventListener('keydown', this.closeModalEsc);
@@ -74,8 +76,7 @@ class Modal extends Component {
     }
 
     handleOutsideClick (e) {
-        console.log('handleOutsideClick', e);
-        const outsideClick = !this.node.contains(e.target);
+        const outsideClick = e.target.classList.contains('modal-overlay');
 
         if (outsideClick) this.closeModal();
     }

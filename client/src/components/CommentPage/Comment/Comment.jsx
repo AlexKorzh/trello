@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import './comment.scss';
 
 class Comment extends Component {
-    constructor () {
-        super();
+    constructor (props) {
+        super(props);
     }
 
     render () {
@@ -23,7 +23,11 @@ class Comment extends Component {
                 <div className="comment__button-controls">
                     <button
                         disabled = {!this.props.btnStatus} 
-                        className = "comment__button btn btn-success">{this.props.buttonText}</button>
+                        className = "comment__button btn btn-success"
+                        onClick = {this.props.handleClick} 
+                    >
+                        {this.props.buttonText}
+                    </button>
                     <i
                         className = "material-icons icon-close comment__button-close"
                         role = "button"

@@ -13,9 +13,11 @@ const cardSchema = new Schema({
             height: Number,
             width: Number
         }
+    }],
+    comments: [{
+        body: String,
+        date: Date
     }]
-
-    //comments
 });
 
 cardSchema.methods.getPublicFields = function () {
@@ -24,7 +26,8 @@ cardSchema.methods.getPublicFields = function () {
         title: this.title,
         list: this.list,
         board: this.board,
-        attachments: this.attachments
+        attachments: this.attachments,
+        comments: this.comments
     };
 
     return fields;

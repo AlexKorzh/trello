@@ -52,7 +52,6 @@ function getTitle (req, res) {
         .then(sendResponse);
 
     function sendResponse (board) {
-        console.log('BOARD ----> ',board);
         res.send({board: board});
         done();
     }

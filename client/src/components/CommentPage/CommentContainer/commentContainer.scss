@@ -3,6 +3,7 @@ $white-bg: #fff;
 $gray-color: #838c91;
 
 .comment-container {
+    border-bottom: 1px solid #e2e4e6;
     &.editing {
         .comment__text-wrap {
             display: none;
@@ -22,8 +23,6 @@ $gray-color: #838c91;
     .comment__text-wrap {
         margin: 10px 0px;
         box-sizing: border-box;
-        padding-bottom: 10px;
-        border-bottom: 1px solid #e2e4e6;
     }
     .comment__text {
         display: inline-block;

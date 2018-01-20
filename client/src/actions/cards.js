@@ -6,11 +6,15 @@ import {
     GET_CARDS,
     UPDATE_CARD_TITLE,
     GET_CARD_DETAILS,
+    DELETE_CARD,
     START_FILE_UPLOADING,
-    END_FILE_UPLOADING
+    END_FILE_UPLOADING,
+    ADD_COMMENT,
+    UPDATE_COMMENT,
+    DELETE_COMMENT
 } from '../constants/ActionTypes';
 
-import { updateModalTitle } from './modal';
+import { updateModalTitle, hideModal } from './modal';
 import { startFetching, endFetching } from './fetching';
 
 export const createCard = payload => {
@@ -51,6 +55,34 @@ export const updateCardTitle = payload => {
 export const getCardDetails = payload => {
     return {
         type: GET_CARD_DETAILS,
+        payload
+    }
+}
+
+export const deleteCard = payload => {
+    return {
+        type: DELETE_CARD,
+        payload
+    }
+}
+
+export const addComment = payload => {
+    return {
+        type: ADD_COMMENT,
+        payload
+    }
+}
+
+export const updateComment = payload => {
+    return {
+        type: UPDATE_COMMENT,
+        payload
+    }
+}
+
+export const deleteComment = payload => {
+    return {
+        type: DELETE_COMMENT,
         payload
     }
 }
@@ -150,6 +182,19 @@ export const fetchCards = (lists) => dispatch => {
     });
 }
 
+export const deleteCardMiddleware = id => {
+    return dispatch => {
+        axios.post(
+            `${currentHost}/deleteCard`,
+            {id},
+            {headers: { authorization: token.get() }}
+        ).then(response => {
+            dispatch(hideModal());
+            dispatch(deleteCard(response.data.card));
+        });
+    }
+}
+
 export const getCardDetailsMiddleware = (id) => {
     return dispatch => {
         axios.get(
@@ -160,6 +205,51 @@ export const getCardDetailsMiddleware = (id) => {
             }
         ).then(response => {
             console.log('CARD DETAILS --->', response);
+        });
+    }
+}
+
+//Comments
+export const addCommentMiddleware = comment => {
+    return dispatch => {
+        axios.post(
+            `${currentHost}/addComment`,
+            {id: comment.cardId, text: comment.text, date: comment.date},
+            {headers: { authorization: token.get() }}
+        ).then(response => {
+            dispatch(addComment(response.data.card));
+        });
+    }
+}
+
+export const updateCommentMiddleware = comment => {
+    return dispatch => {
+        axios.post(
+            `${currentHost}/updateComment`,
+            {
+                id: comment.cardId,
+                commentId: comment.commentId, 
+                text: comment.text, 
+                date: comment.date
+            },
+            {headers: { authorization: token.get() }}
+        ).then(response => {
+            dispatch(updateComment(response.data.card));
+        });
+    }
+}
+
+export const deleteCommentMiddleware = comment => {
+    return dispatch => {
+        axios.post(
+            `${currentHost}/deleteComment`,
+            {
+                id: comment.cardId,
+                commentId: comment.commentId 
+            },
+            {headers: { authorization: token.get() }}
+        ).then(response => {
+            dispatch(deleteComment(response.data.card));
         });
     }
 }

@@ -12,6 +12,7 @@ import { updateCardTitleMiddleware } from '../../../../actions/cards';
 import './cardDetailModal.scss';
 
 import CommentPage from '../../components/../../CommentPage/CommentPage.jsx';
+import SidebarContainer from '../../../SidebarContainer/SidebarContainer.jsx';
 
 class CardDetailModal extends Component {
     constructor (props) {
@@ -20,15 +21,15 @@ class CardDetailModal extends Component {
 
     componentWillMount () {
         const { _id : id } = this.props.card;
-        console.log('componentWillMount::CardDetailModal');
+
         this.props.fetchData(id);
+        document.body.classList.add('modal-open');
     }
 
     componentWillUnmount () {
-        console.log('componentWillUnmount::CardDetailModal');
         const { boardId } = this.props;
 
-        console.log(boardId);
+        document.body.classList.remove('modal-open');
     }
 
     render () {
@@ -43,9 +44,11 @@ class CardDetailModal extends Component {
                 />
                 CardDetailModal!!!<br/>
                 Title: {title}<br/>
-                id: { this.props.id}
-
-                <CommentPage />
+                id: {this.props.id}
+                <div className = "modal-wrap">
+                    <CommentPage card = {this.props.card}/>
+                </div>
+                <SidebarContainer card = {this.props.card}/>
             </div>
         );
     }
@@ -56,20 +59,6 @@ CardDetailModal.propTypes = {
     title: PropTypes.string,
     fetchData: PropTypes.func
 };
-
-// const mapStateToProps = state => {
-//     const { id, title } = state.modal.modalProps;
-//     const boardId = state.cards.length && 
-//         state.cards
-//             .find(card => card._id === id && card.board)
-//             .board;
-
-//     return {
-//         id,
-//         title,
-//         boardId
-//     };
-// };
 
 const mapStateToProps = state => {
     const id = state.modal.modalProps.id;

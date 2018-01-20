@@ -12,7 +12,19 @@ import getRoute from '../../utils/getRoute';
 import normalize from '../../utils/normalize';
 
 import CardPreview from './components/CardPreview';
-import Badges from './components/Badges';
+import Badge from './components/Badge';
+
+const makeBadge = data => {
+    const { name, className, length } = data;
+
+    return (
+        <Badge
+            name = { name }
+            className = { className }
+            items = { length }
+        />
+    );
+}
 
 class Card extends Component {
     constructor () {
@@ -53,6 +65,8 @@ class Card extends Component {
     }
 
     handeEditInconClick (event) {
+        event.preventDefault();
+        
         this.findCardPosition(event);
         this.setState({isEditModalOpen: true});
     }
@@ -74,16 +88,17 @@ class Card extends Component {
         if (event.target.classList.contains('edit-icon__card')) {
             this.handeEditInconClick(event);
         } else {
-            const { id, title, onSelect } = this.props;
+            const { title, onSelect } = this.props;
 
             onSelect({id, title});
         }
     }
 
     render () {
-        const { id, title, attachments } = this.props;
+        const { id, title, attachments, comments } = this.props;
         const isEditModalOpen = this.state.isEditModalOpen;
         const isAttachments = attachments && attachments.length;
+        const isComments = comments && comments.length;
 
         return (
             <div className = "card-info">
@@ -107,12 +122,26 @@ class Card extends Component {
                                 role='button'
                                 onClick={ this.handeEditInconClick }
                             />
-                            {
-                                isAttachments ?
-                                    <Badges
-                                        items={attachments.length}
-                                    /> : null
-                            }
+                            <div className = "badges-wrap">
+                                {
+                                    isComments ?
+                                        makeBadge({
+                                            name: 'chat_bubble_outline', 
+                                            className: 'comment-icon__card',
+                                            length: comments.length
+                                        })
+                                        : null
+                                }
+                                {
+                                    isAttachments ?
+                                        makeBadge({
+                                            name: 'attachment', 
+                                            className: 'attachment-icon__card',
+                                            length: attachments.length
+                                        })
+                                        : null
+                                }
+                            </div>
                         </div>
                     </div>
                     
@@ -139,8 +168,6 @@ Card.propTypes = {
     id: PropTypes.string,
     onSelect: PropTypes.func
 };
-
-// const mapStateToProps = state => ({fetching: state.fetching})
 
 const mapDispatchToProps = dispatch => {
     return {

@@ -20,6 +20,7 @@ export const DELETE_LIST = 'DELETE_LIST';
 export const GET_CARDS = 'GET_CARDS';
 export const CREATE_CARD = 'CREATE_CARD';
 export const UPDATE_CARD_TITLE = 'UPDATE_CARD_TITLE';
+export const DELETE_CARD = 'DELETE_CARD';
 export const START_FILE_UPLOADING = 'START_FILE_UPLOADING';
 export const END_FILE_UPLOADING = 'END_FILE_UPLOADING';
 
@@ -30,6 +31,11 @@ export const UPDATE_TITLE = 'UPDATE_TITLE';
 export const GET_TITLE = 'GET_TITLE';
 
 export const GET_CARD_DETAILS = 'GET_CARD_DETAILS';
+
+//Comments
+export const ADD_COMMENT = 'ADD_COMMENT';
+export const UPDATE_COMMENT = 'UPDATE_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
 
 // Modal
 

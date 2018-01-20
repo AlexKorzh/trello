@@ -86,6 +86,10 @@ module.exports = function (app) {
     //Cards
     app.post('/createCard', requireAuth, upload.single('file'), Card.create);
     app.post('/updateCardTitle', requireAuth, Card.updateTitle);
+    app.post('/deleteCard', requireAuth, Card.deleteCard);
     app.post('/getAllCards', requireAuth, Card.getAllCards);
+    app.post('/addComment', requireAuth, Card.addComment);
+    app.post('/updateComment', requireAuth, Card.updateComment);
+    app.post('/deleteComment', requireAuth, Card.deleteComment);
     app.get('/cardDetails', requireAuth, Card.details)
 }

@@ -6,14 +6,25 @@ class ModalList extends Component {
         super(props);
     }
     render () {
-        let modalStatus = this.props.status ? 'show' : 'hide';
+        let modalStatus = this.props.status ? 'show' : 'hide',
+            modalPosition = {};
+
+        if (this.props.modalPosition) {
+            let { left, top, height, viewPortDiff = ''} = this.props.modalPosition;
+
+            modalPosition = {
+                left: left + 'px',
+                top: top + height - viewPortDiff + 'px',
+                position: 'fixed'
+            };
+        }
 
         return (
-            <div className = {`modal-list ${modalStatus}`}>
+            <div style = {modalPosition} className = {`modal-list ${modalStatus}`}>
                 <h2 className = "modal-list__head">
                     {this.props.title}
                     <button 
-                        type = "button" 
+                        type = "tab" 
                         className = "close" 
                         aria-label = "Close"
                         onClick = {this.props.close}
@@ -26,8 +37,6 @@ class ModalList extends Component {
                     this.props.list.map((item) => item)
                 } */}
                 </div>
-               
-                <hr />
                 <div className = "button-wrap">
                     <button 
                         className = "modal-list__button btn btn-danger"

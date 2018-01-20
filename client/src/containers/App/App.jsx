@@ -52,8 +52,8 @@ class App extends Component {
                             <Route path="/signout" component={SignOut}/>
                             <Route exact path = "/" component = {requireAuth(BoardPage)}/>
                             <Switch>
-                                <Route path='/b/:id/:title' component={ListPage}/>
-                                <Route path='/c/:id/:title' component={ListPage}/>
+                                <Route path='/b/:id/:title' component={requireAuth(ListPage)}/>
+                                <Route path='/c/:id/:title' component={requireAuth(ListPage)}/>
                             </Switch>
                             <Modal />
                         </div>

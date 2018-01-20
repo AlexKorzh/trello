@@ -9,6 +9,7 @@ class Header extends Component {
     constructor (props) {
         super(props);
     }
+
     renderButtons (config) {
         const { text, btnClass, route, auth, key } = config;
         
@@ -22,6 +23,7 @@ class Header extends Component {
             </li>
         );
     }
+    
     render () {
         let btns = [];
 
@@ -51,8 +53,9 @@ class Header extends Component {
         }
         return (
             <header className="header">
-                <Link to = "/" className = "logo-wrap">
-                    <img className = "logo" src = {logo} alt = "logo"/>
+                <Link to = "/" className = "logo-wrap logo-text">
+                    {/* <img className = "logo" src = {logo} alt = "logo"/> */}
+                    Kanban
                 </Link>
                 <ul className = "nav nav-pills">
                     {

@@ -1,24 +1,25 @@
-import { withRouter } from 'react-router-dom';
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-
 import './listPage.scss';
-
+import PropTypes from 'prop-types';
+//components
 import CreateListButton from '../List/CreateListButton';
 import BoardTitle from './BoardTitle';
 import Header from '../Header';
 import List from '../List';
+// other libraries
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 //middleware
 import { updateListMiddleware } from '../../actions/lists';
 import { deleteListMiddleware } from '../../actions/lists';
 
 import { fetchLists } from '../../actions/lists';
 import { fetchCards } from '../../actions/cards';
-import getRoute from '../../utils/getRoute';
-import history from '../../utils/history';
 import { showCardDetailModal } from '../../actions/modal';
 import { hideModal } from '../../actions/modal';
+import getRoute from '../../utils/getRoute';
+import history from '../../utils/history';
 
 class ListPage extends Component {
     constructor (props) {

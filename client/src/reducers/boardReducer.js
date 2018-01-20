@@ -12,7 +12,7 @@ export default function (state = [], action) {
         case CREATE_BOARD:
             return [...state, action.payload];
         case UPDATE_BOARD:
-            return [...state, action.payload]
+            return state.map(board => board._id === action.payload._id ? action.payload : board)
         case DELETE_BOARD: 
             const id = action.payload;
             

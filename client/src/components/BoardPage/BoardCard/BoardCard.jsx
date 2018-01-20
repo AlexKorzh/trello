@@ -14,7 +14,7 @@ class BoardCard extends Component {
     }
 
     handleBoardDelete (e) {
-        e.stopPropagation();
+        e.preventDefault();
         
         const { id }  = this.props;
 

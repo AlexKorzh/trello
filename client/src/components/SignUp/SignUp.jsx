@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field, Form } from 'redux-form';
 import * as actions from '../../actions/users';
+import { Link } from 'react-router-dom';
 
 // if touched is true and if error is true and if error true 
 // return the last value  - div with error
@@ -9,8 +10,8 @@ const renderInput = (field) => {
     const { label, type, input, meta: { error, touched } } = field;
     return (
         <div>
-            <input {...input} type={type}
-                className="form-control"
+            <input {...input} type = {type}
+                className = "form-control"
                 placeholder = {label} />
             {touched && error && <div className="error">{error}</div>}
         </div>
@@ -36,39 +37,40 @@ class Signup extends Component {
         const { handleSubmit } = this.props;
         return (
             <div className="overlay align-items-center">
-                <div className="col-md-3 mx-sm-auto auth-form">
+                <div className="col-md-6 mx-sm-auto auth-form">
                     <div className="signin-container signin-default-container">
                         <Form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
                             <div className="form-group form-group-custom">
                                 <Field 
-                                    name="email" 
-                                    type="email" 
-                                    component={renderInput} 
-                                    label="Email"
+                                    name = "email" 
+                                    type = "email" 
+                                    component = {renderInput} 
+                                    label = "Email"
                                 />
                             </div>
-                            <div className="form-group form-group-custom">
+                            <div className = "form-group form-group-custom">
                                 <Field 
-                                    name="password" 
-                                    type="password" 
-                                    component={renderInput} 
-                                    label="Password" 
+                                    name = "password" 
+                                    type = "password" 
+                                    component = {renderInput} 
+                                    label = "Password" 
                                 />
                             </div>
-                            <div className="form-group">
+                            <div className = "form-group">
                                 <Field 
-                                    name="passwordConfirm" 
-                                    type="password" 
-                                    component={renderInput} 
-                                    label="Confirm" 
+                                    name = "passwordConfirm" 
+                                    type = "password" 
+                                    component = {renderInput} 
+                                    label = "Confirm" 
                                 />
                             </div>
                             {this.renderAlert()}
                             <button 
-                                action="submit" 
-                                className="btn btn-lg btn-enter btn-bloc">
+                                action = "submit" 
+                                className = "btn btn-success btn-lg btn-enter btn-bloc">
                                 Sign up!
                             </button>
+                            <Link to = "/signin" className = "form-link">Sign In</Link>
                         </Form>
                     </div>
                 </div>

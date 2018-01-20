@@ -1,8 +1,10 @@
+.cooment-page__title, 
+.add-comment-wrap .title {
+    margin: 15px 0;
+    font-size: 18px;
+}
 .add-comment-wrap {
-    margin: 10px 0px;
-    .title {
-        font-size: 18px;
-    }
+    margin: 10px 0px 30px 0px;
     .comment__button-close {
         display: none;
     }

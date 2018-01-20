@@ -48,10 +48,13 @@ class List extends Component {
     onHandleAdd () {
         const { id: list, boardId: board } = this.props;
         const { value } = this.cardTitle;
-
-        this.props.createCard({list, board, title: value});
-
-        this.closeAddCardModal();
+        
+        if (value) {
+            this.props.createCard({list, board, title: value});
+            this.closeAddCardModal();
+        } else {
+            this.closeAddCardModal();
+        }
     }
     render () {
         const cards = this.props.cards;
@@ -83,6 +86,7 @@ class List extends Component {
                                             key = { index }
                                             title={ card.title }
                                             attachments = { card.attachments }
+                                            comments = { card.comments }
                                             id = { card._id }
                                             updateTitle = { this.props.onUpdateCardTitle }
                                         />

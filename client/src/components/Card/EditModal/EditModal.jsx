@@ -5,6 +5,7 @@ class EditModal extends Component {
     constructor (props) {
         super(props);
     }
+    
     render () {
         const status = this.props.status ? 'show' : 'hide';
         let position = this.props.position,
@@ -23,9 +24,8 @@ class EditModal extends Component {
                     <textarea
                         className = "edit-modal__title" 
                         ref = {this.props.textareaRef}
-                    >
-                        {this.props.title}
-                    </textarea>
+                        defaultValue = {this.props.title}
+                    />
                     <button 
                         className = "edit-modal__button btn btn-success"
                         onClick = {this.props.updateTitle}
