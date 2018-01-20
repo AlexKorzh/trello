@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import TitleForm from '../../TitleForm/TitleForm.jsx';
 import '../../TitleForm/titleForm.scss';
 import { connect } from 'react-redux';
-import { fetchTitleMiddleware } from '../../../actions/title';
-import { updateBoardMiddleware } from '../../../actions/boards';
+import { fetchTitleMiddleware } from '../../../middlewares/title';
+import { updateBoardMiddleware } from '../../../middlewares/boards';
 
 class BoardTitle extends Component {
     constructor () {

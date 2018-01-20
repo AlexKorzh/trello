@@ -9,7 +9,7 @@ import {
     ADD_COMMENT, 
     UPDATE_COMMENT,
     DELETE_COMMENT
-} from '../constants/ActionTypes';
+} from '../ActionTypes';
 
 const updateCardState = (state, action) => state.map(card => { 
     return card._id === action.payload._id ? action.payload : card

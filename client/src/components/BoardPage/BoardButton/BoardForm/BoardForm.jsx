@@ -4,7 +4,7 @@ import './boardForm.scss';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { createBoardMiddleware } from '../../../../actions/boards';
+import { createBoardMiddleware } from '../../../../middlewares/boards';
 
 class BoardForm extends Component {
     constructor () {

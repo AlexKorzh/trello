@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import Icon from '../Icon';
 
 import EditModal from './EditModal/EditModal.jsx';
-import { showCardDetailModal } from '../../actions/modal';
+import { showCardDetailModal } from '../../actionCreators/modal';
 import { Link, withRouter } from 'react-router-dom';
 import getRoute from '../../utils/getRoute';
 import normalize from '../../utils/normalize';

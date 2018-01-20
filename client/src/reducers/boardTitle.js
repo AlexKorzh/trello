@@ -1,7 +1,7 @@
 import { 
     UPDATE_TITLE,
     GET_TITLE
-} from '../constants/ActionTypes';
+} from '../ActionTypes';
 
 export default function (state = '', action) {
     switch (action.type) {

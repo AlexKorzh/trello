@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 
 import Title from '../../../Title/Title.jsx';
 
-import { getCardDetailsMiddleware } from '../../../../actions/cards';
-import { updateCardTitleMiddleware } from '../../../../actions/cards';
+import { getCardDetailsMiddleware } from '../../../../middlewares/cards';
+import { updateCardTitleMiddleware } from '../../../../middlewares/cards';
 
 import findCover from '../../../../utils/findCover';
 

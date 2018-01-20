@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './app.scss';
 import reducers from '../../reducers';
-import { AUTH_USER } from '../../constants/ActionTypes';
+import { AUTH_USER } from '../../ActionTypes';
 
 import Welcome from '../Welcome/Welcome.jsx';
 import SignIn from '../../components/SignIn/SignIn.jsx';

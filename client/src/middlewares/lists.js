@@ -2,48 +2,14 @@ import token from '../utils/token';
 import currentHost from '../utils/host';
 import axios from 'axios';
 import { fetchCards } from './cards';
-import {
-    CREATE_LIST,
-    GET_LISTS,
-    UPDATE_LIST,
-    DELETE_LIST,
-    SET_BOARD_ID
-} from '../constants/ActionTypes';
 
-export const createList = payload => {
-    return {
-        type: CREATE_LIST,
-        payload
-    }
-}
-
-export const getLists = payload => {
-    return {
-        type: GET_LISTS,
-        payload
-    }
-}
-
-export const setBoardId = id => {
-    return {
-        type: SET_BOARD_ID,
-        id
-    }
-}
-
-export const updateList = payload => {
-    return {
-        type: UPDATE_LIST,
-        payload
-    }
-}
-
-export const deleteList = payload => {
-    return {
-        type: DELETE_LIST,
-        payload
-    }
-}
+import { 
+    createList,
+    getLists,
+    updateList,
+    deleteList,
+    setBoardId
+} from '../actionCreators/lists';
 
 export const createListMiddleware = (title, boardId) => {
     return dispatch => {
@@ -88,10 +54,12 @@ export const fetchLists = ({id, type}) => dispatch => {
         { headers: { authorization: token.get() } }
     ).then(function (response) {
         const { lists, boardId } = response.data;
+
         dispatch(getLists(lists));
         dispatch(setBoardId(boardId));
 
         let newlist = lists.map((list) => list._id);
+        
         dispatch(fetchCards(newlist));
     })
 }

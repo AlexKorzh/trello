@@ -1,43 +1,14 @@
 import token from '../utils/token';
 import currentHost from '../utils/host';
 import axios from 'axios';
-import {
-    GET_BOARDS,
-    CREATE_BOARD,
-    DELETE_BOARD,
-    UPDATE_BOARD
-} from '../constants/ActionTypes';
+import { 
+    createBoard, 
+    updateBoard, 
+    deleteBoard, 
+    getBoards 
+} from '../actionCreators/boards';
 
-import { startFetching, endFetching } from './fetching';
-import { updateTitle } from './title';
-
-export const createBoard = payload => {
-    return {
-        type: CREATE_BOARD,
-        payload
-    }
-}
-
-export const getBoards = payload => {
-    return {
-        type: GET_BOARDS,
-        payload
-    }
-}
-
-export const updateBoard = payload => {
-    return {
-        type: UPDATE_BOARD,
-        payload 
-    }
-}
-
-export const deleteBoard = payload => {
-    return {
-        type: DELETE_BOARD,
-        payload
-    }
-}
+import { updateTitle } from '../actionCreators/title';
 
 export const createBoardMiddleware = title => {
     return dispatch => {
@@ -53,7 +24,6 @@ export const createBoardMiddleware = title => {
 
 export const updateBoardMiddleware = (boardId, title) => {
     return dispatch => {
-        // dispatch(startFetching());
         axios.post(
             `${currentHost}/updateBoard`,
             {boardId, title},
@@ -61,8 +31,19 @@ export const updateBoardMiddleware = (boardId, title) => {
         ).then(response => {
             let boardTitle = response.data.board.title;
             dispatch(updateBoard(response.data.board));
-            // dispatch(endFetching());
             dispatch(updateTitle(boardTitle))
+        });
+    }
+}
+
+export const deleteBoardMiddleware = boardId => {
+    return dispatch => {
+        axios.post(
+            `${currentHost}/deleteBoard`,
+            {boardId},
+            {headers: { authorization: token.get() }}
+        ).then(response => {
+            dispatch(deleteBoard(response.data.board));
         });
     }
 }
@@ -80,14 +61,3 @@ export const getBoardsMiddleware = () => dispatch => {
     })
 };
 
-export const deleteBoardMiddleware = boardId => {
-    return dispatch => {
-        axios.post(
-            `${currentHost}/deleteBoard`,
-            {boardId},
-            {headers: { authorization: token.get() }}
-        ).then(response => {
-            dispatch(deleteBoard(response.data.board));
-        });
-    }
-}

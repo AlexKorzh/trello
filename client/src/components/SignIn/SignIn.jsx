@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './signin.scss';
 import { connect } from 'react-redux';
 import { reduxForm, Field, Form } from 'redux-form';
-import * as actions from '../../actions/users';
+import * as actions from '../../middlewares/users';
 import { Link } from 'react-router-dom';
 
 const inputField = field => {

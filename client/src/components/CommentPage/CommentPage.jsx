@@ -3,9 +3,9 @@ import './commentPage.scss';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { addCommentMiddleware } from '../../actions/cards';
-import { updateCommentMiddleware } from '../../actions/cards';
-import { deleteCommentMiddleware } from '../../actions/cards';
+import { addCommentMiddleware } from '../../middlewares/cards';
+import { updateCommentMiddleware } from '../../middlewares/cards';
+import { deleteCommentMiddleware } from '../../middlewares/cards';
 
 import CommentContainer from './CommentContainer/CommentContainer.jsx';
 import AddCommentContainer from './AddCommentContainer/AddCommentContainer.jsx';

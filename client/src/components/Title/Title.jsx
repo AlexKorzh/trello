@@ -61,13 +61,6 @@ class Title extends Component {
                     name="close"
                     onClick={ this.handleCloseClick }
                 />
-                {/* <button
-                    onClick={this.handleCloseClick}
-                    type="button"
-                    className="close"
-                    aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button> */}
             </div>
         );
     }

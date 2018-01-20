@@ -1,6 +1,6 @@
 import { 
     SET_BOARD_ID
-} from '../constants/ActionTypes';
+} from '../ActionTypes';
 
 export default function (state = '', action) {
     switch (action.type) {

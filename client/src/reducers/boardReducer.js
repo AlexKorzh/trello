@@ -3,7 +3,7 @@ import {
     CREATE_BOARD, 
     DELETE_BOARD,
     UPDATE_BOARD
-} from '../constants/ActionTypes';
+} from '../ActionTypes';
 
 export default function (state = [], action) {
     switch (action.type) {

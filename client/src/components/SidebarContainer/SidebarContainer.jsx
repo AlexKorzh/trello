@@ -3,7 +3,7 @@ import './sidebarContainer.scss';
 import { connect } from 'react-redux';
 import Sidebar from './Sidebar/Sidebar';
 
-import { deleteCardMiddleware } from '../../actions/cards';
+import { deleteCardMiddleware } from '../../middlewares/cards';
 
 class SidebarContainer extends Component {
     constructor (props) {

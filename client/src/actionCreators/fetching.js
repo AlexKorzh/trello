@@ -1,7 +1,7 @@
 import {
     START_FETCHING,
     END_FETCHING
-} from '../constants/ActionTypes';
+} from '../ActionTypes';
 
 export const startFetching = () => {
     return {

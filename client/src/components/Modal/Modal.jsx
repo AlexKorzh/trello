@@ -6,10 +6,10 @@ import './modal.scss';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
-import { hideModal } from '../../actions/modal';
-import { hideModalManual } from '../../actions/modal';
+import { hideModal } from '../../actionCreators/modal';
+import { hideModalManual } from '../../actionCreators/modal';
 
-import { CARD_DETAIL_MODAL } from '../../constants/ActionTypes';
+import { CARD_DETAIL_MODAL } from '../../ActionTypes';
 
 import CardDetailModal from './components/cardDetailModal';
 

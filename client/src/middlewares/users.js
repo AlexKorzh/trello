@@ -7,18 +7,14 @@ import {
     AUTH_ERROR, 
     UNAUTH_USER,
     FETCH_MESSAGE
-} from '../constants/ActionTypes';
+} from '../ActionTypes';
+
+import {
+    authError,
+    authUser
+} from '../actionCreators/users';
 
 const ROOT_URL = "http://localhost:3090";
-
-export const authError = error => {
-    return {
-        type: AUTH_ERROR,
-        payload: error
-    }
-}
-
-export const authUser = () => ({ type: AUTH_USER });
 
 export const signinUser = (email, password) => {
     return dispatch => {

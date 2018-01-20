@@ -11,13 +11,13 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 //middleware
-import { updateListMiddleware } from '../../actions/lists';
-import { deleteListMiddleware } from '../../actions/lists';
+import { updateListMiddleware } from '../../middlewares/lists';
+import { deleteListMiddleware } from '../../middlewares/lists';
+import { fetchLists } from '../../middlewares/lists';
+import { fetchCards } from '../../middlewares/cards';
 
-import { fetchLists } from '../../actions/lists';
-import { fetchCards } from '../../actions/cards';
-import { showCardDetailModal } from '../../actions/modal';
-import { hideModal } from '../../actions/modal';
+import { showCardDetailModal } from '../../actionCreators/modal';
+import { hideModal } from '../../actionCreators/modal';
 import getRoute from '../../utils/getRoute';
 import history from '../../utils/history';
 

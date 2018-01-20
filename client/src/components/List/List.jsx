@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 import ListHeader from './ListHeader/ListHeader.jsx';
 import Card from '../Card/Card.jsx';
-import { createCardMiddleware } from '../../actions/cards';
-import { updateCardTitleMiddleware } from '../../actions/cards';
+import { createCardMiddleware } from '../../middlewares/cards';
+import { updateCardTitleMiddleware } from '../../middlewares/cards';
 import { getCards } from '../../reducers/lists';
 
 class List extends Component {

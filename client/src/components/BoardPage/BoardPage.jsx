@@ -10,8 +10,8 @@ import List from '../List/List.jsx';
 
 import Icon from '../Icon';
 
-import { getBoardsMiddleware } from '../../actions/boards';
-import { deleteBoardMiddleware } from '../../actions/boards';
+import { getBoardsMiddleware } from '../../middlewares/boards';
+import { deleteBoardMiddleware } from '../../middlewares/boards';
 
 class BoardPage extends Component {
     componentDidMount () {

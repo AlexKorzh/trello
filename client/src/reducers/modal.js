@@ -3,7 +3,7 @@ import {
     HIDE_MODAL, 
     HIDE_MODAL_MANUAL,
     UPDATE_MODAL_TITLE 
-} from '../constants/ActionTypes';
+} from '../ActionTypes';
 
 const initialState = {
     modalType: null,

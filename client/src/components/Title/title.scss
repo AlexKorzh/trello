@@ -42,7 +42,6 @@ $box-shadow: #0284c6;
         cursor: text;
         transition: background 85ms ease-in, border-color 85ms ease-in;
         &:focus {
-            @include textarea-styles();
             outline: none !important;
         }
     }

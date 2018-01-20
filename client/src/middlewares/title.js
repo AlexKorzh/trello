@@ -1,24 +1,16 @@
-import {
-    UPDATE_TITLE,
-    GET_TITLE
-} from '../constants/ActionTypes';
 import token from '../utils/token';
 import currentHost from '../utils/host';
 import axios from 'axios';
 
-export const updateTitle = payload => {
-    return {
-        type: UPDATE_TITLE,
-        payload
-    }
-}
+import {
+    UPDATE_TITLE,
+    GET_TITLE
+} from '../ActionTypes';
 
-export const getTitle = payload => {
-    return {
-        type: GET_TITLE,
-        payload
-    }
-}
+import {
+    updateTitle,
+    getTitle
+} from '../actionCreators/title';
 
 export const fetchTitleMiddleware = (boardId) => dispatch => {
     let authorization = token.get();
