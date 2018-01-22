@@ -1,7 +1,7 @@
 import { 
     START_FETCHING,
     END_FETCHING
-} from '../ActionTypes';
+} from '../actionTypes';
 
 export default function (state = false, action) {
     switch (action.type) {

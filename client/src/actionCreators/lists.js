@@ -4,7 +4,7 @@ import {
     UPDATE_LIST,
     DELETE_LIST,
     SET_BOARD_ID
-} from '../ActionTypes';
+} from '../actionTypes';
 
 export const createList = payload => {
     return {

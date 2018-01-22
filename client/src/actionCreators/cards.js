@@ -9,7 +9,7 @@ import {
     ADD_COMMENT,
     UPDATE_COMMENT,
     DELETE_COMMENT
-} from '../ActionTypes';
+} from '../actionTypes';
 
 export const createCard = payload => {
     return {

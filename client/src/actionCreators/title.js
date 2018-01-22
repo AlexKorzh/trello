@@ -1,7 +1,7 @@
 import {
     UPDATE_TITLE,
     GET_TITLE
-} from '../ActionTypes';
+} from '../actionTypes';
 
 export const updateTitle = payload => {
     return {

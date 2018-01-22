@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './app.scss';
 import reducers from '../../reducers';
-import { AUTH_USER } from '../../ActionTypes';
+import { AUTH_USER } from '../../actionTypes';
 
 import Welcome from '../Welcome/Welcome.jsx';
 import SignIn from '../../components/SignIn/SignIn.jsx';
@@ -39,8 +39,9 @@ if (token) {
     store.dispatch({ type: AUTH_USER });
 }
 
+const protectedListPage = requireAuth(ListPage);
+
 class App extends Component {
-    test () {}
     render () {
         return(
             <MuiThemeProvider>
@@ -52,8 +53,8 @@ class App extends Component {
                             <Route path="/signout" component={SignOut}/>
                             <Route exact path = "/" component = {requireAuth(BoardPage)}/>
                             <Switch>
-                                <Route path='/b/:id/:title' component={requireAuth(ListPage)}/>
-                                <Route path='/c/:id/:title' component={requireAuth(ListPage)}/>
+                                <Route path='/b/:id/:title' component={protectedListPage}/>
+                                <Route path='/c/:id/:title' component={protectedListPage}/>
                             </Switch>
                             <Modal />
                         </div>

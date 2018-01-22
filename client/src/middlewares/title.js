@@ -5,7 +5,7 @@ import axios from 'axios';
 import {
     UPDATE_TITLE,
     GET_TITLE
-} from '../ActionTypes';
+} from '../actionTypes';
 
 import {
     updateTitle,

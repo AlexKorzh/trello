@@ -7,7 +7,7 @@ import {
     AUTH_ERROR, 
     UNAUTH_USER,
     FETCH_MESSAGE
-} from '../ActionTypes';
+} from '../actionTypes';
 
 import {
     authError,

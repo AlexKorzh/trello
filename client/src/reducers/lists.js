@@ -3,7 +3,7 @@ import {
     GET_LISTS,
     UPDATE_LIST,
     DELETE_LIST
-} from '../ActionTypes';
+} from '../actionTypes';
 
 export default function (state = [], action) {
     switch (action.type) {

@@ -105,7 +105,7 @@ class Card extends Component {
             <div className = "card-info">
                 <Link
                     to = {`/c/${id}/${normalize(title)}`}
-                    onClick={this.showModal}
+                    onClick = {this.showModal}
                     className = "card"
                 >
                     <div className = "card__wrap">

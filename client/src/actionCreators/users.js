@@ -3,7 +3,7 @@ import {
     AUTH_ERROR, 
     UNAUTH_USER,
     FETCH_MESSAGE
-} from '../ActionTypes';
+} from '../actionTypes';
 
 export const authError = error => {
     return {

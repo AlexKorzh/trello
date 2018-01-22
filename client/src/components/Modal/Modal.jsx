@@ -9,7 +9,7 @@ import { withRouter } from 'react-router-dom';
 import { hideModal } from '../../actionCreators/modal';
 import { hideModalManual } from '../../actionCreators/modal';
 
-import { CARD_DETAIL_MODAL } from '../../ActionTypes';
+import { CARD_DETAIL_MODAL } from '../../actionTypes';
 
 import CardDetailModal from './components/cardDetailModal';
 
