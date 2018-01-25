@@ -21,12 +21,10 @@ const path = require('path');
 //         cb(null, file.originalname);
 //     }
 // });
-    
+
 // const upload = multer({ storage });
 
-// mongoose.connect('mongodb://localhost:auth/auth');
-mongoose.connect(process.env.MONGODB_URI);
-
+mongoose.connect('mongodb://localhost:auth/auth');
 
 app.use('/files', express.static(path.join(__dirname, 'files')));
 
