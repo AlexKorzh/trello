@@ -4,12 +4,18 @@
   "description": "Kanban Application",
   "main": "index.js",
   "scripts": {
+    "heroku-prebuild": "echo This runs before Heroku installs your dependencies.",
+    "heroku-postbuild": "echo This runs afterwards.",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon --inspect index.js",
     "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "6.11.0",
+    "npm": "3.10.10"
+  },
   "dependencies": {
     "body-parser": "^1.18.2",
     "ejs": "^2.5.7",
